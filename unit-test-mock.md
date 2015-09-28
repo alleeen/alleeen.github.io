@@ -3,9 +3,7 @@
 
 ##Mocks aren't stubs
 
-这是软件大师[Martin Fowler](http://martinfowler.com/)的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击[这里](http://martinfowler.com/articles/mocksArentStubs.html)阅读原文。
-
-我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。
+这是软件大师[Martin Fowler](http://martinfowler.com/)的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击[这里](http://martinfowler.com/articles/mocksArentStubs.html)阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。
 
 ###相同点
 
