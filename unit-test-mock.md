@@ -11,6 +11,42 @@
 
 ###不同点
 
+Mock和Stub有两个主要区别：
 
+1. 校验测试结果的方式不同，Mock倾向于校验行为（Beahavior verification），Stub倾向于校验状态；
+2. Mock和Stub也代表了两种将测试与设计结合在一起的理念。
 
+上面的说法比较抽象，让我们通过例子来看看Mock与Stub的区别。
 
+##使用Stub进行单元测试
+
+下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。
+
+```
+public class OrderStateTester extends TestCase{
+    private static String TALISKER = "Talisker";
+    private static String HIGHLAND_PARK = "Highland Park";
+    private WareHouse warehouse = new WareHouseImpl();
+    
+    protected void setup() throws Exception{
+        warehouse.add(TALISKER , 50);
+        warehouse.add(HIGHLAND_PARK , 25);
+    }
+
+    public void testOrderIsFilledIfEnoughInWarehouse(){
+        Order order = new Order(TALISKER , 50);
+        order.fill(warehouse);
+        assertTrue(order.isFilled());
+        assertEquals(0 , warehouse.getInventory(TALISKER));
+    }
+
+    public void testOrderDoseNotRemoveIfNotEnough() {
+        Order order = new Order(TALISKER , 51);
+        order.fill(warehouse);
+        assertFalse(order.isFilled());
+        assertEquals(50 , warehouse.getInventory(TALISKER));
+    }
+}
+```
+
+上面的例子里，我们需要对Order对象进行测试，为了验证Order.fill方法，我们还需要WareHouse对象。但真正的WareHouse对象内部可能有很复杂的实现，比如读取文件，访问数据库，持有同步锁以维持对象在并发访问时内部数据正确等。实际上在单元测试时我们并不需要去和这些代码发生交互，而且这些复杂的代码还会让我们的单元测试很不稳定。数据库连接失败、必须的配置文件读取失败等都会导致我们的单元测试失败。显然我们并不希望这些外部的因素影响我们的单元测试
