@@ -4,7 +4,7 @@
 ####################################
 #
 title:       "Allen's blog"
-description: 'A backend developer who loves design awesome things. Working at RendezvousCheznous.com in Marseille, France.'
+description: 'A backend developer who loves design awesome things. Working for Huawei.'
 url:         # the base hostname & protocol for your site
 
 #
@@ -47,7 +47,7 @@ owner:
     ad-slot:
   bing-verify:
   github: alleeen #username
-  stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
+  stackoverflow: 1434570/allen-xudong-cheng #123456/username   from a "http://stackoverflow.com/users/123456/username" link
   linkedin: #username
   xing: #username
   instagram: #username
@@ -59,6 +59,6 @@ owner:
   dribbble: #username
   youtube: #username
   soundcloud: #username
-  weibo: #username
+  weibo: allenzheng1225
   flickr: #username
   codepen: #username
