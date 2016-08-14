@@ -1,4 +1,9 @@
-# 在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法
+---
+layout: post
+title:  "在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法"
+date:   2015-10-14 13:50:39
+categories: 单元测试
+---
 
 在修改单元测试的过程中，不幸踩了个坑，发现**Powermockito**的``` PowerMock.mockStatic(ClassThatContainsStaticMethod.class)```在多线程场景下是无法正常工作的，这再次验证了之前ThrougthWorks顾问说的那句话：
 
@@ -15,13 +20,13 @@ Class C{
 
 Class A {
 	private SomeObject someObject = C.getSomeObject();
-	
+
 	[.....]
 }
 
 Class B {
 	private SomeObject someObject = C.getSomeObject();
-	
+
 	[.....]
 }
 ```
@@ -59,7 +64,7 @@ Class BTest{
 
 >Which is roughly equivalent to :
  (***** NEVER use a reference to OngoingStubbing in real test code, it might lead to wrong test code *****)
- 
+
 
 > ```String aString = eq("A");
 Long aLong = longThat(...);

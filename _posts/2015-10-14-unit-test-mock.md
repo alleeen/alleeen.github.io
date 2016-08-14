@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Mock 与 Stub"
+date:   2015-10-14 16:50:39
+categories: 单元测试
+---
+
 # Mock 与 Stub
 >在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。
 
@@ -27,7 +34,7 @@ public class OrderStateTester extends TestCase{
     private static String TALISKER = "Talisker";
     private static String HIGHLAND_PARK = "Highland Park";
     private WareHouse warehouse = new WareHouseImpl();
-    
+
     protected void setup() throws Exception{
         warehouse.add(TALISKER , 50);
         warehouse.add(HIGHLAND_PARK , 25);
