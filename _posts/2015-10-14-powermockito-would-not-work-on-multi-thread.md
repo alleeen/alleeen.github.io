@@ -2,7 +2,8 @@
 layout: post
 title:  "在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法"
 date:   2015-10-14 13:50:39
-categories: 单元测试
+categories: 软件技术
+tags: [Java, 单元测试]
 ---
 
 在修改单元测试的过程中，不幸踩了个坑，发现**Powermockito**的``` PowerMock.mockStatic(ClassThatContainsStaticMethod.class)```在多线程场景下是无法正常工作的，这再次验证了之前ThrougthWorks顾问说的那句话：
