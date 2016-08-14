@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    {% include meta.html %}
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
-      {% include css.html %}
-  </head>
+<html lang="en">
 
-  <body class="home overflow-hidden">
-    {% include header.html %}
-    {% include main.html %}
-    {% include js.html %}
-    {% include analytics.html %}
-  </body>
+{% include head.html %}
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        {% include sidebar.html %}
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        {{ content }}
+        {% include footer.html %}
+      </div>
+    </div>
+  </div>
+  {% include js.html %}
+</body>
 </html>

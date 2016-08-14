@@ -7,6 +7,8 @@ categories: 多线程
 
 在上一篇blogs中，我详细的解释了`CompletionService`的使用方法和`ExecutorCompletionService`的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。
 
+<!--more-->
+
 首先，在初始化`ExecutorCompletionService`的时候我们需要传入一个`Executor`，作为`ExecutorCompletionService`执行任务的容器。
 
 ```

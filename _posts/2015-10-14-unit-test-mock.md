@@ -12,6 +12,8 @@ categories: 单元测试
 
 这是软件大师[Martin Fowler](http://martinfowler.com/)的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击[这里](http://martinfowler.com/articles/mocksArentStubs.html)阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。
 
+<!--more-->
+
 ###相同点
 
 先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。
