@@ -5,6 +5,7 @@
 #
 title:       "Allen's blog"
 email:       "xudongzheng1225@gmail.com"
+baseurl:     ""
 description: 'A backend developer who loves design awesome things. Working for Huawei.'
 url:         http://alleeen.github.io # the base hostname & protocol for your site
 
