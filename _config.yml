@@ -4,8 +4,9 @@
 ####################################
 #
 title:       "Allen's blog"
+email:
 description: 'A backend developer who loves design awesome things. Working for Huawei.'
-url:         # the base hostname & protocol for your site
+url:         http://alleeen.github.io # the base hostname & protocol for your site
 
 #
 ###################################
