@@ -2,6 +2,7 @@
 layout: post
 title:  "Java核心API需要掌握的程度"
 date:   2016-08-14 23:21:39
+comments: true
 categories: 软件技术
 tags: [Java, api]
 ---

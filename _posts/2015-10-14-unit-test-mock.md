@@ -2,6 +2,7 @@
 layout: post
 title:  "Mock 与 Stub"
 date:   2015-10-14 16:50:39
+comments: true
 categories: 软件技术
 tags: [Java, 单元测试]
 ---
@@ -31,7 +32,7 @@ Mock和Stub有两个主要区别：
 
 下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。
 
-```
+```java
 public class OrderStateTester extends TestCase{
     private static String TALISKER = "Talisker";
     private static String HIGHLAND_PARK = "Highland Park";

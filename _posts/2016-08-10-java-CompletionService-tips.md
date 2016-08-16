@@ -2,6 +2,7 @@
 layout: post
 title:  "CompletionService小技巧"
 date:   2016-08-10 16:50:39
+comments: true
 categories: 软件技术
 tags: [Java, 多线程]
 ---
@@ -12,20 +13,20 @@ tags: [Java, 多线程]
 
 首先，在初始化`ExecutorCompletionService`的时候我们需要传入一个`Executor`，作为`ExecutorCompletionService`执行任务的容器。
 
-```
+```java
 public ExecutorCompletionService(Executor executor) {
-    ...
+    [......]
 }
 
 public ExecutorCompletionService(Executor executor,
                                  BlockingQueue<Future<V>> completionQueue) {
-    ...
+    [......]
 }
 
 ```
 然后，调用`submit`方法，向它提交任务。`submit`方法会将我们提交的任务包装成一个`QueueingFuture`并提交给`Executor`来执行。
 
-```
+```java
 public Future<V> submit(Callable<V> task) {  
     if (task == null) throw new NullPointerException();  
     RunnableFuture<V> f = newTaskFor(task);  
@@ -36,7 +37,7 @@ public Future<V> submit(Callable<V> task) {
 
 接着，`QueueingFuture`会在任务执行完成后把执行结果放到队列中。
 
-```
+```java
 private class QueueingFuture extends FutureTask<Void> {
     QueueingFuture(RunnableFuture<V> task) {
         super(task, null);
@@ -51,7 +52,7 @@ private class QueueingFuture extends FutureTask<Void> {
 
 下面让我们设想一个场景，我需要从网络上下载几张图片和视频并最后把它们渲染到页面上去，由于下载图片和视频都比较耗时，所以我希望能以多线程的形式进行下载。但是由于资源有限，下载的并发度不能太大，所以需要限制线程池的并发线程大小。但如果将可用线程数平均分给下载图片和下载视频的线程池，当某线程池的所有任务执行完成后，另外一个线程池也无法获取到它所释放的资源。那怎么办呢？我们可以创建一个统一的线程池，然后把两个CompletionService绑定上去，让CompletionService作为一个句柄来使用。
 
-```
+```java
 final ExecutorService pool = Executors.newFixedThreadPool(5);
 
 final ExecutorCompletionService<Image> imageCompletionService = new ExecutorCompletionService<>(pool);
@@ -93,7 +94,5 @@ for(int i = 0; i < topSites.size(); ++i) {
         log.warn("Error while downloading", e.getCause());
     }
 }
-
 // ... do process content
-
 ```
