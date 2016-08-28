@@ -8,13 +8,13 @@ categories: 软件技术
 tags: [Java, 单元测试]
 ---
 
-在修改单元测试的过程中，不幸踩了个坑，发现**Powermockito**的``` PowerMock.mockStatic(ClassThatContainsStaticMethod.class)```在多线程场景下是无法正常工作的，这再次验证了之前ThrougthWorks顾问说的那句话：
+在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
 
 >除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。
 
 <!--more-->
 
-发生问题的场景是这样的```Class C```有一个静态方法，```Class A```和```Class B```都需要调用这个方法完成一些功能：
+发生问题的场景是这样的 Class C 有一个静态方法，Class A 和 Class B 都需要调用这个方法完成一些功能：
 
 ```java
 Class C{
@@ -36,7 +36,7 @@ Class B {
 }
 ```
 
-由于在测试中直接调用```C.getSomeObject()```会导致一些不可预期的错误，所以我想对AB类进行测试就必须使用Mock，于是我那么写：
+由于在测试中直接调用 C.getSomeObject() 会导致一些不可预期的错误，所以我想对AB类进行测试就必须使用Mock，于是我那么写：
 
 ```java
 Class ATest{
@@ -59,7 +59,7 @@ Class BTest{
 
 ```
 
-当我在IDE中分别运行```ATest```或者```BTest```是，我的测试都是能正确运行的，但是当你使用Maven或者其他的构建工具进行多线程测试的时候，你就会发现问题来了。一会是A抛异常，一会是B抛异常，总之就是不能很好的工作。由于我不是Powermockito的专家，所以无法深入的去探究这个问题的原因，但是我想，这应该是和静态方法本身在一个JVM内的唯一性有关，我截取了网上两个解释供参考：
+当我在IDE中分别运行 ATest 或者 BTest 是，我的测试都是能正确运行的，但是当你使用Maven或者其他的构建工具进行多线程测试的时候，你就会发现问题来了。一会是A抛异常，一会是B抛异常，总之就是不能很好的工作。由于我不是Powermockito的专家，所以无法深入的去探究这个问题的原因，但是我想，这应该是和静态方法本身在一个JVM内的唯一性有关，我截取了网上两个解释供参考：
 
 #### Explanation 1
 
