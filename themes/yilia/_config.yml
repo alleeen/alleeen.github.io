@@ -6,18 +6,18 @@ menu:
 
 # SubNav
 subnav:
-  github: "#"
-  weibo: "#"
-  rss: "#"
-  zhihu: "#"
+  github: "https://github.com/allenn"
+  weibo: "http://weibo.com/allenzheng1225"
+  rss: /atom.xml
+  #zhihu: "#"
   #douban: "#"
-  #mail: "#"
-  #facebook: "#"
+  mail: "xudongzheng1225@gmail.com"
+  facebook: "https://www.facebook.com/allencheng1225"
   #google: "#"
-  #twitter: "#"
+  twitter: "https://twitter.com/xudongzheng1225"
   #linkedin: "#"
 
-rss: /atom.xml
+
 
 # 是否需要修改 root 路径
 # 如果您的网站存放在子目录中，例如 http://yoursite.com/blog，
@@ -55,13 +55,13 @@ tagcloud: true
 #不开启——
 #friends: false
 #开启——
-friends:
-  奥巴马的博客: http://localhost:4000/
-  卡卡的美丽传说: http://localhost:4000/
-  本泽马的博客: http://localhost:4000/
-  吉格斯的博客: http://localhost:4000/
-  习大大大不同: http://localhost:4000/
-  托蒂的博客: http://localhost:4000/
+#friends:
+#  奥巴马的博客: http://localhost:4000/
+#  卡卡的美丽传说: http://localhost:4000/
+#  本泽马的博客: http://localhost:4000/
+#  吉格斯的博客: http://localhost:4000/
+#  习大大大不同: http://localhost:4000/
+#  托蒂的博客: http://localhost:4000/
 
 #是否开启“关于我”。
 #不开启——

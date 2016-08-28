@@ -70,5 +70,6 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:allenn/allenn.github.io.git
-  branch: master
+  repo:
+       github: git@github.com:allenn/allenn.github.io.git,master
+       coding: git@git.coding.net:allennn/allennn.git,coding-pages
