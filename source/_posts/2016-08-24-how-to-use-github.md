@@ -10,14 +10,14 @@ tags: [Git,Github]
 
 在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：
 
-![Github Flow](/img/github-flow/github-flow.png)
+![Github Flow](/assets/images/github-flow/github-flow.png)
 
 <!--more-->
 
 ### 第一步：Fork项目
 Fork 项目其实就是在 Github 上拷贝一份他人项目的副本作为自己的项目。当你进入一个项目页面后，会在右上方看见一个*Fork*的按钮，点击它就可以 Fork 一个项目。
 
-![Fork Project](/img/github-flow/fork-project.jpg)
+![Fork Project](/assets/images/github-flow/fork-project.jpg)
 
 需要注意的是Fork项目后，你自己的项目并不会和源项目保持自动同步，所以你需要手动进行更新，如何更新请看：*第五步：拉取源项目的更新*。
 
@@ -140,10 +140,10 @@ git push -u origin myfeature
 ### 第八步：发送Pull Request
 点击项目页面上方的pull request按钮
 
-![pull request button](/img/github-flow/create-pull-request-1.jpg)
+![pull request button](/assets/images/github-flow/create-pull-request-1.jpg)
 
 我们自己的项目选择之前的开发分支，源项目选择 master 分支
 
-![pull request](/img/github-flow/create-pull-request-2.png)
+![pull request](/assets/images/github-flow/create-pull-request-2.png)
 
 在下面的页面上填写上描述，然后点击发送即可，接着下来就是原作者的事儿了，如果他同意合入我们会在项目的 master 分支看到我们刚刚贡献的代码。
