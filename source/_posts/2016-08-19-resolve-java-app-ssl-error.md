@@ -14,19 +14,19 @@ tags: [Java, IntelliJ,ssl]
 
 OK, Let's do it! 首先导出公司代理服务器的根证书，用浏览器即可，随便访问应该https的外网网站，点击地址栏上的小锁头。
 
-![ie_url_bar](/img/java-ssl-error/ie_url_bar-certificate-error.png)
+![ie_url_bar](/assets/images/java-ssl-error/ie_url_bar-certificate-error.png)
 
 打开的窗口中,点击下一步即可,
 
-![证书详细信息](/img/java-ssl-error/export_cert_1.png)
+![证书详细信息](/assets/images/java-ssl-error/export_cert_1.png)
 
 在正式编码格式中,选择指定的格式,点击下一步;
 
-![证书导出向导](/img/java-ssl-error/export_cert_2.png)
+![证书导出向导](/assets/images/java-ssl-error/export_cert_2.png)
 
 指定生成证书文件的名称(此处为vbooking.cer)
 
-![vbooking.cer](/img/java-ssl-error/export_cert_3.png)
+![vbooking.cer](/assets/images/java-ssl-error/export_cert_3.png)
 
 接着，将证书导入java的cacerts证书库，切换到目录 ${JAVA_HOME}/jre/lib/security, 执行如下命令
 
