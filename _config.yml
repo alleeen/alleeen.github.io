@@ -71,5 +71,5 @@ theme: yilia
 deploy:
   type: git
   repo:
-       github: git@github.com:allenn/allenn.github.io.git,master
-       coding: git@git.coding.net:allennn/allennn.git,coding-pages
+   github: git@github.com:allenn/allenn.github.io.git,master
+   coding: git@git.coding.net:allennn/allennn.git,coding-pages
