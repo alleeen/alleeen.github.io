@@ -1,6 +1,3 @@
-env:
-  global:
-    secure: ah6hxFQzvk7GtnInJMf0JeSJcpBuL5cm/6c5uBLXmT6yNEoaUOYkKlIFluZNYKpm4eFypQA8M5HYx3MqFks2CTzfthK8nNHPE/6v47sITrvDt+MTDVJquo/hoDqicCzLwzcJTYdPhXBtPkBFB5qVAaJEB3pC20pgIr4ZZB/dG+R+Idv1rDn+OvA+ps6L+orxusnIdATYzXl8qgYG0qEE1fY4f/fqDRSdruHRwlOcLLXISgHowO6rUprGREL1EwflELESg+M8pVhJzBdqBH31IcbeTA+GM6nMTXkQnftmmbrWCyKAx+ByU0iIqD6sexttCmgOdH7AEgg9Rd5nBmwMkdoTfs5BgElqCqD25VbTdjkKUav54GcTaP7mxd2ygFiHC6cU4pXtK6uuRMvb39dCtkD73UuDvgol2RPmP9dXbmyPuBqTPPA98YE6oqHPc21hbNxJW6YQtFJyA8Q91vnZ8PAH31mPLMIE0G8g/uRClRjhlPzTwpdkUwrjuApCYte1lKBv5i8NtRRgjhhvQo4v0qjlP9EGWUvJXn1oaZuNTMbGz2FUYWX6Pti7prDBtMVFoNlGOLmZUfi4WkHOtRE9r91FktKJlRb/GCAPHcc76PijOwPaN8W0e5fxwu9c70m0bWBMlt4AOzzGnW1duXU5MetC42aSTLJu0TdRFLgdKRE=
 language: node_js
 sudo: false
 branches:
@@ -8,16 +5,17 @@ branches:
   - hexo
 cache:
   directories:
-    - node_modules
+  - node_modules
 before_install:
-- openssl aes-256-cbc -K $encrypted_0a6446eb3ae3_key -iv $encrypted_0a6446eb3ae3_key -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+- openssl aes-256-cbc -K $encrypted_b60764d3cdc1_key -iv $encrypted_b60764d3cdc1_iv
+  -in .travis/travis.enc -out ~\/.ssh/travis -d
 - chmod 600 ~/.ssh/id_rsa
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/id_rsa
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'allenn'
 - git config --global user.email 'xudongzheng1225@gmail.com'
-- export TZ='Asia/Shanghai'  # 设置时区
+- export TZ='Asia/Shanghai'
 install:
 - npm install hexo-cli -g
 - npm install
