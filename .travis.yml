@@ -3,10 +3,9 @@ env:
     secure: ah6hxFQzvk7GtnInJMf0JeSJcpBuL5cm/6c5uBLXmT6yNEoaUOYkKlIFluZNYKpm4eFypQA8M5HYx3MqFks2CTzfthK8nNHPE/6v47sITrvDt+MTDVJquo/hoDqicCzLwzcJTYdPhXBtPkBFB5qVAaJEB3pC20pgIr4ZZB/dG+R+Idv1rDn+OvA+ps6L+orxusnIdATYzXl8qgYG0qEE1fY4f/fqDRSdruHRwlOcLLXISgHowO6rUprGREL1EwflELESg+M8pVhJzBdqBH31IcbeTA+GM6nMTXkQnftmmbrWCyKAx+ByU0iIqD6sexttCmgOdH7AEgg9Rd5nBmwMkdoTfs5BgElqCqD25VbTdjkKUav54GcTaP7mxd2ygFiHC6cU4pXtK6uuRMvb39dCtkD73UuDvgol2RPmP9dXbmyPuBqTPPA98YE6oqHPc21hbNxJW6YQtFJyA8Q91vnZ8PAH31mPLMIE0G8g/uRClRjhlPzTwpdkUwrjuApCYte1lKBv5i8NtRRgjhhvQo4v0qjlP9EGWUvJXn1oaZuNTMbGz2FUYWX6Pti7prDBtMVFoNlGOLmZUfi4WkHOtRE9r91FktKJlRb/GCAPHcc76PijOwPaN8W0e5fxwu9c70m0bWBMlt4AOzzGnW1duXU5MetC42aSTLJu0TdRFLgdKRE=
 language: node_js
 sudo: false
-# master为hexo博客所在分支
 branches:
   only:
-  - master
+  - hexo
 cache:
   directories:
     - node_modules
