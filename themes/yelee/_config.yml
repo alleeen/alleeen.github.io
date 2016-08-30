@@ -41,14 +41,10 @@ since: 2016
 
 subnav:
   GitHub: "https://github.com/allenn"
-  weibo: "http://weibo.com/allenzheng1225"
-  rss: /atom.xml
-  #zhihu: "#"
-  #douban: "#"
-  mail: "mailto:xudongzheng1225@gmail.com?Subject=Hello"
-  facebook: "https://www.facebook.com/allencheng1225"
-  #google: "#"
-  twitter: "https://twitter.com/xudongzheng1225"
+  新浪微博: "http://weibo.com/allenzheng1225"
+  Email: "mailto:xudongzheng1225@gmail.com?Subject=Hello"
+  Facebook: "https://www.facebook.com/allencheng1225"
+  Twitter: "https://twitter.com/xudongzheng1225"
   #linkedin: "#"
   #新浪微博: "sina weibo"
   #V2EX: "#"
@@ -105,7 +101,7 @@ disqus:
   # you have set "disqus_shortname" in your site's "_config.yml"
 
 duoshuo:
-  #on: true
+  on: true
   domain: alleeen
   # 是否开启多说评论，http://duoshuo.com/create-site/
   # 使用上面网址登陆你的多说，然后创建站点，在 domain 中填入你设定的域名前半部分
