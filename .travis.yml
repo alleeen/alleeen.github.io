@@ -15,6 +15,7 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'allenn'
 - git config --global user.email 'xudongzheng1225@gmail.com'
+- git submodule update --init --recursive
 - export TZ='Asia/Shanghai'
 install:
 - npm install hexo-cli -g
