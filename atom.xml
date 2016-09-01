@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://allenn.cn/"/>
-  <updated>2016-09-01T14:21:01.156Z</updated>
+  <updated>2016-09-01T14:36:38.125Z</updated>
   <id>http://allenn.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</id>
     <published>2016-08-24T08:21:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
 <p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
@@ -87,7 +87,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</id>
     <published>2016-08-19T14:21:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="external">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
 <a id="more"></a>
@@ -133,7 +133,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</id>
     <published>2016-08-14T15:21:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。</p>
 <ol>
@@ -173,7 +173,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</id>
     <published>2016-08-12T08:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？</p>
 <p><img src="/assets/images/intro-pomodoro-technique/time-lack.png" alt="我真的很缺时间"></p>
@@ -235,7 +235,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</id>
     <published>2016-08-10T08:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
 <a id="more"></a>
@@ -270,7 +270,7 @@
     <link href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
     <id>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</id>
     <published>2015-10-17T05:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -301,7 +301,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</id>
     <published>2015-10-14T08:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
@@ -343,7 +343,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</id>
     <published>2015-10-14T05:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：</p>
 <blockquote>
@@ -391,7 +391,7 @@
     <link href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/"/>
     <id>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</id>
     <published>2010-06-20T05:50:39.000Z</published>
-    <updated>2016-09-01T14:21:01.156Z</updated>
+    <updated>2016-09-01T14:36:38.125Z</updated>
     
     <content type="html"><![CDATA[<p>最近听到的消息有点多，</p>
 <p>FOR EXAMPLE,</p>
