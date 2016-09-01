@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+
+    <!--[if lt IE 9]>
+        <style>body {display: none; background: none !important} </style>
+        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
+    <![endif]-->
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="author" content="Allen Zheng" />
+
+
+
+<meta name="description" content="在上一篇blogs中，我详细的解释了CompletionService的使用方法和ExecutorCompletionService的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CompletionService小技巧">
+<meta property="og:url" content="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/index.html">
+<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:description" content="在上一篇blogs中，我详细的解释了CompletionService的使用方法和ExecutorCompletionService的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。">
+<meta property="og:updated_time" content="2016-09-01T01:36:55.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CompletionService小技巧">
+<meta name="twitter:description" content="在上一篇blogs中，我详细的解释了CompletionService的使用方法和ExecutorCompletionService的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。">
+
+<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
+
+
+    <link rel="alternate" href="/atom.xml" title="Allen&#39;s Blog" type="application/atom+xml">
+
+
+
+    <link rel="shortcut icon" href="/assets/images/blog-img/favicon.png">
+
+
+
+
+
+    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
+
+
+
+    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/css/style.css">
+
+
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+
+<title>CompletionService小技巧 | Allen&#39;s Blog</title>
+
+<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+<script>
+    var yiliaConfig = {
+        fancybox: true,
+        animate: false,
+        isHome: false,
+        isPost: true,
+        isArchive: false,
+        isTag: false,
+        isCategory: false,
+        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
+        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
+        search: undefined
+    }
+</script>
+
+
+    <script> yiliaConfig.jquery_ui = [false]; </script>
+
+
+
+    <script> yiliaConfig.rootUrl = "\/";</script>
+
+
+
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
+        </a>
+        <hgroup>
+          <h1 class="header-author"><a href="/">Allen Zheng</a></h1>
+        </hgroup>
+
+        
+
+        
+
+
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/">主页</a></li>
+                        
+                            <li><a href="/archives/">所有文章</a></li>
+                        
+                            <li><a href="/tags/随笔">随笔</a></li>
+                        
+                            <li><a href="/tags/">标签云</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" href="https://github.com/allenn" title="GitHub"></a>
+                            
+                                <a class="fa 新浪微博" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
+                            
+                                <a class="fa Email" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
+                            
+                                <a class="fa Facebook" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
+                            
+                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吐槽/">吐槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业/">毕业</a></li></ul>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="https://github.com/">GitHub</a>
+                    
+                      <a class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">讲真，没想好写点什么</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Allen Zheng</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="回到主页">Allen Zheng</a></h1>
+            </hgroup>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/">主页</a></li>
+                
+                    <li><a href="/archives/">所有文章</a></li>
+                
+                    <li><a href="/tags/随笔">随笔</a></li>
+                
+                    <li><a href="/tags/">标签云</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fa GitHub" target="_blank" href="https://github.com/allenn" title="GitHub"></a>
+                            
+                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
+                            
+                                <a class="fa Email" target="_blank" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
+                            
+                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
+                            
+                                <a class="fa Twitter" target="_blank" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
+                            
+                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
+                            
+                        </ul>
+            </nav>
+        </header>                
+    </div>
+    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+</nav>
+      <div class="body-wrap"><article id="post-2016-08-10-java-CompletionService-tips" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" class="article-date">
+      <time datetime="2016-08-10T08:50:39.000Z" itemprop="datePublished">2016-08-10</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      CompletionService小技巧
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
+    </div>
+
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
+<a id="more"></a>
+<p>首先，在初始化<code>ExecutorCompletionService</code>的时候我们需要传入一个<code>Executor</code>，作为<code>ExecutorCompletionService</code>执行任务的容器。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue) &#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，调用<code>submit</code>方法，向它提交任务。<code>submit</code>方法会将我们提交的任务包装成一个<code>QueueingFuture</code>并提交给<code>Executor</code>来执行。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Future&lt;V&gt; <span class="title">submit</span><span class="params">(Callable&lt;V&gt; task)</span> </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();  </div><div class="line">    RunnableFuture&lt;V&gt; f = newTaskFor(task);  </div><div class="line">    executor.execute(<span class="keyword">new</span> QueueingFuture(f));  </div><div class="line">    <span class="keyword">return</span> f;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着，<code>QueueingFuture</code>会在任务执行完成后把执行结果放到队列中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueingFuture</span> <span class="keyword">extends</span> <span class="title">FutureTask</span>&lt;<span class="title">Void</span>&gt; </span>&#123;</div><div class="line">    QueueingFuture(RunnableFuture&lt;V&gt; task) &#123;</div><div class="line">        <span class="keyword">super</span>(task, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">this</span>.task = task;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">done</span><span class="params">()</span> </span>&#123; completionQueue.add(task); &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Future&lt;V&gt; task;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，我们通过<code>take</code>或者<code>poll</code>方法就能拿到任务执行的结果。</p>
+<p>下面让我们设想一个场景，我需要从网络上下载几张图片和视频并最后把它们渲染到页面上去，由于下载图片和视频都比较耗时，所以我希望能以多线程的形式进行下载。但是由于资源有限，下载的并发度不能太大，所以需要限制线程池的并发线程大小。但如果将可用线程数平均分给下载图片和下载视频的线程池，当某线程池的所有任务执行完成后，另外一个线程池也无法获取到它所释放的资源。那怎么办呢？我们可以创建一个统一的线程池，然后把两个CompletionService绑定上去，让CompletionService作为一个句柄来使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">final</span> ExecutorService pool = Executors.newFixedThreadPool(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="keyword">final</span> ExecutorCompletionService&lt;Image&gt; imageCompletionService = <span class="keyword">new</span> ExecutorCompletionService&lt;&gt;(pool);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">final</span> String site : imageSites) &#123;</div><div class="line">    completionService.submit(<span class="keyword">new</span> Callable&lt;Image&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">            <span class="keyword">return</span> IOUtils.toString(<span class="keyword">new</span> URL(<span class="string">"http://"</span> + site), StandardCharsets.UTF_8);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">final</span> ExecutorCompletionService&lt;Video&gt; vidoeCompletionService = <span class="keyword">new</span> ExecutorCompletionService&lt;&gt;(pool);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">final</span> String site : videoSites) &#123;</div><div class="line">    completionService.submit(<span class="keyword">new</span> Callable&lt;Video&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">            <span class="keyword">return</span> IOUtils.toString(<span class="keyword">new</span> URL(<span class="string">"http://"</span> + site), StandardCharsets.UTF_8);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">List&lt;Image&gt; images = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; topSites.size(); ++i) &#123;</div><div class="line">    <span class="keyword">final</span> Future&lt;String&gt; future = completionService.take();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        images.add(future.get());</div><div class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">        log.warn(<span class="string">"Error while downloading"</span>, e.getCause());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">List&lt;Video&gt; videos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; topSites.size(); ++i) &#123;</div><div class="line">    <span class="keyword">final</span> Future&lt;String&gt; future = completionService.take();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        videos.add(future.get());</div><div class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">        log.warn(<span class="string">"Error while downloading"</span>, e.getCause());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// ... do process content</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">CompletionService小技巧</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
+        <p><span>发布时间:</span>2016-08-10, 16:50:39</p>
+        <p><span>最后更新:</span>2016-09-01, 09:36:55</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" title="CompletionService小技巧">http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+    <nav id="article-nav">
+        
+            <div id="article-nav-newer" class="article-nav-title">
+                <a href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">
+                    25分钟改变你的工作效率：番茄工作法
+                </a>
+            </div>
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/2015-10/how-to-set-property-in-unit-test/">
+                    如何在单元测试中设置系统环境变量
+                </a>
+            </div>
+        
+    </nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"CompletionService小技巧　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2016-08/2016-08-10-java-CompletionService-tips/" data-title="CompletionService小技巧" data-url="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"alleeen"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/" title="上一篇: 25分钟改变你的工作效率：番茄工作法">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/2015-10/how-to-set-property-in-unit-test/" title="下一篇: 如何在单元测试中设置系统环境变量">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-14-java-api-need-to-know/">Java核心API需要掌握的程度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">25分钟改变你的工作效率：番茄工作法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">CompletionService小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/how-to-set-property-in-unit-test/">如何在单元测试中设置系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2010-06/2010-06-20-graduate/">我的毕业综合症</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                <i class="fa fa-copyright"></i> 
+                2016 Allen Zheng
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>| </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+    </div>
+    
+<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-36907890-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    // Open in New Window
+    
+        var oOpenInNew = {
+            
+            
+            
+            
+            
+            
+             archives: ".archive-article-title", 
+             miniArchives: "a.post-list-link", 
+            
+             friends: "#js-friends a", 
+             socail: ".social a" 
+        }
+        for (var x in oOpenInNew) {
+            $(oOpenInNew[x]).attr("target", "_blank");
+        }
+    
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+  </div>
+</body>
+</html>

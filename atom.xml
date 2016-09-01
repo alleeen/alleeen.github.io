@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Allen&#39;s Blog</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://allenn.cn/"/>
+  <updated>2016-09-01T01:36:55.000Z</updated>
+  <id>http://allenn.cn/</id>
+  
+  <author>
+    <name>Allen Zheng</name>
+    <email>xudongzheng1225@gmail.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Github的正确使用方法</title>
+    <link href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/"/>
+    <id>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</id>
+    <published>2016-08-24T08:21:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
+<p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
+<a id="more"></a>
+<h3 id="第一步：Fork项目"><a href="#第一步：Fork项目" class="headerlink" title="第一步：Fork项目"></a>第一步：Fork项目</h3><p>Fork 项目其实就是在 Github 上拷贝一份他人项目的副本作为自己的项目。当你进入一个项目页面后，会在右上方看见一个<em>Fork</em>的按钮，点击它就可以 Fork 一个项目。</p>
+<p><img src="/assets/images/github-flow/fork-project.jpg" alt="Fork Project"></p>
+<p>需要注意的是Fork项目后，你自己的项目并不会和源项目保持自动同步，所以你需要手动进行更新，如何更新请看：<em>第五步：拉取源项目的更新</em>。</p>
+<h3 id="第二步：Clone-到本地"><a href="#第二步：Clone-到本地" class="headerlink" title="第二步：Clone 到本地"></a>第二步：Clone 到本地</h3><p>Fork 项目后，我们就可以把代码 Clone 到本地以便我们修改。Github 提供两种 Clone 项目的方式，SSH/HTTPS。如果选用SSH模式，你需要先在本地生成一对SSH Key并上传到Github用于身份识别，具体请参考 Github 的帮助文档：<a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">Generating an SSH key</a>。如果选用HTTPS模式，在更新和提交时就要输入 Github 的用户名和密码。一般来说使用 SSH 模式，在一次配置后，就可以免输密码提交代码，比较方便，但使用 HTTPS 模式更具备通用性，所以各有利弊，随意选择~</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 使用 ssh clone 项目到本地</div><div class="line">$ git clone git@github.com:rvm/rvm.git</div><div class="line"></div><div class="line"># 使用 https clone 项目到本地</div><div class="line">$ git clone https://github.com/rvm/rvm.git</div></pre></td></tr></table></figure>
+<h3 id="第三步：创建分支"><a href="#第三步：创建分支" class="headerlink" title="第三步：创建分支"></a>第三步：创建分支</h3><p>每次开发新功能，都应该新建一个单独的分支（这方面可以参考<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="external">《Git分支管理策略》</a>）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 获取主干最新代码</div><div class="line">$ git checkout master</div><div class="line">$ git pull</div><div class="line"></div><div class="line"># 新建一个开发分支myfeature</div><div class="line">$ git checkout -b myfeature</div></pre></td></tr></table></figure>
+<h3 id="第四步：Commit-新代码"><a href="#第四步：Commit-新代码" class="headerlink" title="第四步：Commit 新代码"></a>第四步：Commit 新代码</h3><p>分支修改后，就可以提交commit了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git add --all</div><div class="line">$ git status</div><div class="line">$ git commit --verbose</div></pre></td></tr></table></figure>
+<ul>
+<li>git add 命令的all参数，表示保存所有变化（包括新建、修改和删除）。从Git 2.0开始，all是 git add 的默认参数，所以也可以用 git add . 代替。</li>
+<li>git status 命令，用来查看发生变动的文件。</li>
+<li>git commit 命令的verbose参数，会列出 diff 的结果。</li>
+</ul>
+<p>需要注意的是 Commit 代码必须给出简明扼要的提交信息，下面是一个范本，第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Present-tense summary under 50 characters</div><div class="line"></div><div class="line">* More information about commit (under 72 characters).</div><div class="line">* More information about commit (under 72 characters).</div><div class="line"></div><div class="line">http://project.management-system.com/ticket/123</div></pre></td></tr></table></figure>
+<h3 id="第五步：拉取源项目的更新"><a href="#第五步：拉取源项目的更新" class="headerlink" title="第五步：拉取源项目的更新"></a>第五步：拉取源项目的更新</h3><p>当我们在修改代码的时候，源项目肯定也会发生变化，所以在我们向源项目推送代码之前，需要先将源项目的代码更新拉取下来。</p>
+<p>先查看我们的 Remote 配置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote -v</div><div class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div></pre></td></tr></table></figure>
+<p>将源项目添加为 upstream</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</div></pre></td></tr></table></figure>
+<p>检查配置是否生效</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote -v</div><div class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div><div class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)</div><div class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)</div></pre></td></tr></table></figure>
+<p>拉取源项目的变更</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git fetch upstream</div><div class="line">remote: Counting objects: 75, done.</div><div class="line">remote: Compressing objects: 100% (53/53), done.</div><div class="line">remote: Total 62 (delta 27), reused 44 (delta 9)</div><div class="line">Unpacking objects: 100% (62/62), done.</div><div class="line">From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</div><div class="line"> * [new branch]      master     -&gt; upstream/master</div></pre></td></tr></table></figure>
+<p>切换到 master 分支</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git checkout master</div></pre></td></tr></table></figure>
+<p>将源项目的修改合并到本地 master 分支</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git merge upstream/master</div></pre></td></tr></table></figure>
+<h3 id="第六步：Rebase-本地分支并解决冲突"><a href="#第六步：Rebase-本地分支并解决冲突" class="headerlink" title="第六步：Rebase 本地分支并解决冲突"></a>第六步：Rebase 本地分支并解决冲突</h3><p>接着我们切换到之前的开发分支 myfeature，并同 master 分支进行同步</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git checkout myfeature</div><div class="line">$ git rebase master</div></pre></td></tr></table></figure>
+<p>有时我们会和主干发生冲突，那么我们需要在本地把所有冲突解决掉后才能继续合入代码。如何解决冲突，请阅：<a href="https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/" target="_blank" rel="external">Resolving a merge conflict from the command line</a></p>
+<h3 id="第七步：Push到Github"><a href="#第七步：Push到Github" class="headerlink" title="第七步：Push到Github"></a>第七步：Push到Github</h3><p>同步好本地分支后，我们就可以将代码推送到Github了</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push -u origin myfeature</div></pre></td></tr></table></figure>
+<h3 id="第八步：发送Pull-Request"><a href="#第八步：发送Pull-Request" class="headerlink" title="第八步：发送Pull Request"></a>第八步：发送Pull Request</h3><p>点击项目页面上方的pull request按钮</p>
+<p><img src="/assets/images/github-flow/create-pull-request-1.jpg" alt="pull request button"></p>
+<p>我们自己的项目选择之前的开发分支，源项目选择 master 分支</p>
+<p><img src="/assets/images/github-flow/create-pull-request-2.png" alt="pull request"></p>
+<p>在下面的页面上填写上描述，然后点击发送即可，接着下来就是原作者的事儿了，如果他同意合入我们会在项目的 master 分支看到我们刚刚贡献的代码。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/github-flow/github-flow.png&quot; alt=&quot;Github Flow&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Git" scheme="http://allenn.cn/tags/Git/"/>
+    
+      <category term="Github" scheme="http://allenn.cn/tags/Github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在公司内网如何更新IntelliJ的插件</title>
+    <link href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/"/>
+    <id>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</id>
+    <published>2016-08-19T14:21:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="external">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
+<a id="more"></a>
+<p>OK, Let’s do it! 首先导出公司代理服务器的根证书，用浏览器即可，随便访问应该https的外网网站，点击地址栏上的小锁头。</p>
+<p><img src="/assets/images/java-ssl-error/ie_url_bar-certificate-error.png" alt="ie_url_bar"></p>
+<p>打开的窗口中,点击下一步即可,</p>
+<p><img src="/assets/images/java-ssl-error/export_cert_1.png" alt="证书详细信息"></p>
+<p>在正式编码格式中,选择指定的格式,点击下一步;</p>
+<p><img src="/assets/images/java-ssl-error/export_cert_2.png" alt="证书导出向导"></p>
+<p>指定生成证书文件的名称(此处为vbooking.cer)</p>
+<p><img src="/assets/images/java-ssl-error/export_cert_3.png" alt="vbooking.cer"></p>
+<p>接着，将证书导入java的cacerts证书库，切换到目录 ${JAVA_HOME}/jre/lib/security, 执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">keytool -import -alias vbooking -keystore cacerts -file $&#123;cert_file_path&#125;</div></pre></td></tr></table></figure>
+<p>其中：</p>
+<ul>
+<li>-alias 指定别名(推荐和证书同名)</li>
+<li>-keystore 指定存储文件(此处固定)</li>
+<li>-file 指定证书文件全路径(证书文件所在的目录)</li>
+</ul>
+<p>此时命令行会提示你输入cacerts证书库的密码,敲入changeit即可,这是java中cacerts证书库的默认密码,当然也可自行修改。</p>
+<p>最后，在系统中新建一个环境变量，IDEA_JDK（64位程序为IDEA_JDK_64），指向刚才导入根证书的JDK，不然IntelliJ会使用内置的JDK（详细见<a href="https://intellij-support.jetbrains.com/hc/en-us/articles/206544879-Selecting-the-JDK-version-the-IDE-will-run-under" target="_blank" rel="external">这里</a>），重启IntelliJ后即可。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB&quot;&gt;中间人攻击&lt;/a&gt;的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="IntelliJ" scheme="http://allenn.cn/tags/IntelliJ/"/>
+    
+      <category term="ssl" scheme="http://allenn.cn/tags/ssl/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java核心API需要掌握的程度</title>
+    <link href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/"/>
+    <id>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</id>
+    <published>2016-08-14T15:21:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。</p>
+<ol>
+<li>java.lang包下的80％以上的类的功能的灵活运用。</li>
+<li>java.util包下的80％以上的类的灵活运用，特别是集合类体系、正规表达式、时间、属性、和Timer.</li>
+<li>java.io包下的60％以上的类的使用，理解IO体系的基于管道模型的设计思路以及常用IO类的特性和使用场合。</li>
+<li>java.math包下的100％的内容。</li>
+<li>java.net包下的60％以上的内容，对各个类的功能比较熟悉。</li>
+<li>java.text包下的60％以上的内容，特别是各种格式化类。</li>
+<li>熟练运用JDBC.</li>
+<li>java.security包下40％以上的内容，如果对于安全没有接触的话根本就不可能掌握java.</li>
+<li>AWT的基本内容，包括各种组件事件、监听器、布局管理器、常用组件、打印。</li>
+<li>Swing的基本内容，和AWT的要求类似。</li>
+<li>XML处理，熟悉SAX、DOM以及JDOM的优缺点并且能够使用其中的一种完成XML的解析及内容处理。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。&lt;/p&gt;
+&lt;ol&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="api" scheme="http://allenn.cn/tags/api/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>25分钟改变你的工作效率：番茄工作法</title>
+    <link href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/"/>
+    <id>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</id>
+    <published>2016-08-12T08:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？</p>
+<p><img src="/assets/images/intro-pomodoro-technique/time-lack.png" alt="我真的很缺时间"></p>
+<p>那么，你想变得更专注么？你想变得更有效率么？你想每天下班按时回家么？那么来试试这个番茄工作法吧！</p>
+<a id="more"></a>
+<p>番茄工作法？也许很多人对它还比较陌生，包括我，我也是在阅读了《软技能－代码之外的生存指南》（这是一本好书，推荐所有人阅读）后才了解到它。那么什么是番茄工作法呢？</p>
+<blockquote>
+<p>番茄工作法（英语：Pomodoro Technique）是一种时间管理法方法，在上世纪八十年代由Francesco Cirillo创立。该方法使用一个定时器来分割出一个一般为25分钟的工作时间和5分钟的休息时间，而那些时间段被称为pomodori，为意大利语单词 pomodoro（中文：番茄）之复数。以上来自<a href="https://zh.wikipedia.org/wiki/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95" target="_blank" rel="external">维基百科：番茄工作法</a></p>
+</blockquote>
+<p>简单来说就是把工作时间划分为一小节一小节的，每小节30分钟，其中包含了25分钟的工作时间和5分钟的休息时间。是不是很简单？</p>
+<p>OK，那让我们来实践一下，请选择一件你觉得在25分钟内能完成的工作，在这25分钟的工作时间中，请把Email关掉，手机调整成静音，打好茶水。然后把手机的定时器打开，设置25分钟的倒计时，然后开始工作。</p>
+<p><img src="/assets/images/intro-pomodoro-technique/25mins-get-it-done.png" alt="打开你的定时器"></p>
+<p>OK,Time up，现在感觉怎么样？是不是找回了专注的感觉？<em>一次只专注做好一件事情</em>，这就是番茄工作法的精髓所在。我们都知道工作情境的切换特别耗费人的精力，你也许会有过这样的体验，当你在酝酿某种思路时，突然一个电话，你之前在大脑里构建的宏伟建筑顷刻就能灰飞烟灭。你只有一双脚，不能同时跳两场舞。</p>
+<p><img src="/assets/images/intro-pomodoro-technique/two-dance.gif" alt="打开你的定时器"></p>
+<h2 id="如何做？"><a href="#如何做？" class="headerlink" title="如何做？"></a>如何做？</h2><p>「番茄工作法」的使用主流程如下：</p>
+<ol>
+<li>每天早上到公司后，首先拿一张纸（或者是本子中的一页），用笔写下当天应该要做完的事情。</li>
+<li>将这些事情按优先级排序，然后进行大致的估算后，拆分成若干个「番茄钟」，每个「番茄钟」是 25 分钟。</li>
+<li>设置「番茄钟」倒计时，同时开始第一件事情的第一个「番茄钟」。</li>
+<li>在「番茄钟」倒计时期间，集中精力只做事先安排好的事情。</li>
+<li>在「番茄钟」结束后，休息 5 分钟，走动放松一下，然后继续下一个「番茄钟」，直到完成自己的任务。</li>
+<li>每完成 4 个「番茄钟」（即 2 小时），休息 15-30 分钟。</li>
+<li>每天回顾「番茄钟」完成的情况，回顾一下自己被打断的原因，看看哪些打断可以避免。</li>
+</ol>
+<p>在实际工作中你总会遇到一些疑问情况，因为你不是与世隔绝的，你是在一个团队中工作。番茄工作法也没有要求你做到与世隔绝，完全“两耳不闻窗外事”。那么如何处理这种“突发状况”呢：</p>
+<ol>
+<li>如果你被电话、交谈打断，这个「番茄钟」即宣告失败，可以简单休息 5 分钟，然后重启「番茄钟」。</li>
+<li>如果你突然想到一件重要的事情，除非当前非做不可，否则应该在纸上将此事快速记录下来，然后继续你的「番茄钟」。</li>
+</ol>
+<p>下面用一张图来说明整个番茄工作法的流程，这张图来自<a href="https://www.amazon.cn/%E7%95%AA%E8%8C%84%E5%B7%A5%E4%BD%9C%E6%B3%95%E5%9B%BE%E8%A7%A3-%E7%AE%80%E5%8D%95%E6%98%93%E8%A1%8C%E7%9A%84%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86%E6%96%B9%E6%B3%95-%E8%AF%BA%E7%89%B9%E4%BC%AF%E6%A0%BC/dp/B004O9F71K" target="_blank" rel="external">《番茄工作法图解-简单易行的时间管理方法》</a>：</p>
+<p><img src="/assets/images/intro-pomodoro-technique/overview.png" alt="工作流程"></p>
+<h2 id="技巧和心得"><a href="#技巧和心得" class="headerlink" title="技巧和心得"></a>技巧和心得</h2><p>OK，上面说了那么多，相信你对番茄工作法已经有一定的了解了，那为什么我要推荐给你，因为我用了以后觉得好，就像成龙大哥说的那样：我用完之后是这样子，你们用完之后，也是这样子！</p>
+<p><img src="/assets/images/intro-pomodoro-technique/duang.png" alt="duang"></p>
+<ol>
+<li>在进行「番茄钟」时，我们应该尽量想办法避开一些容易分神的信息源。例如：将手机的消息推送静音，关闭 QQ 和微信。相信我，你大多数时候并不需要立即响应聊天软件中的信息。使用「番茄钟」后，你的消息回复时间最坏情况下也就是晚 25 分钟。如果真的有人有急事，他会直接到你的办公桌来找你，或者直接给你打电话的。</li>
+<li>刚开始的时候我建议你把「番茄钟」设定在25分钟，随着你的注意力控制越来越容易，你可以适当延长「番茄钟」的时间。就我的经验，延长到 45 - 50 分钟是完全没有问题的。其实你如果明白了「番茄钟」的原理，你甚至可以在心中假想一个「番茄钟」，然后让自己快速进入精力集中状态。</li>
+<li>一天下来，回顾自己当天的「番茄钟」完成情况，看看主要的问题在于自己的精力无法集中，还是老是被别人打断。针对具体的问题可以做一些调整的尝试。比如，如果是精力无法集中，则看看是否是干扰源过多，尽量减少干扰。如果是老被打断，则可以和同事商量一些工作方式，比如让同事尽量用邮件和 QQ 找你，而不是当面打扰你。</li>
+<li>我使用了一个内置番茄计时器的看板程序来追踪我每天的工作情况，<a href="https://kanbanflow.com" target="_blank" rel="external">Kanbanflow</a>，我每天会在开完早会后花一个番茄钟的时间来安排我一天的任务，并用它来作为我的「番茄钟」计时器。它还能输出一个报告，告诉你每天完成了多少个「番茄钟」，被打断了多少次，被打断的原因又是什么。我觉得不错，你可以去试试。</li>
+</ol>
+<p><img src="/assets/images/intro-pomodoro-technique/KanbanFlowBoard.png" alt="KanbanFlowBoard"></p>
+<p>最后我想说的是，我们应该认识到，工作被打断是在所难免的，总会有一些临时的沟通工作无法被计划，并且是有价值的。所以，「番茄钟」失败后，不应该有过多的情绪，尽快重启一个「番茄钟」，你的工作应该很快就会进入状态。Try it，相信你也会有很大的收获。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/intro-pomodoro-technique/time-lack.png&quot; alt=&quot;我真的很缺时间&quot;&gt;&lt;/p&gt;
+&lt;p&gt;那么，你想变得更专注么？你想变得更有效率么？你想每天下班按时回家么？那么来试试这个番茄工作法吧！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工作方法" scheme="http://allenn.cn/categories/%E5%B7%A5%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>CompletionService小技巧</title>
+    <link href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"/>
+    <id>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</id>
+    <published>2016-08-10T08:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
+<a id="more"></a>
+<p>首先，在初始化<code>ExecutorCompletionService</code>的时候我们需要传入一个<code>Executor</code>，作为<code>ExecutorCompletionService</code>执行任务的容器。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue) &#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后，调用<code>submit</code>方法，向它提交任务。<code>submit</code>方法会将我们提交的任务包装成一个<code>QueueingFuture</code>并提交给<code>Executor</code>来执行。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Future&lt;V&gt; <span class="title">submit</span><span class="params">(Callable&lt;V&gt; task)</span> </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();  </div><div class="line">    RunnableFuture&lt;V&gt; f = newTaskFor(task);  </div><div class="line">    executor.execute(<span class="keyword">new</span> QueueingFuture(f));  </div><div class="line">    <span class="keyword">return</span> f;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着，<code>QueueingFuture</code>会在任务执行完成后把执行结果放到队列中。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">QueueingFuture</span> <span class="keyword">extends</span> <span class="title">FutureTask</span>&lt;<span class="title">Void</span>&gt; </span>&#123;</div><div class="line">    QueueingFuture(RunnableFuture&lt;V&gt; task) &#123;</div><div class="line">        <span class="keyword">super</span>(task, <span class="keyword">null</span>);</div><div class="line">        <span class="keyword">this</span>.task = task;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">done</span><span class="params">()</span> </span>&#123; completionQueue.add(task); &#125;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Future&lt;V&gt; task;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，我们通过<code>take</code>或者<code>poll</code>方法就能拿到任务执行的结果。</p>
+<p>下面让我们设想一个场景，我需要从网络上下载几张图片和视频并最后把它们渲染到页面上去，由于下载图片和视频都比较耗时，所以我希望能以多线程的形式进行下载。但是由于资源有限，下载的并发度不能太大，所以需要限制线程池的并发线程大小。但如果将可用线程数平均分给下载图片和下载视频的线程池，当某线程池的所有任务执行完成后，另外一个线程池也无法获取到它所释放的资源。那怎么办呢？我们可以创建一个统一的线程池，然后把两个CompletionService绑定上去，让CompletionService作为一个句柄来使用。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">final</span> ExecutorService pool = Executors.newFixedThreadPool(<span class="number">5</span>);</div><div class="line"></div><div class="line"><span class="keyword">final</span> ExecutorCompletionService&lt;Image&gt; imageCompletionService = <span class="keyword">new</span> ExecutorCompletionService&lt;&gt;(pool);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">final</span> String site : imageSites) &#123;</div><div class="line">    completionService.submit(<span class="keyword">new</span> Callable&lt;Image&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">            <span class="keyword">return</span> IOUtils.toString(<span class="keyword">new</span> URL(<span class="string">"http://"</span> + site), StandardCharsets.UTF_8);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">final</span> ExecutorCompletionService&lt;Video&gt; vidoeCompletionService = <span class="keyword">new</span> ExecutorCompletionService&lt;&gt;(pool);</div><div class="line"><span class="keyword">for</span> (<span class="keyword">final</span> String site : videoSites) &#123;</div><div class="line">    completionService.submit(<span class="keyword">new</span> Callable&lt;Video&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> String <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">            <span class="keyword">return</span> IOUtils.toString(<span class="keyword">new</span> URL(<span class="string">"http://"</span> + site), StandardCharsets.UTF_8);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line">List&lt;Image&gt; images = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; topSites.size(); ++i) &#123;</div><div class="line">    <span class="keyword">final</span> Future&lt;String&gt; future = completionService.take();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        images.add(future.get());</div><div class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">        log.warn(<span class="string">"Error while downloading"</span>, e.getCause());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">List&lt;Video&gt; videos = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; topSites.size(); ++i) &#123;</div><div class="line">    <span class="keyword">final</span> Future&lt;String&gt; future = completionService.take();</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        videos.add(future.get());</div><div class="line">    &#125; <span class="keyword">catch</span> (ExecutionException e) &#123;</div><div class="line">        log.warn(<span class="string">"Error while downloading"</span>, e.getCause());</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// ... do process content</span></div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在上一篇blogs中，我详细的解释了&lt;code&gt;CompletionService&lt;/code&gt;的使用方法和&lt;code&gt;ExecutorCompletionService&lt;/code&gt;的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="多线程" scheme="http://allenn.cn/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何在单元测试中设置系统环境变量</title>
+    <link href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
+    <id>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</id>
+    <published>2015-10-17T05:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>但是我们很快就会发现，这种设置方法在只有一个测试用例的时候是OK的，当你的测试类里有多个@Test标签时，就会发生一些很奇怪的问题。比如某些用例读到了环境变量，有些却没有读取到。主要的原因是System.setProperty(“xxx.xxx”, “xxx.xxx”);方法是会作用在整个JVM上的，而多个测试用例是会在同一个JVM上面运行的，而JUnit的@Before标签标示的方法又会在每个测试用例启动前运行，这样就会导致环境变量相互覆盖。特别是开启并发执行单元测试功能时，这种现象更加严重。那么如何设置环境变量才是安全的呢？首先，我们要抛弃在setUp方法里设置环境变量的做法，然后在POM文件中做如下配置：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 单元测试时，系统参数iemp.home的路径--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">test.home</span>&gt;</span>$&#123;project.build.directory&#125;/opt/server<span class="tag">&lt;/<span class="name">test.home</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.18.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">        ....</div><div class="line">        <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">home</span>&gt;</span>$&#123;test.home&#125;<span class="tag">&lt;/<span class="name">home</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这样我们就可以很轻松的在单元测试中读取系统环境变量了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Before&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setUp&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; LicenseException&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    PowerMockito.mockStatic(XXXSystem.class);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    System.setProperty(&lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="单元测试" scheme="http://allenn.cn/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mock 与 Stub</title>
+    <link href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"/>
+    <id>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</id>
+    <published>2015-10-14T08:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
+</blockquote>
+<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="external">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="external">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
+<a id="more"></a>
+<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><p>先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。</p>
+<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>Mock和Stub有两个主要区别：</p>
+<ol>
+<li>校验测试结果的方式不同，Mock倾向于校验行为（Beahavior verification），Stub倾向于校验状态；</li>
+<li>Mock和Stub也代表了两种将测试与设计结合在一起的理念。</li>
+</ol>
+<p>上面的说法比较抽象，让我们通过例子来看看Mock与Stub的区别。</p>
+<h2 id="使用Stub进行单元测试"><a href="#使用Stub进行单元测试" class="headerlink" title="使用Stub进行单元测试"></a>使用Stub进行单元测试</h2><p>下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderStateTester</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TALISKER = <span class="string">"Talisker"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String HIGHLAND_PARK = <span class="string">"Highland Park"</span>;</div><div class="line">    <span class="keyword">private</span> WareHouse warehouse = <span class="keyword">new</span> WareHouseImpl();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        warehouse.add(TALISKER , <span class="number">50</span>);</div><div class="line">        warehouse.add(HIGHLAND_PARK , <span class="number">25</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderIsFilledIfEnoughInWarehouse</span><span class="params">()</span></span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">50</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertTrue(order.isFilled());</div><div class="line">        assertEquals(<span class="number">0</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderDoseNotRemoveIfNotEnough</span><span class="params">()</span> </span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">51</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertFalse(order.isFilled());</div><div class="line">        assertEquals(<span class="number">50</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的例子里，我们需要对Order对象进行测试，为了验证Order.fill方法，我们还需要WareHouse对象。但真正的WareHouse对象内部可能有很复杂的实现，比如读取文件，访问数据库，持有同步锁以维持对象在并发访问时内部数据正确等。实际上在单元测试时我们并不需要去和这些代码发生交互，而且这些复杂的代码还会让我们的单元测试很不稳定。数据库连接失败、必须的配置文件读取失败等都会导致我们的单元测试失败。显然我们并不希望这些外部的因素影响我们的单元测试</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;Mocks-aren’t-stubs&quot;&gt;&lt;a href=&quot;#Mocks-aren’t-stubs&quot; class=&quot;headerlink&quot; title=&quot;Mocks aren’t stubs&quot;&gt;&lt;/a&gt;Mocks aren’t stubs&lt;/h2&gt;&lt;p&gt;这是软件大师&lt;a href=&quot;http://martinfowler.com/&quot;&gt;Martin Fowler&lt;/a&gt;的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击&lt;a href=&quot;http://martinfowler.com/articles/mocksArentStubs.html&quot;&gt;这里&lt;/a&gt;阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="单元测试" scheme="http://allenn.cn/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</title>
+    <link href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"/>
+    <id>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</id>
+    <published>2015-10-14T05:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：</p>
+<blockquote>
+<p>除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。</p>
+</blockquote>
+<a id="more"></a>
+<p>发生问题的场景是这样的 Class C 有一个静态方法，Class A 和 Class B 都需要调用这个方法完成一些功能：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class C&#123;</div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SomeObject <span class="title">getSomeObject</span><span class="params">()</span></span>&#123;</div><div class="line">truetrue[....]</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class A &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class B &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于在测试中直接调用 C.getSomeObject() 会导致一些不可预期的错误，所以我想对AB类进行测试就必须使用Mock，于是我那么写：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class ATest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">Class BTest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我在IDE中分别运行 ATest 或者 BTest 是，我的测试都是能正确运行的，但是当你使用Maven或者其他的构建工具进行多线程测试的时候，你就会发现问题来了。一会是A抛异常，一会是B抛异常，总之就是不能很好的工作。由于我不是Powermockito的专家，所以无法深入的去探究这个问题的原因，但是我想，这应该是和静态方法本身在一个JVM内的唯一性有关，我截取了网上两个解释供参考：</p>
+<h4 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation 1"></a>Explanation 1</h4><p>Without going into details let’s look at this code written using with Mockito :</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">given(mock.doSomethingWith(eq(<span class="string">"A"</span>), longThat(...)).thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
+<p>Which is roughly equivalent to :<br>(<strong>*</strong> NEVER use a reference to OngoingStubbing in real test code, it might &gt;lead to wrong test code <strong>*</strong>)</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String aString = eq(<span class="string">"A"</span>);</div><div class="line">Long aLong = longThat(...);</div><div class="line">String variableThatGiveReturnType = mock.doSomethingWith(aString, aLong);</div><div class="line">BDDOngoingStubbing&lt;String&gt; ongoingStubbing = given(variableThatGiveReturnType);</div><div class="line">ongoingStubbing.thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
+<p>The stubbing is clearly not finished until the last call thenReturn is completed, right.</p>
+<p>Don’t you see the missing link between all those line to actually achieve the stubbing in a fluent way ? ;)</p>
+<p>Dependening on how you do that, if you don’t synchronize this block you won’t be able to achieve any correct stubbing, otherwise concurrent access anywhere in this block will garble things in the mock internals.</p>
+<p>And if you add the fact that the mock might be already used, with it’s own concurrent code to use the answers, you end up in with completely messed up internal states.</p>
+<p>Anyway, always stub before using mocks concurrently.</p>
+<h4 id="Explanation-2"><a href="#Explanation-2" class="headerlink" title="Explanation 2"></a>Explanation 2</h4><p>For healthy scenarios Mockito plays nicely with threads. For instance, you can run tests in parallel to speed up the build. Also, You can let multiple threads call methods on a shared mock to test in concurrent conditions. Check out a [<a href="http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22" target="_blank" rel="external">http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22</a> timeout()] feature for testing concurrency.</p>
+<p>However Mockito is only thread-safe in healthy tests, that is tests without multiple threads stubbing/verifying a shared mock. Stubbing or verification of a shared mock from different threads is NOT the proper way of testing because it will always lead to intermittent behavior. In general mutable state + assertions in multi-threaded environment lead to random results. If you do stub/verify a shared mock across threads you will face occasional exceptions like: WrongTypeOfReturnValue, etc.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="单元测试" scheme="http://allenn.cn/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我的毕业综合症</title>
+    <link href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/"/>
+    <id>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</id>
+    <published>2010-06-20T05:50:39.000Z</published>
+    <updated>2016-09-01T01:36:55.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近听到的消息有点多，</p>
+<p>FOR EXAMPLE,</p>
+<p>XX获得 UNIVERSITY XXX 的 OFFER （XXX可以替代 Cambridge，Oxford，OR Stanford etc..）。</p>
+<a id="more"></a>
+<p>OR</p>
+<p>XX的PHD获批，一年XXXXX欧元研究经费，还不用交学费，</p>
+<p>OR</p>
+<p>XX雅思6+、7+，GRE 1400+……</p>
+<p>P.S:暂时没有听见XX被Microsoft, Google, Ericsson, IBM, Oracle录取，不然我彻底崩溃</p>
+<p>然后我就开始质疑我的选择是否正确，并纠结着是否给Dan发个邮件问他能不能赏个PHD我读读，最后开始感叹同样是人，怎么差距就那么大。</p>
+<p>我开始担心三年后，我的激情是否会被相对死板的中国银行给浇灭，然后成为一个完全没有自我意识软件流水线操作员。</p>
+<p>我开始担心三年后，我不在对代码感兴趣，而是对办公室里的权力斗争感兴趣，特别是在中国银行这样一个非创新性企业。</p>
+<p>好吧，我承认我开始俗了，我开始担心是否有车有房，是否能为和我一同来到这个世界上的小兄弟找个港湾。</p>
+<p>接着想到民工般的工资，毒贩般的工作压力，GFW，Evil的Party &amp; Gov，悲剧的中国软件业～～～</p>
+<p>开始觉得有点渺茫～～</p>
+<p>Jason在考试成绩公布后，在Google Talk上留下一句极其霸气的话：</p>
+<p>Undergraduate is done, now its time to change the world.</p>
+<p>好吧，我承认我比一个35+，并有家室，小孩的人还悲观～～</p>
+<p>最后膜拜下Jason</p>
+<p><img src="/img/jason-gtalk.jpg" alt="Jason"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近听到的消息有点多，&lt;/p&gt;
+&lt;p&gt;FOR EXAMPLE,&lt;/p&gt;
+&lt;p&gt;XX获得 UNIVERSITY XXX 的 OFFER （XXX可以替代 Cambridge，Oxford，OR Stanford etc..）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随便乱写" scheme="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
+    
+    
+      <category term="吐槽" scheme="http://allenn.cn/tags/%E5%90%90%E6%A7%BD/"/>
+    
+      <category term="毕业" scheme="http://allenn.cn/tags/%E6%AF%95%E4%B8%9A/"/>
+    
+  </entry>
+  
+</feed>
