@@ -22,7 +22,7 @@ before_install:
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 - git submodule update --init --recursive
 - git clone -b master git@github.com:allenn/allenn.github.io.git .deploy_git
-- cp .deploy_git public
+- cp -r .deploy_git public
 - rm -rf ./public/.git
 - export TZ='Asia/Shanghai'
 install:
