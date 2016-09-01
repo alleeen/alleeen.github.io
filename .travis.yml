@@ -1,4 +1,7 @@
 language: node_js
+node_js:
+- 'stable'
+
 sudo: false
 git:
   submodules: false
@@ -18,6 +21,7 @@ before_install:
 - git config --global user.email 'xudongzheng1225@gmail.com'
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 - git submodule update --init --recursive
+- git clone -b master git@github.com:allenn/allenn.github.io.git .deploy_git
 - export TZ='Asia/Shanghai'
 install:
 - npm install hexo-cli -g
