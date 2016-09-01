@@ -2,72 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</loc>
-    
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</loc>
     
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
+    <lastmod>2016-09-01T15:37:14.570Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</loc>
     
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
+    <lastmod>2016-09-01T15:37:14.570Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</loc>
     
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
+    <lastmod>2016-09-01T15:37:14.570Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.570Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</loc>
+    
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://allenn.cn/404.html</loc>
     
-    <lastmod>2016-09-01T14:36:38.125Z</lastmod>
+    <lastmod>2016-09-01T15:37:14.566Z</lastmod>
     
   </url>
   
