@@ -17,7 +17,7 @@ tags: [Blogs,Jekyll,软件工程师的自我宣传]
 
 要在使用 GitHub Pages 服务，首先需要创建一个名字叫 “[你的用户名].github.io” 的项目：
 
-![图片来自：GitHub](/assets/images/make-mine-blogs-1/uset-repo@2x.png)
+![图片来自：GitHub](/assets/images/make-mine-blogs-1/user-repo@2x.png)
 
 接着把新建好的项目 Clone 下来，有两种方式 Clone 项目，一种是点击项目右上角的绿色“Set up in desktop”按钮使用 Github 客户端 Clone 项目；另外一种就是通过终端命令行来 Clone 项目。
 
