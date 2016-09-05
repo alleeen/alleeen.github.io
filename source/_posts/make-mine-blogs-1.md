@@ -12,7 +12,7 @@ tags: [Blogs,Jekyll,软件工程师的自我宣传]
 
 <!-- more -->
 
-### Jekyll & GitHub Pages
+## Jekyll & GitHub Pages
 自我总结一下，之前没有坚持下来很大一个原因就是一个字：“懒”，再加上之前的那些 Blogs 系统多多少少会有点不足。我也曾经尝试过购买 VPS 主机，自己搭建 Blogs，我甚至还为之购买了域名，可是后来发现，为何 VPS 是何等的费时费力。要安装软件，要安装数据库，还要防止被盗链导致流量不够用，哎，都是泪，不说了。到最近，无意中看到一篇译文，似乎是[《像黑客一样写博客》](http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html)，瞬间就被带上车了，开始使用 Jekyll 和 GitHub Pages 架设我的静态博客。
 
 要在使用 GitHub Pages 服务，首先需要创建一个名字叫 “[你的用户名].github.io” 的项目：
@@ -27,7 +27,7 @@ $ git clone [you project addr] [your locale dir]
 
 Clone 完成后，需要在本地搭建 Jekyll 的写作环境，正式开启静态博客之旅。
 
-#### Jekyll 环境准备
+### Jekyll 环境准备
 首先安装必要工具
 
 - Ruby：Mac OS X 10.5以上都自带
@@ -111,7 +111,7 @@ $ jekyll server // 简写 jekyll s
 
 在浏览器地址栏中输入：http://localhost:4000/ 就可以看到刚才新建的 Blog 长什么样子了。在这里新增、修改、删除文章都可以实时的看到，只需要刷新页面即可。你可以试着修改那篇默认文章看看效果。
 
-#### 开始写作
+### 开始写作
 Jekyll 博客的配置全在 Blogs 根目录的`_config.yml`文件中，一般来说，只要没有什么特殊的需求，只需要修改诸如：博客名、所有者名字、email等信息即可，如果有更多的需求，请参考所用主题的说明和 Jekyll 的文档：[https://jekyllrb.com/docs/configuration/](https://jekyllrb.com/docs/configuration/)。我的 Blog 的基本配置如下，可以参考：
 
 ```yml
@@ -155,4 +155,5 @@ $ git commit -m 'xxxxx'
 $ git push origin master
 ```
 
+## 总结
 总的来说，使用 GitHub Pages + Jekyll 搭建简单的静态博客是非常容易上手的，只要有一点编程基础应该都能搞得定，而且不用像自己搭建 VPS 那样要时不时去维护主机，当然了，Jekyll 也并非完美，下篇文章我将分享我用 Jekyll 时踩到的一些坑。
