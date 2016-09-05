@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://allenn.cn/"/>
-  <updated>2016-09-04T15:45:21.952Z</updated>
+  <updated>2016-09-05T16:00:37.454Z</updated>
   <id>http://allenn.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://allenn.cn/articles/2016-09/play-trick-with-powermock/"/>
     <id>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</id>
     <published>2016-09-01T15:31:03.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/" target="_blank" rel="external">逸言</a>，感谢原作者的精彩分享</p>
 <p>当我们面对一个遗留系统时，常见的问题是没有测试。正如Michael Feathers在Working Effectively with Legacy Code一书中对“遗留代码”的定义。他将其简单归纳为“没有测试的代码”。真是太贴切了！正是因为没有测试，使得我们对遗留代码的任何重构都有些战战兢兢，甚至成为开发人员抵制重构的借口。从收益与成本的比例来看，对于这样的系统，我一贯认为不要盲目进行重构。因为重构的真正适用场景其实是发生在开发期间，而非维护期间。当然，提升自己的重构能力，尤其学会运用IDE提供的自动重构工具，可以在一定程度上保障重构的质量。然而，安全的做法，还是需要为其编写测试。</p>
@@ -77,11 +77,76 @@
   </entry>
   
   <entry>
+    <title>Allen&#39;s Blogs 创建历程（1）</title>
+    <link href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/"/>
+    <id>http://allenn.cn/articles/2016-08/make-mine-blogs-1/</id>
+    <published>2016-08-30T08:21:39.000Z</published>
+    <updated>2016-09-05T16:00:37.454Z</updated>
+    
+    <content type="html"><![CDATA[<p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248" target="_blank" rel="external">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
+<a id="more"></a>
+<h3 id="Jekyll-amp-GitHub-Pages"><a href="#Jekyll-amp-GitHub-Pages" class="headerlink" title="Jekyll &amp; GitHub Pages"></a>Jekyll &amp; GitHub Pages</h3><p>自我总结一下，之前没有坚持下来很大一个原因就是一个字：“懒”，再加上之前的那些 Blogs 系统多多少少会有点不足。我也曾经尝试过购买 VPS 主机，自己搭建 Blogs，我甚至还为之购买了域名，可是后来发现，为何 VPS 是何等的费时费力。要安装软件，要安装数据库，还要防止被盗链导致流量不够用，哎，都是泪，不说了。到最近，无意中看到一篇译文，似乎是<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html" target="_blank" rel="external">《像黑客一样写博客》</a>，瞬间就被带上车了，开始使用 Jekyll 和 GitHub Pages 架设我的静态博客。</p>
+<p>要在使用 GitHub Pages 服务，首先需要创建一个名字叫 “[你的用户名].github.io” 的项目：</p>
+<p><img src="/assets/images/make-mine-blogs-1/uset-repo@2x.png" alt="图片来自：GitHub"></p>
+<p>接着把新建好的项目 Clone 下来，有两种方式 Clone 项目，一种是点击项目右上角的绿色“Set up in desktop”按钮使用 Github 客户端 Clone 项目；另外一种就是通过终端命令行来 Clone 项目。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> [you project addr] [your locale dir]</div></pre></td></tr></table></figure>
+<p>Clone 完成后，需要在本地搭建 Jekyll 的写作环境，正式开启静态博客之旅。</p>
+<h4 id="Jekyll-环境准备"><a href="#Jekyll-环境准备" class="headerlink" title="Jekyll 环境准备"></a>Jekyll 环境准备</h4><p>首先安装必要工具</p>
+<ul>
+<li>Ruby：Mac OS X 10.5以上都自带</li>
+<li>RubyGems：Mac OS X 10.5以上都自带</li>
+<li>Xcode Command-Line Tools： 安装Xcode会自动安装，检查Preferences → Downloads → Components是否有Command-Line Tools这项提供下载，如果没有说明已安装</li>
+<li>git：命令行输入git –version检查是否已安装，下载地址：<a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a></li>
+</ul>
+<p>在国内 gem 源地址可能已经被墙（万恶的 GFW），所以你可能需要将 gem 源替换为淘宝的镜像源：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 移除官方镜像源</div><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">// 添加淘宝镜像源，或者其他镜像地址</div><div class="line">$ gem sources <span class="_">-a</span> http://ruby.taobao.org/</div><div class="line">// 验证是否替换成功</div><div class="line">$ gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
+<p>如果终端中出现下面的显示则代表替换成功。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<p>接着开始安装 Jekyll</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 更新下 gem</div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
+<p>MAC 系统版本如果是 El Capitan 使用下面这个命令。这是因为 Apple 在 OS X El Capitan 中全面启用了名为 System Integrity Protection (SIP) 的系统完整性保护技术。受此影响，大部分系统文件即使在 root 用户下也无法直接进行修改，所以需要把安装路径替换为用户有写入权限的目录。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">sudo gem update -n /usr/<span class="built_in">local</span>/bin --system</div></pre></td></tr></table></figure>
+<p>如果你嫌每次都要打安装路径比较麻烦，你也可以把它变成默认配置，在用户根目录下创建一个名为<code>.gemrc</code>的文件，在里面写入<code>gem: -n/usr/local/bin</code>，并保存。或者使用下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;gem: -n/usr/local/bin&quot; &gt;&gt; ~/.gemrc</div></pre></td></tr></table></figure>
+<p>接下来安装 Jekyll</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ sudo gem install jekyll</div><div class="line">// 如果提示权限错误，请使用下面的命令</div><div class="line">$ sudo gem install jekyll -n /usr/<span class="built_in">local</span>/bin</div></pre></td></tr></table></figure>
+<p>OK，这样 Jekyll 环境就安装完成了，接下来导入 Jekyll 后，就可以开始写作了。在网络上有很多漂亮的 Jekyll 主题可供你选择，你可以访问<a href="http://jekyllthemes.io/" target="_blank" rel="external">jekyllthemes.io</a>找到你喜欢的主题并下载下来，或者通过 Google 搜索，如果还不满意，你也可以选择自己创建一个主题。选择好你喜欢的 Jekyll 的主题后，将主题复制到前面从 Github 上 Clone 的项目文件夹中去。一个典型的 Jekyll Blogs 的目录结构应该如下面所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── _drafts</div><div class="line">|   ├── begin-with-the-crazy-ideas.textile</div><div class="line">|   └── on-simplicity-in-technology.markdown</div><div class="line">├── _includes</div><div class="line">|   ├── footer.html</div><div class="line">|   └── header.html</div><div class="line">├── _layouts</div><div class="line">|   ├── default.html</div><div class="line">|   └── post.html</div><div class="line">├── _posts</div><div class="line">|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile</div><div class="line">|   └── 2009-04-26-barcamp-boston-4-roundup.textile</div><div class="line">├── _data</div><div class="line">|   └── members.yml</div><div class="line">├── _site</div><div class="line">├── .jekyll-metadata</div><div class="line">└── index.html</div></pre></td></tr></table></figure>
+<p>在该目录下执行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ jekyll server // 简写 jekyll s</div></pre></td></tr></table></figure>
+<p>在浏览器地址栏中输入：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就可以看到刚才新建的 Blog 长什么样子了。在这里新增、修改、删除文章都可以实时的看到，只需要刷新页面即可。你可以试着修改那篇默认文章看看效果。</p>
+<h4 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h4><p>Jekyll 博客的配置全在 Blogs 根目录的<code>_config.yml</code>文件中，一般来说，只要没有什么特殊的需求，只需要修改诸如：博客名、所有者名字、email等信息即可，如果有更多的需求，请参考所用主题的说明和 Jekyll 的文档：<a href="https://jekyllrb.com/docs/configuration/" target="_blank" rel="external">https://jekyllrb.com/docs/configuration/</a>。我的 Blog 的基本配置如下，可以参考：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><div class="line"><span class="attr">name:</span> Allen</div><div class="line"><span class="attr">description:</span> Blogging about stuffs</div><div class="line"><span class="attr">meta_description:</span> <span class="string">"Allen's Blog"</span></div><div class="line"></div><div class="line"><span class="attr">markdown:</span> krmark</div><div class="line"><span class="attr">redcarpet:</span></div><div class="line"></div><div class="line"><span class="attr">highlighter:</span> pygments</div><div class="line"><span class="attr">logo:</span> <span class="literal">false</span></div><div class="line"><span class="attr">paginate:</span> <span class="number">20</span></div><div class="line"><span class="attr">baseurl:</span> /</div><div class="line"><span class="attr">domain_name:</span> <span class="string">'http://allenn.cn/'</span></div><div class="line"><span class="attr">google_analytics:</span> <span class="string">'UA-XXXXXXXX-X'</span></div><div class="line"></div><div class="line"><span class="comment"># Details for the RSS feed generator</span></div><div class="line"><span class="attr">url:</span>            <span class="string">'/rss.xml'</span></div><div class="line"><span class="attr">author:</span>         <span class="string">'Allen'</span></div></pre></td></tr></table></figure>
+<p>好了，一切准备就绪，我们可以开始写作了。按照 Jekyll 的规范，文章是放在<code>_posts</code>目录下的，并且需要以时间戳开头，比如：<code>2007-10-29-why-every-programmer-should-play-nethack.md</code>，在文章的开头，需要增加一些描述性的东西，这样 Jekyll 才能正确的处理我们写的文章。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">---</div><div class="line">layout: post</div><div class="line">title:  &quot;在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法&quot;</div><div class="line">date:   2015-10-14 13:50:39</div><div class="line">comments: true</div><div class="line">categories: 软件技术</div><div class="line">tags: [Java, 单元测试]</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>写好描述后，就可以开始愉快的写正文啦，当你洋洋洒洒的写完你的大作后，你可以使用下面的命令将你的文章提交到 Github 上，完成之后过几分钟应该就能看到新的文章已经在你的个人博客主页上了。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">'xxxxx'</span></div><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<p>总的来说，使用 GitHub Pages + Jekyll 搭建简单的静态博客是非常容易上手的，只要有一点编程基础应该都能搞得定，而且不用像自己搭建 VPS 那样要时不时去维护主机，当然了，Jekyll 也并非完美，下篇文章我将分享我用 Jekyll 时踩到的一些坑。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：&lt;a href=&quot;http://product.china-pub.com/4971248&quot;&gt;《软技能：代码之外的生存指南》&lt;/a&gt;，里面&lt;em&gt;第二篇：自我营销&lt;/em&gt;中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="随便乱写" scheme="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
+    
+    
+      <category term="Blogs" scheme="http://allenn.cn/tags/Blogs/"/>
+    
+      <category term="Jekyll" scheme="http://allenn.cn/tags/Jekyll/"/>
+    
+      <category term="软件工程师的自我宣传" scheme="http://allenn.cn/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%9A%84%E8%87%AA%E6%88%91%E5%AE%A3%E4%BC%A0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Github的正确使用方法</title>
     <link href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</id>
     <published>2016-08-24T08:21:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
 <p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
@@ -148,7 +213,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</id>
     <published>2016-08-19T14:21:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="external">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
 <a id="more"></a>
@@ -194,7 +259,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</id>
     <published>2016-08-14T15:21:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。</p>
 <ol>
@@ -234,7 +299,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</id>
     <published>2016-08-12T08:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？</p>
 <p><img src="/assets/images/intro-pomodoro-technique/time-lack.png" alt="我真的很缺时间"></p>
@@ -296,7 +361,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</id>
     <published>2016-08-10T08:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
 <a id="more"></a>
@@ -331,7 +396,7 @@
     <link href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
     <id>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</id>
     <published>2015-10-17T05:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -362,7 +427,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</id>
     <published>2015-10-14T08:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
@@ -404,7 +469,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</id>
     <published>2015-10-14T05:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：</p>
 <blockquote>
@@ -452,7 +517,7 @@
     <link href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/"/>
     <id>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</id>
     <published>2010-06-20T05:50:39.000Z</published>
-    <updated>2016-09-04T15:45:21.952Z</updated>
+    <updated>2016-09-05T16:00:37.454Z</updated>
     
     <content type="html"><![CDATA[<p>最近听到的消息有点多，</p>
 <p>FOR EXAMPLE,</p>

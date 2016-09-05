@@ -4,136 +4,8 @@
 
     
   <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>Java核心API需要掌握的程度</title>
-        <pubTime>2016-08-14T15:21:39.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>api</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>我的毕业综合症</title>
-        <pubTime>2010-06-20T05:50:39.000Z</pubTime>
-        
-        <tag>吐槽</tag>
-         
-        <tag>毕业</tag>
-         
-         
-           
-             
-              <breadCrumb title="随便乱写" url="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</title>
-        <pubTime>2015-10-14T05:50:39.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>单元测试</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>CompletionService小技巧</title>
-        <pubTime>2016-08-10T08:50:39.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>25分钟改变你的工作效率：番茄工作法</title>
-        <pubTime>2016-08-12T08:50:39.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="工作方法" url="http://allenn.cn/categories/%E5%B7%A5%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
-    <data>
-        <display>
-        <title>Mock 与 Stub</title>
-        <pubTime>2015-10-14T08:50:39.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>单元测试</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
     <data>
         <display>
         <title>在公司内网如何更新IntelliJ的插件</title>
@@ -156,8 +28,136 @@
 
     
   <url>
+    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>我的毕业综合症</title>
+        <pubTime>2010-06-20T05:50:39.000Z</pubTime>
+        
+        <tag>吐槽</tag>
+         
+        <tag>毕业</tag>
+         
+         
+           
+             
+              <breadCrumb title="随便乱写" url="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>Mock 与 Stub</title>
+        <pubTime>2015-10-14T08:50:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>单元测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>CompletionService小技巧</title>
+        <pubTime>2016-08-10T08:50:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>25分钟改变你的工作效率：番茄工作法</title>
+        <pubTime>2016-08-12T08:50:39.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作方法" url="http://allenn.cn/categories/%E5%B7%A5%E4%BD%9C%E6%96%B9%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>Java核心API需要掌握的程度</title>
+        <pubTime>2016-08-14T15:21:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>api</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</title>
+        <pubTime>2015-10-14T05:50:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>单元测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
     <data>
         <display>
         <title>Github的正确使用方法</title>
@@ -179,7 +179,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
     <data>
         <display>
         <title>如何在单元测试中设置系统环境变量</title>
@@ -200,8 +200,32 @@
 
     
   <url>
+    <loc>http://allenn.cn/articles/2016-08/make-mine-blogs-1/</loc>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
+    <data>
+        <display>
+        <title>Allen's Blogs 创建历程（1）</title>
+        <pubTime>2016-08-30T08:21:39.000Z</pubTime>
+        
+        <tag>Blogs</tag>
+         
+        <tag>Jekyll</tag>
+         
+        <tag>软件工程师的自我宣传</tag>
+         
+         
+           
+             
+              <breadCrumb title="随便乱写" url="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</loc>
-    <lastmod>2016-09-04T15:45:21.952Z</lastmod>
+    <lastmod>2016-09-05T16:00:37.454Z</lastmod>
     <data>
         <display>
         <title>玩花招的PowerMock</title>

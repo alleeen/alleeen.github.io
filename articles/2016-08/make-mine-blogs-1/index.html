@@ -15,22 +15,18 @@
 
 
 
-<meta name="description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta name="description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
-<meta property="og:url" content="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/index.html">
+<meta property="og:title" content="Allen's Blogs 创建历程（1）">
+<meta property="og:url" content="http://allenn.cn/articles/2016-08/make-mine-blogs-1/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta property="og:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
+<meta property="og:image" content="http://allenn.cn/assets/images/make-mine-blogs-1/uset-repo@2x.png">
 <meta property="og:updated_time" content="2016-09-05T16:00:37.454Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
-<meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta name="twitter:title" content="Allen's Blogs 创建历程（1）">
+<meta name="twitter:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
+<meta name="twitter:image" content="http://allenn.cn/assets/images/make-mine-blogs-1/uset-repo@2x.png">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +56,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法 | Allen&#39;s Blog</title>
+<title>Allen&#39;s Blogs 创建历程（1） | Allen&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -282,11 +278,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-2015-10-14-powermockito-would-not-work-on-multi-thread" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="drafts-make-mine-blogs-1" class="article article-type-drafts" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" class="article-date">
-      <time datetime="2015-10-14T05:50:39.000Z" itemprop="datePublished">2015-10-14</time>
+      <a href="/articles/2016-08/make-mine-blogs-1/" class="article-date">
+      <time datetime="2016-08-30T08:21:39.000Z" itemprop="datePublished">2016-08-30</time>
 </a>
 
 
@@ -301,7 +297,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法
+      Allen&#39;s Blogs 创建历程（1）
     </h1>
   
 
@@ -310,13 +306,13 @@
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
+    <a class="article-category-link" href="/categories/随便乱写/">随便乱写</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -326,27 +322,45 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：</p>
-<blockquote>
-<p>除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。</p>
-</blockquote>
+        <p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248" target="_blank" rel="external">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
 <a id="more"></a>
-<p>发生问题的场景是这样的 Class C 有一个静态方法，Class A 和 Class B 都需要调用这个方法完成一些功能：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class C&#123;</div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SomeObject <span class="title">getSomeObject</span><span class="params">()</span></span>&#123;</div><div class="line">truetrue[....]</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class A &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class B &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由于在测试中直接调用 C.getSomeObject() 会导致一些不可预期的错误，所以我想对AB类进行测试就必须使用Mock，于是我那么写：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class ATest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">Class BTest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当我在IDE中分别运行 ATest 或者 BTest 是，我的测试都是能正确运行的，但是当你使用Maven或者其他的构建工具进行多线程测试的时候，你就会发现问题来了。一会是A抛异常，一会是B抛异常，总之就是不能很好的工作。由于我不是Powermockito的专家，所以无法深入的去探究这个问题的原因，但是我想，这应该是和静态方法本身在一个JVM内的唯一性有关，我截取了网上两个解释供参考：</p>
-<h4 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation 1"></a>Explanation 1</h4><p>Without going into details let’s look at this code written using with Mockito :</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">given(mock.doSomethingWith(eq(<span class="string">"A"</span>), longThat(...)).thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
-<p>Which is roughly equivalent to :<br>(<strong>*</strong> NEVER use a reference to OngoingStubbing in real test code, it might &gt;lead to wrong test code <strong>*</strong>)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String aString = eq(<span class="string">"A"</span>);</div><div class="line">Long aLong = longThat(...);</div><div class="line">String variableThatGiveReturnType = mock.doSomethingWith(aString, aLong);</div><div class="line">BDDOngoingStubbing&lt;String&gt; ongoingStubbing = given(variableThatGiveReturnType);</div><div class="line">ongoingStubbing.thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
-<p>The stubbing is clearly not finished until the last call thenReturn is completed, right.</p>
-<p>Don’t you see the missing link between all those line to actually achieve the stubbing in a fluent way ? ;)</p>
-<p>Dependening on how you do that, if you don’t synchronize this block you won’t be able to achieve any correct stubbing, otherwise concurrent access anywhere in this block will garble things in the mock internals.</p>
-<p>And if you add the fact that the mock might be already used, with it’s own concurrent code to use the answers, you end up in with completely messed up internal states.</p>
-<p>Anyway, always stub before using mocks concurrently.</p>
-<h4 id="Explanation-2"><a href="#Explanation-2" class="headerlink" title="Explanation 2"></a>Explanation 2</h4><p>For healthy scenarios Mockito plays nicely with threads. For instance, you can run tests in parallel to speed up the build. Also, You can let multiple threads call methods on a shared mock to test in concurrent conditions. Check out a [<a href="http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22" target="_blank" rel="external">http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22</a> timeout()] feature for testing concurrency.</p>
-<p>However Mockito is only thread-safe in healthy tests, that is tests without multiple threads stubbing/verifying a shared mock. Stubbing or verification of a shared mock from different threads is NOT the proper way of testing because it will always lead to intermittent behavior. In general mutable state + assertions in multi-threaded environment lead to random results. If you do stub/verify a shared mock across threads you will face occasional exceptions like: WrongTypeOfReturnValue, etc.</p>
+<h3 id="Jekyll-amp-GitHub-Pages"><a href="#Jekyll-amp-GitHub-Pages" class="headerlink" title="Jekyll &amp; GitHub Pages"></a>Jekyll &amp; GitHub Pages</h3><p>自我总结一下，之前没有坚持下来很大一个原因就是一个字：“懒”，再加上之前的那些 Blogs 系统多多少少会有点不足。我也曾经尝试过购买 VPS 主机，自己搭建 Blogs，我甚至还为之购买了域名，可是后来发现，为何 VPS 是何等的费时费力。要安装软件，要安装数据库，还要防止被盗链导致流量不够用，哎，都是泪，不说了。到最近，无意中看到一篇译文，似乎是<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html" target="_blank" rel="external">《像黑客一样写博客》</a>，瞬间就被带上车了，开始使用 Jekyll 和 GitHub Pages 架设我的静态博客。</p>
+<p>要在使用 GitHub Pages 服务，首先需要创建一个名字叫 “[你的用户名].github.io” 的项目：</p>
+<p><img src="/assets/images/make-mine-blogs-1/uset-repo@2x.png" alt="图片来自：GitHub"></p>
+<p>接着把新建好的项目 Clone 下来，有两种方式 Clone 项目，一种是点击项目右上角的绿色“Set up in desktop”按钮使用 Github 客户端 Clone 项目；另外一种就是通过终端命令行来 Clone 项目。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> [you project addr] [your locale dir]</div></pre></td></tr></table></figure>
+<p>Clone 完成后，需要在本地搭建 Jekyll 的写作环境，正式开启静态博客之旅。</p>
+<h4 id="Jekyll-环境准备"><a href="#Jekyll-环境准备" class="headerlink" title="Jekyll 环境准备"></a>Jekyll 环境准备</h4><p>首先安装必要工具</p>
+<ul>
+<li>Ruby：Mac OS X 10.5以上都自带</li>
+<li>RubyGems：Mac OS X 10.5以上都自带</li>
+<li>Xcode Command-Line Tools： 安装Xcode会自动安装，检查Preferences → Downloads → Components是否有Command-Line Tools这项提供下载，如果没有说明已安装</li>
+<li>git：命令行输入git –version检查是否已安装，下载地址：<a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a></li>
+</ul>
+<p>在国内 gem 源地址可能已经被墙（万恶的 GFW），所以你可能需要将 gem 源替换为淘宝的镜像源：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 移除官方镜像源</div><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">// 添加淘宝镜像源，或者其他镜像地址</div><div class="line">$ gem sources <span class="_">-a</span> http://ruby.taobao.org/</div><div class="line">// 验证是否替换成功</div><div class="line">$ gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
+<p>如果终端中出现下面的显示则代表替换成功。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
+<p>接着开始安装 Jekyll</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 更新下 gem</div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
+<p>MAC 系统版本如果是 El Capitan 使用下面这个命令。这是因为 Apple 在 OS X El Capitan 中全面启用了名为 System Integrity Protection (SIP) 的系统完整性保护技术。受此影响，大部分系统文件即使在 root 用户下也无法直接进行修改，所以需要把安装路径替换为用户有写入权限的目录。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">sudo gem update -n /usr/<span class="built_in">local</span>/bin --system</div></pre></td></tr></table></figure>
+<p>如果你嫌每次都要打安装路径比较麻烦，你也可以把它变成默认配置，在用户根目录下创建一个名为<code>.gemrc</code>的文件，在里面写入<code>gem: -n/usr/local/bin</code>，并保存。或者使用下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;gem: -n/usr/local/bin&quot; &gt;&gt; ~/.gemrc</div></pre></td></tr></table></figure>
+<p>接下来安装 Jekyll</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ sudo gem install jekyll</div><div class="line">// 如果提示权限错误，请使用下面的命令</div><div class="line">$ sudo gem install jekyll -n /usr/<span class="built_in">local</span>/bin</div></pre></td></tr></table></figure>
+<p>OK，这样 Jekyll 环境就安装完成了，接下来导入 Jekyll 后，就可以开始写作了。在网络上有很多漂亮的 Jekyll 主题可供你选择，你可以访问<a href="http://jekyllthemes.io/" target="_blank" rel="external">jekyllthemes.io</a>找到你喜欢的主题并下载下来，或者通过 Google 搜索，如果还不满意，你也可以选择自己创建一个主题。选择好你喜欢的 Jekyll 的主题后，将主题复制到前面从 Github 上 Clone 的项目文件夹中去。一个典型的 Jekyll Blogs 的目录结构应该如下面所示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── _drafts</div><div class="line">|   ├── begin-with-the-crazy-ideas.textile</div><div class="line">|   └── on-simplicity-in-technology.markdown</div><div class="line">├── _includes</div><div class="line">|   ├── footer.html</div><div class="line">|   └── header.html</div><div class="line">├── _layouts</div><div class="line">|   ├── default.html</div><div class="line">|   └── post.html</div><div class="line">├── _posts</div><div class="line">|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile</div><div class="line">|   └── 2009-04-26-barcamp-boston-4-roundup.textile</div><div class="line">├── _data</div><div class="line">|   └── members.yml</div><div class="line">├── _site</div><div class="line">├── .jekyll-metadata</div><div class="line">└── index.html</div></pre></td></tr></table></figure>
+<p>在该目录下执行：</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ jekyll server // 简写 jekyll s</div></pre></td></tr></table></figure>
+<p>在浏览器地址栏中输入：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就可以看到刚才新建的 Blog 长什么样子了。在这里新增、修改、删除文章都可以实时的看到，只需要刷新页面即可。你可以试着修改那篇默认文章看看效果。</p>
+<h4 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h4><p>Jekyll 博客的配置全在 Blogs 根目录的<code>_config.yml</code>文件中，一般来说，只要没有什么特殊的需求，只需要修改诸如：博客名、所有者名字、email等信息即可，如果有更多的需求，请参考所用主题的说明和 Jekyll 的文档：<a href="https://jekyllrb.com/docs/configuration/" target="_blank" rel="external">https://jekyllrb.com/docs/configuration/</a>。我的 Blog 的基本配置如下，可以参考：</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><div class="line"><span class="attr">name:</span> Allen</div><div class="line"><span class="attr">description:</span> Blogging about stuffs</div><div class="line"><span class="attr">meta_description:</span> <span class="string">"Allen's Blog"</span></div><div class="line"></div><div class="line"><span class="attr">markdown:</span> krmark</div><div class="line"><span class="attr">redcarpet:</span></div><div class="line"></div><div class="line"><span class="attr">highlighter:</span> pygments</div><div class="line"><span class="attr">logo:</span> <span class="literal">false</span></div><div class="line"><span class="attr">paginate:</span> <span class="number">20</span></div><div class="line"><span class="attr">baseurl:</span> /</div><div class="line"><span class="attr">domain_name:</span> <span class="string">'http://allenn.cn/'</span></div><div class="line"><span class="attr">google_analytics:</span> <span class="string">'UA-XXXXXXXX-X'</span></div><div class="line"></div><div class="line"><span class="comment"># Details for the RSS feed generator</span></div><div class="line"><span class="attr">url:</span>            <span class="string">'/rss.xml'</span></div><div class="line"><span class="attr">author:</span>         <span class="string">'Allen'</span></div></pre></td></tr></table></figure>
+<p>好了，一切准备就绪，我们可以开始写作了。按照 Jekyll 的规范，文章是放在<code>_posts</code>目录下的，并且需要以时间戳开头，比如：<code>2007-10-29-why-every-programmer-should-play-nethack.md</code>，在文章的开头，需要增加一些描述性的东西，这样 Jekyll 才能正确的处理我们写的文章。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">---</div><div class="line">layout: post</div><div class="line">title:  &quot;在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法&quot;</div><div class="line">date:   2015-10-14 13:50:39</div><div class="line">comments: true</div><div class="line">categories: 软件技术</div><div class="line">tags: [Java, 单元测试]</div><div class="line">---</div></pre></td></tr></table></figure>
+<p>写好描述后，就可以开始愉快的写正文啦，当你洋洋洒洒的写完你的大作后，你可以使用下面的命令将你的文章提交到 Github 上，完成之后过几分钟应该就能看到新的文章已经在你的个人博客主页上了。</p>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">'xxxxx'</span></div><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
+<p>总的来说，使用 GitHub Pages + Jekyll 搭建简单的静态博客是非常容易上手的，只要有一点编程基础应该都能搞得定，而且不用像自己搭建 VPS 那样要时不时去维护主机，当然了，Jekyll 也并非完美，下篇文章我将分享我用 Jekyll 时踩到的一些坑。</p>
 
       
     </div>
@@ -355,13 +369,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</a></p>
+        <p><span>本文标题:</span><a href="/articles/2016-08/make-mine-blogs-1/">Allen&#39;s Blogs 创建历程（1）</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
-        <p><span>发布时间:</span>2015-10-14, 13:50:39</p>
+        <p><span>发布时间:</span>2016-08-30, 16:21:39</p>
         <p><span>最后更新:</span>2016-09-06, 00:00:37</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" title="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/articles/2016-08/make-mine-blogs-1/" title="Allen&#39;s Blogs 创建历程（1）">http://allenn.cn/articles/2016-08/make-mine-blogs-1/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2016-08/make-mine-blogs-1/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -374,15 +388,15 @@
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/articles/2015-10/2015-10-14-unit-test-mock/">
-                    Mock 与 Stub
+                <a href="/articles/2016-09/play-trick-with-powermock/">
+                    玩花招的PowerMock
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/articles/2010-06/2010-06-20-graduate/">
-                    我的毕业综合症
+                <a href="/articles/2016-08/2016-08-24-how-to-use-github/">
+                    Github的正确使用方法
                 </a>
             </div>
         
@@ -394,7 +408,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Explanation-1"><span class="toc-number">1.</span> <span class="toc-text">Explanation 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Explanation-2"><span class="toc-number">2.</span> <span class="toc-text">Explanation 2</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jekyll-amp-GitHub-Pages"><span class="toc-number">1.</span> <span class="toc-text">Jekyll & GitHub Pages</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Jekyll-环境准备"><span class="toc-number">1.1.</span> <span class="toc-text">Jekyll 环境准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开始写作"><span class="toc-number">1.2.</span> <span class="toc-text">开始写作</span></a></li></ol></li></ol>
         
     </div>
     <style>
@@ -430,7 +444,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Allen's Blogs 创建历程（1）　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -446,7 +460,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" data-title="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法" data-url="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2016-08/make-mine-blogs-1/" data-title="Allen&#39;s Blogs 创建历程（1）" data-url="http://allenn.cn/articles/2016-08/make-mine-blogs-1/"></div>
     <script>
         var duoshuoQuery = {short_name:"alleeen"};
         var loadComment = function(){
@@ -469,7 +483,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/articles/2015-10/2015-10-14-unit-test-mock/" title="上一篇: Mock 与 Stub">
+            <a href="/articles/2016-09/play-trick-with-powermock/" title="上一篇: 玩花招的PowerMock">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -477,7 +491,7 @@
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/articles/2010-06/2010-06-20-graduate/" title="下一篇: 我的毕业综合症">
+            <a href="/articles/2016-08/2016-08-24-how-to-use-github/" title="下一篇: Github的正确使用方法">
                 <i class="fa fa-angle-right"></i>
             </a>
         
