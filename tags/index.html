@@ -15,19 +15,13 @@
 
 
 
-<meta name="description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：
-@Befor">
-<meta property="og:type" content="article">
-<meta property="og:title" content="如何在单元测试中设置系统环境变量">
-<meta property="og:url" content="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="tags">
+<meta property="og:url" content="http://allenn.cn/tags/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：
-@Befor">
-<meta property="og:updated_time" content="2016-09-07T12:04:26.954Z">
+<meta property="og:updated_time" content="2016-09-07T12:04:26.966Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在单元测试中设置系统环境变量">
-<meta name="twitter:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：
-@Befor">
+<meta name="twitter:title" content="tags">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -57,7 +51,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>如何在单元测试中设置系统环境变量 | Allen&#39;s Blog</title>
+<title>tags | Allen&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -67,7 +61,7 @@
         fancybox: true,
         animate: false,
         isHome: false,
-        isPost: true,
+        isPost: false,
         isArchive: false,
         isTag: false,
         isCategory: false,
@@ -279,11 +273,11 @@
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-how-to-set-property-in-unit-test" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/articles/2015-10/how-to-set-property-in-unit-test/" class="article-date">
-      <time datetime="2015-10-17T05:50:39.000Z" itemprop="datePublished">2015-10-17</time>
+      <a href="/tags/index.html" class="article-date">
+      <time datetime="2016-09-07T12:01:50.000Z" itemprop="datePublished">2016-09-07</time>
 </a>
 
 
@@ -298,7 +292,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      如何在单元测试中设置系统环境变量
+      tags
     </h1>
   
 
@@ -306,16 +300,8 @@
       
       <div class="article-info article-info-post">
         
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
-    </div>
-
         <div class="clearfix"></div>
       </div>
       
@@ -323,78 +309,96 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<p>但是我们很快就会发现，这种设置方法在只有一个测试用例的时候是OK的，当你的测试类里有多个@Test标签时，就会发生一些很奇怪的问题。比如某些用例读到了环境变量，有些却没有读取到。主要的原因是System.setProperty(“xxx.xxx”, “xxx.xxx”);方法是会作用在整个JVM上的，而多个测试用例是会在同一个JVM上面运行的，而JUnit的@Before标签标示的方法又会在每个测试用例启动前运行，这样就会导致环境变量相互覆盖。特别是开启并发执行单元测试功能时，这种现象更加严重。那么如何设置环境变量才是安全的呢？首先，我们要抛弃在setUp方法里设置环境变量的做法，然后在POM文件中做如下配置：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 单元测试时，系统参数iemp.home的路径--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">test.home</span>&gt;</span>$&#123;project.build.directory&#125;/opt/server<span class="tag">&lt;/<span class="name">test.home</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.18.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">        ....</div><div class="line">        <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">home</span>&gt;</span>$&#123;test.home&#125;<span class="tag">&lt;/<span class="name">home</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这样我们就可以很轻松的在单元测试中读取系统环境变量了。</p>
+              <style>
+    .article-meta { display: none; }
+    #container .article .article-title { padding-right: 0; }
+    .article-header {
+        padding: 0;
+        padding-top: 26px;
+        border-left: none;
+        text-align: center;
+    }
+    .article-header:hover { border-left: none; }
+    .article-title { font-size: 1.6em }
+    .article-entry hr { margin: 0;}
+    .article-meta,
+    #container .article-info-post.article-info { display: none;}
+    #container .article .article-title { padding: 0; }
+</style>
 
+
+    <!-- Tag Cloud Page -->
+    <hr>
+<br>
+<ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/工作方法/">工作方法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/转载/">转载</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件技术/">软件技术</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/随便乱写/">随便乱写</a><span class="category-list-count">2</span></li></ul>
+
+<p class="count"></p>
+
+<div class="tags">
+    <a href="/tags/Blogs/" style="font-size: 16px; color: #808080">Blogs</a> <a href="/tags/Git/" style="font-size: 16px; color: #808080">Git</a> <a href="/tags/Github/" style="font-size: 16px; color: #808080">Github</a> <a href="/tags/IntelliJ/" style="font-size: 16px; color: #808080">IntelliJ</a> <a href="/tags/Java/" style="font-size: 35px; color: #000">Java</a> <a href="/tags/Jekyll/" style="font-size: 16px; color: #808080">Jekyll</a> <a href="/tags/PowerMock/" style="font-size: 16px; color: #808080">PowerMock</a> <a href="/tags/api/" style="font-size: 16px; color: #808080">api</a> <a href="/tags/ssl/" style="font-size: 16px; color: #808080">ssl</a> <a href="/tags/单元测试/" style="font-size: 28.67px; color: #2b2b2b">单元测试</a> <a href="/tags/吐槽/" style="font-size: 16px; color: #808080">吐槽</a> <a href="/tags/多线程/" style="font-size: 22.33px; color: #555">多线程</a> <a href="/tags/并发/" style="font-size: 16px; color: #808080">并发</a> <a href="/tags/毕业/" style="font-size: 16px; color: #808080">毕业</a> <a href="/tags/软件工程师的自我宣传/" style="font-size: 16px; color: #808080">软件工程师的自我宣传</a>
+</div>
+<style>
+    .category-list li{
+        display: inline-block;
+        margin: 0 1em .5em 0;
+        padding: 4px;
+        border: 1px solid lightgray;
+        font-size: 1.2rem;
+    }
+    .category-list a { color: gray; }
+    .category-list-item:hover a {
+        color: gray;
+        text-decoration: none;
+    }
+    .category-list-count {
+        margin-left: 2px;
+        font-size: .9rem;
+    }
+    .article-entry ul li:before{ display: none; }
+    .article-inner { text-align: center; }
+    .tags {
+        max-width: 42em;
+        margin: 2em auto;
+        margin-top: 0em;
+    }
+    .tags a {
+        margin-right: 1em;
+        line-height: 65px;
+        border-bottom: 1px solid gray;
+        white-space: nowrap;
+        transition: border-bottom .5s;
+    }
+    .tags a:hover {
+        border-bottom: 3px dotted gray;
+        text-decoration: none;
+    }
+    #count > span {
+        margin: auto .2em;
+        font-weight: bold;
+    }
+</style>
+
+<!-- Count tags and categories -->
+<p id="count">
+        已有<span><script>document.write($(".category-list-item").length)</script></span>个分类，
+        共计<span><script>document.write($(".tags > a").length)</script></span>个标签
+</p>
+<script>
+    $('#count').appendTo('.count');
+</script>
+
+          
+        
       
     </div>
     
   </div>
   
     
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/articles/2015-10/how-to-set-property-in-unit-test/">如何在单元测试中设置系统环境变量</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
-        <p><span>发布时间:</span>2015-10-17, 13:50:39</p>
-        <p><span>最后更新:</span>2016-09-07, 20:04:26</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/articles/2015-10/how-to-set-property-in-unit-test/" title="如何在单元测试中设置系统环境变量">http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
 
-
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">
-                    CompletionService小技巧
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/articles/2015-10/2015-10-14-unit-test-mock/">
-                    Mock 与 Stub
-                </a>
-            </div>
-        
-    </nav>
 
   
 </article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
 
 
 
@@ -412,7 +416,7 @@
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"如何在单元测试中设置系统环境变量　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"tags　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -428,7 +432,7 @@
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2015-10/how-to-set-property-in-unit-test/" data-title="如何在单元测试中设置系统环境变量" data-url="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="tags/index.html" data-title="tags" data-url="http://allenn.cn/tags/index.html"></div>
     <script>
         var duoshuoQuery = {short_name:"alleeen"};
         var loadComment = function(){
@@ -446,26 +450,6 @@
 </div>
     
 
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" title="上一篇: CompletionService小技巧">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/articles/2015-10/2015-10-14-unit-test-mock/" title="下一篇: Mock 与 Stub">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/why-not-concurrency-arraylist/">为什么java.util.concurrent 包里没有并发的ArrayList实现？</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/play-trick-with-powermock/">玩花招的PowerMock</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/make-mine-blogs-1/">Allen's Blogs 创建历程（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-14-java-api-need-to-know/">Java核心API需要掌握的程度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">25分钟改变你的工作效率：番茄工作法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">CompletionService小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/how-to-set-property-in-unit-test/">如何在单元测试中设置系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2010-06/2010-06-20-graduate/">我的毕业综合症</a></li></ul>
 
 
 
