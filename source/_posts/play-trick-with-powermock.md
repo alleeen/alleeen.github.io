@@ -5,7 +5,7 @@ date:   2016-09-01 23:31:03
 comments: true
 ads: true
 categories: 转载
-tags: [Java,单元测试，PowerMock]
+tags: [Java,单元测试,PowerMock]
 ---
 
 本文转载至：[逸言](http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/)，感谢原作者的精彩分享
