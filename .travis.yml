@@ -17,7 +17,7 @@ before_install:
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/id_rsa
 - cp .travis/ssh_config ~/.ssh/config
-- git config --global user.name 'allenn'
+- git config --global user.name 'Xudong Zheng'
 - git config --global user.email 'xudongzheng1225@gmail.com'
 - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
 - git submodule update --init --recursive
