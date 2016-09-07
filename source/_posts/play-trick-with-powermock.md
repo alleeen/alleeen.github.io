@@ -4,6 +4,7 @@ title:  "玩花招的PowerMock"
 date:   2016-09-01 23:31:03
 comments: true
 ads: true
+original: false
 categories: 转载
 tags: [Java,单元测试,PowerMock]
 ---
