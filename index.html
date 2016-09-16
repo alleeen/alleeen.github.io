@@ -166,8 +166,6 @@
                         
                             <li><a href="/archives/">所有文章</a></li>
                         
-                            <li><a href="/tags/随便乱写">随笔</a></li>
-                        
                             <li><a href="/tags/">标签云</a></li>
                         
                         </ul>
@@ -194,7 +192,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吐槽/">吐槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业/">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吐槽/">吐槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业/">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跳出循环/">跳出循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li></ul>
                     </div>
                 </section>
                 
@@ -247,8 +245,6 @@
                 
                     <li><a href="/archives/">所有文章</a></li>
                 
-                    <li><a href="/tags/随便乱写">随笔</a></li>
-                
                     <li><a href="/tags/">标签云</a></li>
                 
                 <div class="clearfix"></div>
@@ -276,6 +272,75 @@
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
       <div class="body-wrap">
+  
+    <article id="post-how-to-break-loop-scala" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/articles/2016-09/how-to-break-loop-scala/" class="article-date">
+      <time datetime="2016-09-16T11:27:03.000Z" itemprop="datePublished">2016-09-16</time>
+</a>
+
+
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/articles/2016-09/how-to-break-loop-scala/">由 Java 到 Scala：如何优雅的跳出循环</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+              <p>在开发过程中，我们经常会遇到这样的需求：循环执行某个操作，当满足一定条件的时候循环终止。最常见的场景就是累加数组中的元素，一直到大于某个值，用伪代码来描述就是：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DO LOOP&#123;</div><div class="line">  DO SOME THING</div><div class="line">  IF SOME CONDITION</div><div class="line">    BREAK</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
+    </div>
+
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跳出循环/">跳出循环</a></li></ul>
+    </div>
+
+      
+        <p class="article-more-link">
+          <a href="/articles/2016-09/how-to-break-loop-scala/#more">阅读全文 >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="post-why-not-concurrency-arraylist" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -878,77 +943,6 @@
       
         <p class="article-more-link">
           <a href="/articles/2015-10/how-to-set-property-in-unit-test/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2015-10-14-unit-test-mock" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2015-10/2015-10-14-unit-test-mock/" class="article-date">
-      <time datetime="2015-10-14T08:50:39.000Z" itemprop="datePublished">2015-10-14</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <blockquote>
-<p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
-</blockquote>
-<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2015-10/2015-10-14-unit-test-mock/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
