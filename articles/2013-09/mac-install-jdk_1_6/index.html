@@ -15,22 +15,19 @@
 
 
 
-<meta name="description" content="在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。
-
-Mocks aren’t stubs这是软件大师Martin Fowler的一">
+<meta name="description" content="安装JDK1.6oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 http://connect.apple.com/
+详细可参见这篇文章http://stackoverflow.com/questions/66143">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mock 与 Stub">
-<meta property="og:url" content="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/index.html">
+<meta property="og:title" content="Mac OS X 安装 JDK备忘">
+<meta property="og:url" content="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。
-
-Mocks aren’t stubs这是软件大师Martin Fowler的一">
+<meta property="og:description" content="安装JDK1.6oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 http://connect.apple.com/
+详细可参见这篇文章http://stackoverflow.com/questions/66143">
 <meta property="og:updated_time" content="2016-09-16T07:48:50.258Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mock 与 Stub">
-<meta name="twitter:description" content="在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。
-
-Mocks aren’t stubs这是软件大师Martin Fowler的一">
+<meta name="twitter:title" content="Mac OS X 安装 JDK备忘">
+<meta name="twitter:description" content="安装JDK1.6oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 http://connect.apple.com/
+详细可参见这篇文章http://stackoverflow.com/questions/66143">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -60,7 +57,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Mock 与 Stub | Allen&#39;s Blog</title>
+<title>Mac OS X 安装 JDK备忘 | Allen&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -278,11 +275,11 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap"><article id="post-2015-10-14-unit-test-mock" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-mac-install-jdk_1_6" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/articles/2015-10/2015-10-14-unit-test-mock/" class="article-date">
-      <time datetime="2015-10-14T08:50:39.000Z" itemprop="datePublished">2015-10-14</time>
+      <a href="/articles/2013-09/mac-install-jdk_1_6/" class="article-date">
+      <time datetime="2013-09-30T08:21:39.000Z" itemprop="datePublished">2013-09-30</time>
 </a>
 
 
@@ -297,7 +294,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
         
   
     <h1 class="article-title" itemprop="name">
-      Mock 与 Stub
+      Mac OS X 安装 JDK备忘
     </h1>
   
 
@@ -306,13 +303,13 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
       <div class="article-info article-info-post">
         
     <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
+    <a class="article-category-link" href="/categories/日积月累/">日积月累</a>
     </div>
 
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK/">JDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Macbook/">Macbook</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -322,21 +319,16 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
     <div class="article-entry" itemprop="articleBody">
       
           
-        <blockquote>
-<p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
-</blockquote>
-<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="external">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="external">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
-<a id="more"></a>
-<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><p>先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。</p>
-<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>Mock和Stub有两个主要区别：</p>
-<ol>
-<li>校验测试结果的方式不同，Mock倾向于校验行为（Beahavior verification），Stub倾向于校验状态；</li>
-<li>Mock和Stub也代表了两种将测试与设计结合在一起的理念。</li>
-</ol>
-<p>上面的说法比较抽象，让我们通过例子来看看Mock与Stub的区别。</p>
-<h2 id="使用Stub进行单元测试"><a href="#使用Stub进行单元测试" class="headerlink" title="使用Stub进行单元测试"></a>使用Stub进行单元测试</h2><p>下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderStateTester</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TALISKER = <span class="string">"Talisker"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String HIGHLAND_PARK = <span class="string">"Highland Park"</span>;</div><div class="line">    <span class="keyword">private</span> WareHouse warehouse = <span class="keyword">new</span> WareHouseImpl();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        warehouse.add(TALISKER , <span class="number">50</span>);</div><div class="line">        warehouse.add(HIGHLAND_PARK , <span class="number">25</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderIsFilledIfEnoughInWarehouse</span><span class="params">()</span></span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">50</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertTrue(order.isFilled());</div><div class="line">        assertEquals(<span class="number">0</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderDoseNotRemoveIfNotEnough</span><span class="params">()</span> </span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">51</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertFalse(order.isFilled());</div><div class="line">        assertEquals(<span class="number">50</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的例子里，我们需要对Order对象进行测试，为了验证Order.fill方法，我们还需要WareHouse对象。但真正的WareHouse对象内部可能有很复杂的实现，比如读取文件，访问数据库，持有同步锁以维持对象在并发访问时内部数据正确等。实际上在单元测试时我们并不需要去和这些代码发生交互，而且这些复杂的代码还会让我们的单元测试很不稳定。数据库连接失败、必须的配置文件读取失败等都会导致我们的单元测试失败。显然我们并不希望这些外部的因素影响我们的单元测试</p>
+        <h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/" target="_blank" rel="external">http://connect.apple.com/</a></p>
+<p>详细可参见这篇文章<br><a href="http://stackoverflow.com/questions/6614380/jdk-on-osx-10-7-lion" target="_blank" rel="external">http://stackoverflow.com/questions/6614380/jdk-on-osx-10-7-lion</a></p>
+<h3 id="包路径等问题"><a href="#包路径等问题" class="headerlink" title="包路径等问题"></a>包路径等问题</h3><p>系统默认安装的JRE路径<code>/System/Library/Frameworks/JavaVM.framework/</code>，oracle和apple等安装的JDK包的路径<code>/Library/Java/JavaVirtualMachines/</code></p>
+<h3 id="JAVA-HOME在哪了？"><a href="#JAVA-HOME在哪了？" class="headerlink" title="JAVA_HOME在哪了？"></a>JAVA_HOME在哪了？</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home</div></pre></td></tr></table></figure>
+<p>注：1.6.0_38-b04-436.jdk目录名字与安装的jdk版本有关</p>
+<h3 id="rt-jar、jsse-jar去哪了？"><a href="#rt-jar、jsse-jar去哪了？" class="headerlink" title="rt.jar、jsse.jar去哪了？"></a>rt.jar、jsse.jar去哪了？</h3><p>rt.jar已经集成到<code>/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Classes/classes.jar</code>，jsse.jar也在Classes目录下</p>
+<p>建议把<code>classes.jar</code>和<code>jsse.jar</code>建立软连接到<code>/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home/lib/</code>下，并且<code>classes.jar</code>的软连接命名为<code>rt.jar</code></p>
+<p>这样就可以避免一些时候会发生找不到<code>rt.jar</code>的问题了，例如在使用混淆码的时候。</p>
+<h3 id="配置JAVA-HOME"><a href="#配置JAVA-HOME" class="headerlink" title="配置JAVA_HOME"></a>配置JAVA_HOME</h3><p>Mac OS X的环境变量文件在<code>/etc/profile</code>，unix一贯重要的文件。<br>在此添加最下端添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home/</div><div class="line">export JAVA_HOME</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -345,13 +337,13 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a></p>
+        <p><span>本文标题:</span><a href="/articles/2013-09/mac-install-jdk_1_6/">Mac OS X 安装 JDK备忘</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
-        <p><span>发布时间:</span>2015-10-14, 16:50:39</p>
+        <p><span>发布时间:</span>2013-09-30, 16:21:39</p>
         <p><span>最后更新:</span>2016-09-16, 15:48:50</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/articles/2015-10/2015-10-14-unit-test-mock/" title="Mock 与 Stub">http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/articles/2013-09/mac-install-jdk_1_6/" title="Mac OS X 安装 JDK备忘">http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
         <p>
@@ -364,15 +356,15 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
     <nav id="article-nav">
         
             <div id="article-nav-newer" class="article-nav-title">
-                <a href="/articles/2015-10/how-to-set-property-in-unit-test/">
-                    如何在单元测试中设置系统环境变量
+                <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
+                    在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法
                 </a>
             </div>
         
         
             <div id="article-nav-older" class="article-nav-title">
-                <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
-                    在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法
+                <a href="/articles/2010-06/2010-06-20-graduate/">
+                    我的毕业综合症
                 </a>
             </div>
         
@@ -384,7 +376,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Mocks-aren’t-stubs"><span class="toc-number">1.</span> <span class="toc-text">Mocks aren’t stubs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#相同点"><span class="toc-number">1.1.</span> <span class="toc-text">相同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同点"><span class="toc-number">1.2.</span> <span class="toc-text">不同点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Stub进行单元测试"><span class="toc-number">2.</span> <span class="toc-text">使用Stub进行单元测试</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装JDK1-6"><span class="toc-number">1.</span> <span class="toc-text">安装JDK1.6</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#包路径等问题"><span class="toc-number">2.</span> <span class="toc-text">包路径等问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA-HOME在哪了？"><span class="toc-number">3.</span> <span class="toc-text">JAVA_HOME在哪了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rt-jar、jsse-jar去哪了？"><span class="toc-number">4.</span> <span class="toc-text">rt.jar、jsse.jar去哪了？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置JAVA-HOME"><span class="toc-number">5.</span> <span class="toc-text">配置JAVA_HOME</span></a></li></ol>
         
     </div>
     <style>
@@ -420,7 +412,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
         </div>
         <script>
             window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"Mock 与 Stub　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+                "common":{"bdSnsKey":{},"bdText":"Mac OS X 安装 JDK备忘　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         </script>
     
 
@@ -436,7 +428,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
     
       <div class="duoshuo" id="comments">
     <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2015-10/2015-10-14-unit-test-mock/" data-title="Mock 与 Stub" data-url="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2013-09/mac-install-jdk_1_6/" data-title="Mac OS X 安装 JDK备忘" data-url="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/"></div>
     <script>
         var duoshuoQuery = {short_name:"alleeen"};
         var loadComment = function(){
@@ -459,7 +451,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/articles/2015-10/how-to-set-property-in-unit-test/" title="上一篇: 如何在单元测试中设置系统环境变量">
+            <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" title="上一篇: 在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -467,7 +459,7 @@ Mocks aren’t stubs这是软件大师Martin Fowler的一">
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
 
         
-            <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" title="下一篇: 在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
+            <a href="/articles/2010-06/2010-06-20-graduate/" title="下一篇: 我的毕业综合症">
                 <i class="fa fa-angle-right"></i>
             </a>
         
