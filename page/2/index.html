@@ -444,17 +444,8 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/" target="_blank" rel="external">http://connect.apple.com/</a></p>
-<p>详细可参见这篇文章<br><a href="http://stackoverflow.com/questions/6614380/jdk-on-osx-10-7-lion" target="_blank" rel="external">http://stackoverflow.com/questions/6614380/jdk-on-osx-10-7-lion</a></p>
-<h3 id="包路径等问题"><a href="#包路径等问题" class="headerlink" title="包路径等问题"></a>包路径等问题</h3><p>系统默认安装的JRE路径<code>/System/Library/Frameworks/JavaVM.framework/</code>，oracle和apple等安装的JDK包的路径<code>/Library/Java/JavaVirtualMachines/</code></p>
-<h3 id="JAVA-HOME在哪了？"><a href="#JAVA-HOME在哪了？" class="headerlink" title="JAVA_HOME在哪了？"></a>JAVA_HOME在哪了？</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home</div></pre></td></tr></table></figure>
-<p>注：1.6.0_38-b04-436.jdk目录名字与安装的jdk版本有关</p>
-<h3 id="rt-jar、jsse-jar去哪了？"><a href="#rt-jar、jsse-jar去哪了？" class="headerlink" title="rt.jar、jsse.jar去哪了？"></a>rt.jar、jsse.jar去哪了？</h3><p>rt.jar已经集成到<code>/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Classes/classes.jar</code>，jsse.jar也在Classes目录下</p>
-<p>建议把<code>classes.jar</code>和<code>jsse.jar</code>建立软连接到<code>/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home/lib/</code>下，并且<code>classes.jar</code>的软连接命名为<code>rt.jar</code></p>
-<p>这样就可以避免一些时候会发生找不到<code>rt.jar</code>的问题了，例如在使用混淆码的时候。</p>
-<h3 id="配置JAVA-HOME"><a href="#配置JAVA-HOME" class="headerlink" title="配置JAVA_HOME"></a>配置JAVA_HOME</h3><p>Mac OS X的环境变量文件在<code>/etc/profile</code>，unix一贯重要的文件。<br>在此添加最下端添加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_38-b04-436.jdk/Contents/Home/</div><div class="line">export JAVA_HOME</div></pre></td></tr></table></figure>
-
+              <h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/">http://connect.apple.com/</a></p>
+          
       
     </div>
     
@@ -471,6 +462,10 @@
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JDK/">JDK</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Macbook/">Macbook</a></li></ul>
     </div>
 
+      
+        <p class="article-more-link">
+          <a href="/articles/2013-09/mac-install-jdk_1_6/#more">阅读全文 >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
