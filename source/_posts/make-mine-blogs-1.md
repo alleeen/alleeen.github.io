@@ -1,5 +1,5 @@
 ---
-layout: drafts
+layout: post
 title:  "Allen's Blogs 创建历程（1）"
 date:   2016-08-30 16:21:39
 comments: true
