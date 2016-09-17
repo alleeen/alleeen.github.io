@@ -31,6 +31,32 @@ sed [option] 'command' input_file
 + `p`： print即打印，该命令会打印当前选择的行到屏幕上，通常同`-n`一起使用，打印选中的行；
 + `s`： 替换，通常s命令的用法是这样的：s/old/new/g，将old字符串替换成new字符串
 
+## 多个匹配
+有时我们需要一次进行多次匹配，可参考下面的示例：（第一个模式把第一行到第三行的my替换成your，第二个则把第3行以后的This替换成了That）
+
+```
+$ sed '1,3s/my/your/g; 3,$s/This/That/g' my.txt
+This is your cat, your cat's name is betty
+This is your dog, your dog's name is frank
+That is your fish, your fish's name is george
+That is my goat, my goat's name is adam
+```
+上面的命令等价于：（注：下面使用的是sed的-e命令行参数）
+
+```
+sed -e '1,3s/my/your/g' -e '3,$s/This/That/g' my.txt
+```
+
+我们可以使用&来当做被匹配的变量，然后可以在基本左右加点东西。如下所示：
+
+```
+$ sed 's/my/[&]/g' my.txt
+This is [my] cat, [my] cat's name is betty
+This is [my] dog, [my] dog's name is frank
+This is [my] fish, [my] fish's name is george
+This is [my] goat, [my] goat's name is adam
+```
+
 ## 命令示例
 
 假设有一个本地文件test.txt，文件内容如下：
