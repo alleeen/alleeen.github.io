@@ -288,3 +288,55 @@ end
 ```
 
 正则表达式中is两边的部分可以用`\1`和`\2`表示，该例子的作用其实就是删除中间部分的is。
+
+## 一些关于 sed 的基础知识
+前面通过实例说完了 sed 的运用，下面来说一些和 sed 相关的基础知识
+
+### Pattern Space
+什么是Pattern Space，Pattern space相当于车间sed把流内容在这里处理，你可以将pattern space看成是一个流水线，所有的动作都是在“流水线”上执行的。不理解？没关系，我们来看看 sed 的伪代码：
+```
+foreach line in file {
+    //放入把行Pattern_Space
+    Pattern_Space <= line;
+
+    // 对每个pattern space执行sed命令
+    Pattern_Space <= EXEC(sed_cmd, Pattern_Space);
+
+    // 如果没有指定 -n 则输出处理后的Pattern_Space
+    if (sed option hasn't "-n")  {
+       print Pattern_Space
+    }
+}
+```
+
+![sed 执行流程图](/assets/images/sed-usage/pattern-space.png)
+
+### Hold Space
+什么是Hold Space？Hold space相当于仓库，加工的半成品在这里临时储存。由于各种各样的原因，比如用户希望在某个条件下脚本中的某个命令被执行，或者希望模式空间得到保留以便下一次的处理，都有可能使得sed在处理文件的时候不按照正常的流程来进行。这个时候，sed设置了一些高级命令来满足用户的要求。
+
++ g：[address[,address]]g 将hold space中的内容拷贝到pattern space中，原来pattern space里的内容清除
++ G：[address[,address]]G 将hold space中的内容append到pattern space后
++ h：[address[,address]]h 将pattern space中的内容拷贝到hold space中，原来的hold space里的内容被清除
++ H：[address[,address]]H 将pattern space中的内容append到hold space后
++ x： 交换pattern space和hold space的内容
+
+那么这些命令怎么用呢，我们来看些例子，示例文件如下：
+```
+$ cat t.txt
+one
+two
+three
+```
+
+如果我需要使用 sed 完成文件倒序输出要怎么做呢？你可以这样写：
+
+```
+sed '1!G;h;$!d' t.txt
+```
+
+其中的 ‘1!G;h;$!d’ 可拆解为三个命令
++ `1!G` —— 只有第一行不执行G命令，将hold space中的内容append回到pattern space
++ `h` —— 第一行都执行h命令，将pattern space中的内容拷贝到hold space中
++ `$!d` —— 除了最后一行不执行d命令，其它行都执行d命令，删除当前行
+
+![执行序列](/assets/images/sed-usage/sed_demo.jpg)
