@@ -25,7 +25,7 @@
 使用语法sed [option] &amp;apos;command&amp;apo">
 <meta property="og:image" content="http://allenn.cn/assets/images/sed-usage/pattern-space.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/sed-usage/sed_demo.jpg">
-<meta property="og:updated_time" content="2016-09-17T14:57:26.472Z">
+<meta property="og:updated_time" content="2016-09-18T14:08:33.276Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sed 命令详解">
 <meta name="twitter:description" content="sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。
@@ -326,11 +326,11 @@
 <h2 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed [option] &apos;command&apos; input_file</div></pre></td></tr></table></figure>
 <p>常用的option有如下几种：</p>
 <ul>
-<li>-n 使用安静(silent)模式。默认条件下，所有来自stdin的内容一般都会被列出到屏幕上。但如果加上-n参数后，则只有在脚本中使用<code>p</code>，被匹配的行才会被列出来，比如：<code>sed -n &#39;/&lt;HTML&gt;/p&#39;</code>（仅显示<html>这一行）；</html></li>
-<li>-e 用于执行多个编辑命令，如：<code>sed -e &#39;1,3s/my/your/g&#39; -e &#39;3,$s/This/That/g&#39; my.txt</code>；</li>
-<li>-f 从 script-file 中读取 sed 编辑命令，可以将多个编辑命令写在文件中，使用<code>sed -f script-file ...</code>读取；</li>
-<li>-r 让sed命令支持扩展的正则表达式(默认是基础正则表达式)；</li>
-<li>-i 直接修改读取的文件内容，默认下，sed 不会直接修改文件，当提供<code>-i</code>选项时 sed 会直接修改文件内容。</li>
+<li><code>-n</code> 使用安静(silent)模式。默认条件下，所有来自stdin的内容一般都会被列出到屏幕上。但如果加上-n参数后，则只有在脚本中使用<code>p</code>，被匹配的行才会被列出来，比如：<code>sed -n &#39;/&lt;HTML&gt;/p&#39;</code>（仅显示<html>这一行）；</html></li>
+<li><code>-e</code> 用于执行多个编辑命令，如：<code>sed -e &#39;1,3s/my/your/g&#39; -e &#39;3,$s/This/That/g&#39; my.txt</code>；</li>
+<li><code>-f</code> 从 script-file 中读取 sed 编辑命令，可以将多个编辑命令写在文件中，使用<code>sed -f script-file ...</code>读取；</li>
+<li><code>-r</code> 让sed命令支持扩展的正则表达式(默认是基础正则表达式)；</li>
+<li><code>-i</code> 直接修改读取的文件内容，默认下，sed 不会直接修改文件，当提供<code>-i</code>选项时 sed 会直接修改文件内容。</li>
 </ul>
 <a id="more"></a>
 <p>常用的命令有以下几种：</p>
@@ -406,6 +406,10 @@
 <li><code>$!d</code> —— 除了最后一行不执行d命令，其它行都执行d命令，删除当前行</li>
 </ul>
 <p><img src="/assets/images/sed-usage/sed_demo.jpg" alt="执行序列"></p>
+<h3 id="Address"><a href="#Address" class="headerlink" title="Address"></a>Address</h3><p>通过 Address 可以指定 Sed 地址/操作范围，Address 可以是一个数字，也可以是一个模式。用逗号分割两个 Address 表示匹配两个 Address 的区间：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">[address[,address]][!]&#123;cmd&#125;</div></pre></td></tr></table></figure>
+<p>其中的!表示匹配成功后是否执行命令，Address 也可以使用相对位置，如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 其中的+3表示后面连续3行</div><div class="line">$ sed &apos;/dog/,+3s/^/# /g&apos; pets.txt</div><div class="line">This is my cat</div><div class="line">  my cat&apos;s name is betty</div><div class="line"># This is my dog</div><div class="line">#   my dog&apos;s name is frank</div><div class="line"># This is my fish</div><div class="line">#   my fish&apos;s name is george</div><div class="line">This is my goat</div><div class="line">  my goat&apos;s name is adam</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -417,7 +421,7 @@
         <p><span>本文标题:</span><a href="/articles/2016-09/sed-usage/">Sed 命令详解</a></p>
         <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
         <p><span>发布时间:</span>2016-09-17, 19:27:03</p>
-        <p><span>最后更新:</span>2016-09-17, 22:57:26</p>
+        <p><span>最后更新:</span>2016-09-18, 22:08:33</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/articles/2016-09/sed-usage/" title="Sed 命令详解">http://allenn.cn/articles/2016-09/sed-usage/</a>
             <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2016-09/sed-usage/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -447,7 +451,7 @@
     <div id="toc" class="toc-article">
         <strong class="toc-title">文章目录</strong>
         
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用语法"><span class="toc-number">1.</span> <span class="toc-text">使用语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多个匹配"><span class="toc-number">2.</span> <span class="toc-text">多个匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令示例"><span class="toc-number">3.</span> <span class="toc-text">命令示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a命令"><span class="toc-number">3.1.</span> <span class="toc-text">a命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i命令"><span class="toc-number">3.2.</span> <span class="toc-text">i命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c命令"><span class="toc-number">3.3.</span> <span class="toc-text">c命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d命令"><span class="toc-number">3.4.</span> <span class="toc-text">d命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p命令"><span class="toc-number">3.5.</span> <span class="toc-text">p命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s命令"><span class="toc-number">3.6.</span> <span class="toc-text">s命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些关于-sed-的基础知识"><span class="toc-number">4.</span> <span class="toc-text">一些关于 sed 的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pattern-Space"><span class="toc-number">4.1.</span> <span class="toc-text">Pattern Space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hold-Space"><span class="toc-number">4.2.</span> <span class="toc-text">Hold Space</span></a></li></ol></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用语法"><span class="toc-number">1.</span> <span class="toc-text">使用语法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多个匹配"><span class="toc-number">2.</span> <span class="toc-text">多个匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#命令示例"><span class="toc-number">3.</span> <span class="toc-text">命令示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#a命令"><span class="toc-number">3.1.</span> <span class="toc-text">a命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#i命令"><span class="toc-number">3.2.</span> <span class="toc-text">i命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#c命令"><span class="toc-number">3.3.</span> <span class="toc-text">c命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#d命令"><span class="toc-number">3.4.</span> <span class="toc-text">d命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p命令"><span class="toc-number">3.5.</span> <span class="toc-text">p命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#s命令"><span class="toc-number">3.6.</span> <span class="toc-text">s命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一些关于-sed-的基础知识"><span class="toc-number">4.</span> <span class="toc-text">一些关于 sed 的基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Pattern-Space"><span class="toc-number">4.1.</span> <span class="toc-text">Pattern Space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hold-Space"><span class="toc-number">4.2.</span> <span class="toc-text">Hold Space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Address"><span class="toc-number">4.3.</span> <span class="toc-text">Address</span></a></li></ol></li></ol>
         
     </div>
     <style>
