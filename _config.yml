@@ -66,13 +66,13 @@ feed:
   path: atom.xml
   limit: 20
   hub:
-    
+
 #sitemap configuration
 sitemap:
-    path: sitemap.xml
+  path: sitemap.xml
 
 baidusitemap:
-path: baidusitemap.xml
+  path: baidusitemap.xml
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
