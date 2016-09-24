@@ -15,12 +15,15 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen's Blog">
-<meta property="og:url" content="http://allenn.cn/archives/index.html">
+<meta name="description" content="前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun。去go">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误">
+<meta property="og:url" content="http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/index.html">
 <meta property="og:site_name" content="Allen's Blog">
+<meta property="og:description" content="前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun。去go">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen's Blog">
+<meta name="twitter:title" content="解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误">
+<meta name="twitter:description" content="前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun。去go">
 
 <link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
@@ -50,7 +53,7 @@
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
 
 
-<title>Archives | Allen&#39;s Blog</title>
+<title>解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误 | Allen&#39;s Blog</title>
 
 <script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
@@ -60,8 +63,8 @@
         fancybox: true,
         animate: false,
         isHome: false,
-        isPost: false,
-        isArchive: true,
+        isPost: true,
+        isArchive: false,
         isTag: false,
         isCategory: false,
         fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
@@ -297,393 +300,191 @@ ga('send', 'pageview');
     </div>
     <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
 </nav>
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="post-after-update-macosx-git-failed" class="article article-type-post" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-09/after-update-macosx-git-failed/" class="archive-article-date">
-      <time datetime="2016-09-24T05:50:39.000Z" itemprop="datePublished">09-24</time>
+    <div class="article-meta">
+      <a href="/articles/2016-09/after-update-macosx-git-failed/" class="article-date">
+      <time datetime="2016-09-24T05:50:39.000Z" itemprop="datePublished">2016-09-24</time>
 </a>
 
 
-        </div>
-         
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-09/after-update-macosx-git-failed/">解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误
     </h1>
   
 
-        <div class="article-info info-on-archive">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
     <div class="article-category tagcloud">
     <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
     </div>
 
 
-          
+        
     <div class="article-tag tagcloud">
         <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/升级/">升级</a></li></ul>
     </div>
 
-        </div>
         <div class="clearfix"></div>
-    </header>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：<code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code>。去google了一圈，找到了一个github上homebrew issues里很老的帖子，按着里面说的，重装了一下xcode command line，结果就正常了……</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
+<p>不过看帖子里并不是所有人重装都能解决问题，有些人似乎还要手动切换下xcode的路径才能解决。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo xcode-select -switch /</div></pre></td></tr></table></figure>
+<p>因为帖子标题说是在升级到“冲浪湾”时遇到了这问题，所以看来这问题属于每次升级时候都会碰到的月经型问题了OTL。问题解决后，我又去各处翻了下问题出现的原因，可惜没有找到。个人推断可能是因为git所需的lib关联到了command line tools，升级时改动了lib的路径所致吧。</p>
+
+      
+    </div>
+    
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-09/sed-usage/" class="archive-article-date">
-      <time datetime="2016-09-17T11:27:03.000Z" itemprop="datePublished">09-17</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-09/sed-usage/">Sed 命令详解</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/articles/2016-09/after-update-macosx-git-failed/">解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</a></p>
+        <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
+        <p><span>发布时间:</span>2016-09-24, 13:50:39</p>
+        <p><span>最后更新:</span>2016-09-24, 18:55:55</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/articles/2016-09/after-update-macosx-git-failed/" title="解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误">http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+        </p>
     </div>
 
 
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sed/">sed</a></li></ul>
-    </div>
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-09/how-to-break-loop-scala/" class="archive-article-date">
-      <time datetime="2016-09-16T11:27:03.000Z" itemprop="datePublished">09-16</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-09/how-to-break-loop-scala/">由 Java 到 Scala：如何优雅的跳出循环</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跳出循环/">跳出循环</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-09/why-not-concurrency-arraylist/" class="archive-article-date">
-      <time datetime="2016-09-07T11:27:03.000Z" itemprop="datePublished">09-07</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-09/why-not-concurrency-arraylist/">为什么java.util.concurrent 包里没有并发的ArrayList实现？</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-09/play-trick-with-powermock/" class="archive-article-date">
-      <time datetime="2016-09-01T15:31:03.000Z" itemprop="datePublished">09-01</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-09/play-trick-with-powermock/">玩花招的PowerMock</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-08/make-mine-blogs-1/" class="archive-article-date">
-      <time datetime="2016-08-30T08:21:39.000Z" itemprop="datePublished">08-30</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-08/make-mine-blogs-1/">Allen&#39;s Blogs 创建历程（1）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/随便乱写/">随便乱写</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-08/2016-08-24-how-to-use-github/" class="archive-article-date">
-      <time datetime="2016-08-24T08:21:39.000Z" itemprop="datePublished">08-24</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/" class="archive-article-date">
-      <time datetime="2016-08-19T14:21:39.000Z" itemprop="datePublished">08-19</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-08/2016-08-14-java-api-need-to-know/" class="archive-article-date">
-      <time datetime="2016-08-14T15:21:39.000Z" itemprop="datePublished">08-14</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-08/2016-08-14-java-api-need-to-know/">Java核心API需要掌握的程度</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-          
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/api/">api</a></li></ul>
-    </div>
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-          <div class="article-meta">
-              <a href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/" class="archive-article-date">
-      <time datetime="2016-08-12T08:50:39.000Z" itemprop="datePublished">08-12</time>
-</a>
-
-
-        </div>
-         
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">25分钟改变你的工作效率：番茄工作法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-archive">
-          
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/工作方法/">工作方法</a>
-    </div>
-
-
-          
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
+    <nav id="article-nav">
+        
+        
+            <div id="article-nav-older" class="article-nav-title">
+                <a href="/articles/2016-09/sed-usage/">
+                    Sed 命令详解
+                </a>
+            </div>
+        
     </nav>
-  
 
+  
+</article>
+
+    <div id="toc" class="toc-article">
+        <strong class="toc-title">文章目录</strong>
+        
+            
+        
+    </div>
+    <style>
+        .left-col .switch-btn,
+        .left-col .switch-area {
+            display: none;
+        }
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+    <script>
+        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
+    </script>
+
+
+
+    
+<div class="share">
+    
+        <div class="bdsharebuttonbox">
+            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
+            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
+            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
+            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
+            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
+            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
+        </div>
+        <script>
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+        </script>
+    
+
+    
+</div>
+
+
+
+
+
+
+
+    
+      <div class="duoshuo" id="comments">
+    <div id="comment-box" ></div>
+    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2016-09/after-update-macosx-git-failed/" data-title="解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误" data-url="http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/"></div>
+    <script>
+        var duoshuoQuery = {short_name:"alleeen"};
+        var loadComment = function(){
+            var d = document, s = d.createElement('script');
+            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            s.async = true; s.charset = 'UTF-8';
+            (d.head || d.body).appendChild(s);
+        }
+
+        
+    </script>
+    
+    <script> loadComment(); </script>
+
+</div>
+    
+
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+
+        
+            <a href="/articles/2016-09/sed-usage/" title="下一篇: Sed 命令详解">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/after-update-macosx-git-failed/">解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/sed-usage/">Sed 命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/how-to-break-loop-scala/">由 Java 到 Scala：如何优雅的跳出循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/why-not-concurrency-arraylist/">为什么java.util.concurrent 包里没有并发的ArrayList实现？</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/play-trick-with-powermock/">玩花招的PowerMock</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/make-mine-blogs-1/">Allen's Blogs 创建历程（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-14-java-api-need-to-know/">Java核心API需要掌握的程度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">25分钟改变你的工作效率：番茄工作法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">CompletionService小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/how-to-set-property-in-unit-test/">如何在单元测试中设置系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2013-09/mac-install-jdk_1_6/">Mac OS X 安装 JDK备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2010-06/2010-06-20-graduate/">我的毕业综合症</a></li></ul>
+
+
+
+
+    <script>
+        
+    </script>
 </div>
       <footer id="footer">
     <div class="outer">
