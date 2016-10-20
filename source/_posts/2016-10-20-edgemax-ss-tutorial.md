@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用 EdgeMax 路由器自动翻墙"
-date:   2016-10-20 16:21:39
+date:   2016-10-20 22:21:39
 comments: true
 ads: true
 categories: 网络技术
