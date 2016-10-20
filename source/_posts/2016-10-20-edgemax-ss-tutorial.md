@@ -29,18 +29,19 @@ tags: [GFW,防火墙,EdgeMax,路由器]
 
 ## 所需软件
 
-#### shadowsocks-libev
+### shadowsocks-libev
 
 项目地址：[https://github.com/shadowsocks/shadowsocks-libev](https://github.com/shadowsocks/shadowsocks-libev)，可下载源码在路由器上进行编译，或者直接下载[安装包](https://www.onlyos.com/wp-content/uploads/2015/08/shadowsocks-libev_2.2.4-1_mips.zip)，请注意这个安装包只适用于 EdgeRouter Lite 3，其他 EdgeMax 产品需要自行编译。
 
-#### ChinaDNS
+### ChinaDNS
 
 项目地址：[https://github.com/shadowsocks/ChinaDNS](https://github.com/shadowsocks/ChinaDNS)，可下载源码在路由器上进行编译，或者直接下载[安装包](https://www.onlyos.com/wp-content/uploads/2015/08/chinadns-1.3.2.zip)，请注意这个安装包只适用于 EdgeRouter Lite 3，其他 EdgeMax 产品需要自行编译。
 
-#### DNSMasq
+### DNSMasq
 EdgeMax 中已经集成了 DNSMasq 无需另外安装。
 
 ## 配置
+
 ### shadowsocks-libev
 
 shadowsocks-libev 安装好后，会在`/etc/init.d/`中安装一个启动脚本：`shadowsock-libev`，在路由器启动时会默认启动`ss-redir`服务，如果需要重启 Shadowsocks，可以使用命令：`sudo /etc/init.d/shadowsock-libev [start|stop|restart]`。Shadowsocks 的配置在文件`/etc/shadowsocks-libev/config.json`中，在这个文件中配置 Shadowsocks 需要链接的服务器信息：
@@ -60,6 +61,7 @@ shadowsocks-libev 安装好后，会在`/etc/init.d/`中安装一个启动脚本
 配置完成后，`sudo /etc/init.d/shadowsock-libev restart`，这样 Shadowsocks 就在你的路由器上运行了。
 
 ### ChinaDNS
+
 使用源码编译后，会生成一个二进制文件：chinadns，可以将这个文件复制到`/usr/bin`中方便后面使用。ChinaDNS 需要一个文件来标识哪些 IP 属于国内，这个文件可以从[这里下载](http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest)：
 
 ```
@@ -76,6 +78,7 @@ chinadns -s 223.5.5.5,223.6.6.6,127.0.0.1:5300 -c /etc/chinadns/chnroute.txt -p 
 需要注意的是`-s`参数后面的`127.0.0.1:5300`，这个代表将`ss-tunnel`转发的国外可信DNS站点作为上游DNS服务器。
 
 #### ChinaDNS参数详解
+
 + -l：虚假IP列表：默认值：/etc/chinadns_iplist.txt
 
 是GFW常见的DNS污染用IP列表，解析出列表中的IP结果时候，ChinaDNS会自动抛弃，保留默认即可；
@@ -105,6 +108,7 @@ ChinaDNS所监听的端口。根据实际情况更改，注意不能和其他服
 利用GFW遇到压缩指针时的一个bug来精确识别来自GFW的抢答污染，从而极大提高识别的准确性和识别的效率，推荐启用，启用后，IPList和等待时间将禁用（因为用不到了）。 （已强制开启）
 
 ### ss-tunnel
+
 ss-tunnel 是 Shadowsocks 的一个模块，可以用于 UDP 转发，为了防止 GFW 的 DNS 污染，我们用它来转发国外 DNS，可以通过下面命令来启动 ss-tunnel：
 
 ```
@@ -113,6 +117,7 @@ ss-tunnel -c /etc/shadowsocks-libev/config.json -u -b 0.0.0.0 -l 5300 -L 8.8.8.8
 为了让 ss-tunnel 在每次重启路由器的时候自动重启，我们可以写个脚本放在`/config/scripts/post-config.d`目录下。
 
 ### DNSMasq
+
 首先需要将系统的 DNS 服务器设置为本地
 
 ```
@@ -144,7 +149,7 @@ sudo /etc/init.d/dnsmasq restart
 上面所做的一切都是为了防止 GFW 的 DNS 污染，从而拿到正确的 IP 地址，那么拿到 IP 地址后，又如何将国外的流量转发到 Shadowsocks 呢？现在该 iptables 登场了，使用下面的代码设置 iptables 转发规则：
 
 ```
-# Setup the ipset
+  # Setup the ipset
   ipset -N chnroute hash:net maxelem 65536
 
   for ip in $(cat '/etc/chinadns/chnroute.txt'); do
