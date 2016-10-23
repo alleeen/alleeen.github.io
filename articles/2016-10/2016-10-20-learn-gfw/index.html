@@ -1,30 +1,105 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
 <head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="Allen Zheng" />
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
-<meta name="description" content="摘自：https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="GFW,防火墙,研究," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/blog-img/favicon.png?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="摘自：翻墙路由器的实现与原理
 注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。
-GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六">
+GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是：
+首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW">
 <meta property="og:type" content="article">
 <meta property="og:title" content="全面学习GFW">
 <meta property="og:url" content="http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="摘自：https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz
+<meta property="og:description" content="摘自：翻墙路由器的实现与原理
 注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。
-GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六">
+GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是：
+首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-1.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-2.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-3.png">
@@ -35,321 +110,238 @@ GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是�
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-8.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-9.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-10.png">
+<meta property="og:updated_time" content="2016-10-23T10:38:23.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全面学习GFW">
-<meta name="twitter:description" content="摘自：https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz
+<meta name="twitter:description" content="摘自：翻墙路由器的实现与原理
 注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。
-GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六">
+GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是：
+首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW">
 <meta name="twitter:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-1.png">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternate" href="/atom.xml" title="Allen&#39;s Blog" type="application/atom+xml">
-
-
-
-    <link rel="shortcut icon" href="/assets/images/blog-img/favicon.png">
-
-
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>全面学习GFW | Allen&#39;s Blog</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: false,
-        isHome: false,
-        isPost: true,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'alleeen',
+      author: '博主'
     }
+  };
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
 
 
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
+  <link rel="canonical" href="http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/"/>
 
 
-
-<!-- Baidu tongji -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-<!-- Google Analytics -->
-
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-36907890-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-
-<!-- End Google Analytics -->
-
+  <title> 全面学习GFW | Allen's Blog </title>
 </head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">Allen Zheng</a></h1>
-        </hgroup>
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
-        
-
-        
+  
 
 
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-36907890-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" href="https://github.com/allenn" title="GitHub"></a>
-                            
-                                <a class="fa 新浪微博" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
-                            
-                                <a class="fa Email" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
-                            
-                                <a class="fa Facebook" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EdgeMax/">EdgeMax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GFW/">GFW</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Macbook/">Macbook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吐槽/">吐槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业/">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/研究/">研究</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由器/">路由器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跳出循环/">跳出循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
-                    
-                    </div>
-                </section>
-                
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">讲真，没想好写点什么</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Allen's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Allen Zheng</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Allen Zheng</a></h1>
-            </hgroup>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
             
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/allenn" title="GitHub"></a>
-                            
-                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
-                            
-                                <a class="fa Email" target="_blank" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
-                            
-                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" target="_blank" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
-      <div class="body-wrap"><article id="post-2016-10-20-learn-gfw" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-10/2016-10-20-learn-gfw/" class="article-date">
-      <time datetime="2016-10-20T08:21:39.000Z" itemprop="datePublished">2016-10-20</time>
-</a>
 
+ </div>
+    </header>
 
-    </div>
-  
-  <div class="article-inner">
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
+
   
-    <h1 class="article-title" itemprop="name">
-      全面学习GFW
-    </h1>
   
 
-      </header>
-      
-      <div class="article-info article-info-post">
-        
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/网络技术/">网络技术</a>
-    </div>
+  
+  
+  
 
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
 
         
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GFW/">GFW</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/研究/">研究</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
-    </div>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                全面学习GFW
+              
+            
+          </h1>
+        
 
-        <div class="clearfix"></div>
-      </div>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T16:21:39+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
           
-        <p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz" target="_blank" rel="external">https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz</a></p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz" target="_blank" rel="external">翻墙路由器的实现与原理</a></p>
 <p>注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。</p>
 <p>GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是：</p>
 <p>首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW的最天然，最朴素的角度。在这个方面做得非常极致的是一个叫做<a href="https://en.greatfire.org/" target="_blank" rel="external">greatfire</a>的网站。这个网站长期监控成千上万个网站和关键词。通过长期监控，不但可以掌握WHAT被封锁了，还可以知道WHEN被封的，WHEN被解封的。</p>
@@ -433,216 +425,323 @@ ga('send', 'pageview');
 
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GFW/" rel="tag">#GFW</a>
+          
+            <a href="/tags/防火墙/" rel="tag">#防火墙</a>
+          
+            <a href="/tags/研究/" rel="tag">#研究</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/2016-09/after-update-macosx-git-failed/" rel="next" title="解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误">
+                <i class="fa fa-chevron-left"></i> 解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" rel="prev" title="使用 EdgeMax 路由器自动翻墙">
+                使用 EdgeMax 路由器自动翻墙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
   </div>
-  
-    
-    <div class="copyright">
-        <p><span>本文标题:</span><a href="/articles/2016-10/2016-10-20-learn-gfw/">全面学习GFW</a></p>
-        <p><span>文章作者:</span><a href="/" title="回到主页">Allen Zheng</a></p>
-        <p><span>发布时间:</span>2016-10-20, 16:21:39</p>
-        <p><span>最后更新:</span>2016-10-23, 14:59:08</p>
-        <p>
-            <span>原始链接:</span><a class="post-url" href="/articles/2016-10/2016-10-20-learn-gfw/" title="全面学习GFW">http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/</a>
-            <span class="copy-path" data-clipboard-text="原文: http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/　　作者: Allen Zheng" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
-            <script> var clipboard = new Clipboard('.copy-path'); </script>
-        </p>
-        <p>
-            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
-        </p>
-    </div>
 
 
-
-    <nav id="article-nav">
-        
-            <div id="article-nav-newer" class="article-nav-title">
-                <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/">
-                    使用 EdgeMax 路由器自动翻墙
-                </a>
-            </div>
-        
-        
-            <div id="article-nav-older" class="article-nav-title">
-                <a href="/articles/2016-09/after-update-macosx-git-failed/">
-                    解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误
-                </a>
-            </div>
-        
-    </nav>
-
-  
-</article>
-
-    <div id="toc" class="toc-article">
-        <strong class="toc-title">文章目录</strong>
-        
-            <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GFW的原理"><span class="toc-number">1.</span> <span class="toc-text">GFW的原理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#重建"><span class="toc-number">1.1.</span> <span class="toc-text">重建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析"><span class="toc-number">1.2.</span> <span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS-查询"><span class="toc-number">1.2.1.</span> <span class="toc-text">DNS 查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-请求"><span class="toc-number">1.2.2.</span> <span class="toc-text">HTTP 请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP-响应"><span class="toc-number">1.2.3.</span> <span class="toc-text">HTTP 响应</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP代理协议"><span class="toc-number">1.2.4.</span> <span class="toc-text">HTTP代理协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SOCKS4-5代理协议"><span class="toc-number">1.2.5.</span> <span class="toc-text">SOCKS4/5代理协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMTP-协议"><span class="toc-number">1.2.6.</span> <span class="toc-text">SMTP 协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#电驴-ed2k-协议"><span class="toc-number">1.2.7.</span> <span class="toc-text">电驴(ed2k)协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对翻墙流量的分析识别"><span class="toc-number">1.2.8.</span> <span class="toc-text">对翻墙流量的分析识别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#应对"><span class="toc-number">2.</span> <span class="toc-text">应对</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#封IP"><span class="toc-number">2.1.</span> <span class="toc-text">封IP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS劫持"><span class="toc-number">2.2.</span> <span class="toc-text">DNS劫持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-RST阻断"><span class="toc-number">2.3.</span> <span class="toc-text">TCP RST阻断</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#封端口"><span class="toc-number">2.4.</span> <span class="toc-text">封端口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTPS间歇性丢包"><span class="toc-number">2.5.</span> <span class="toc-text">HTTPS间歇性丢包</span></a></li></ol></li></ol>
-        
-    </div>
-    <style>
-        .left-col .switch-btn,
-        .left-col .switch-area {
-            display: none;
-        }
-        .toc-level-3 i,
-        .toc-level-3 ol {
-            display: none !important;
-        }
-    </style>
-
-    <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
-
-    <script>
-        yiliaConfig.toc = ["隐藏目录", "显示目录", !!"false"];
-    </script>
-
-
-
-    
-<div class="share">
-    
-        <div class="bdsharebuttonbox">
-            <a href="#" class="fa fa-twitter bds_twi" data-cmd="twi" title="分享到推特"></a>
-            <a href="#" class="fa fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-            <a href="#" class="fa fa-qq bds_sqq" data-cmd="sqq" title="分享给 QQ 好友"></a>
-            <a href="#" class="fa fa-files-o bds_copy" data-cmd="copy" title="复制网址"></a>
-            <a href="#" class="fa fa fa-envelope-o bds_mail" data-cmd="mail" title="通过邮件分享"></a>
-            <a href="#" class="fa fa-weixin bds_weixin" data-cmd="weixin" title="生成文章二维码"></a>
-            <a href="#" class="fa fa-share-alt bds_more" data-cmd="more"></i></a>
-        </div>
-        <script>
-            window._bd_share_config={
-                "common":{"bdSnsKey":{},"bdText":"全面学习GFW　| Allen's Blog　","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
-        </script>
-    
-
-    
-</div>
-
-
-
-
-
-
-
-    
-      <div class="duoshuo" id="comments">
-    <div id="comment-box" ></div>
-    <div class="ds-thread" id="ds-thread" data-thread-key="articles/2016-10/2016-10-20-learn-gfw/" data-title="全面学习GFW" data-url="http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/"></div>
-    <script>
-        var duoshuoQuery = {short_name:"alleeen"};
-        var loadComment = function(){
-            var d = document, s = d.createElement('script');
-            s.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            s.async = true; s.charset = 'UTF-8';
-            (d.head || d.body).appendChild(s);
-        }
-
-        
-    </script>
-    
-    <script> loadComment(); </script>
-
-</div>
-    
-
-
-
-
-    <div class="scroll" id="post-nav-button">
-        
-            <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" title="上一篇: 使用 EdgeMax 路由器自动翻墙">
-                <i class="fa fa-angle-left"></i>
-            </a>
-        
-
-        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
-
-        
-            <a href="/articles/2016-09/after-update-macosx-git-failed/" title="下一篇: 解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误">
-                <i class="fa fa-angle-right"></i>
-            </a>
-        
-    </div>
-
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/">使用 EdgeMax 路由器自动翻墙</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-10/2016-10-20-learn-gfw/">全面学习GFW</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/after-update-macosx-git-failed/">解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/sed-usage/">Sed 命令详解</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/how-to-break-loop-scala/">由 Java 到 Scala：如何优雅的跳出循环</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/why-not-concurrency-arraylist/">为什么java.util.concurrent 包里没有并发的ArrayList实现？</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-09/play-trick-with-powermock/">玩花招的PowerMock</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/make-mine-blogs-1/">Allen's Blogs 创建历程（1）</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-14-java-api-need-to-know/">Java核心API需要掌握的程度</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-12-intro-pomodoro-technique/">25分钟改变你的工作效率：番茄工作法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2016-08/2016-08-10-java-CompletionService-tips/">CompletionService小技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/how-to-set-property-in-unit-test/">如何在单元测试中设置系统环境变量</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-unit-test-mock/">Mock 与 Stub</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2013-09/mac-install-jdk_1_6/">Mac OS X 安装 JDK备忘</a></li><li class="post-list-item"><a class="post-list-link" href="/articles/2010-06/2010-06-20-graduate/">我的毕业综合症</a></li></ul>
-
-
-
-
-    <script>
-        
-    </script>
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016 Allen Zheng
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
         </div>
         
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/blog-img/avatar.jpg"
+               alt="Allen Zheng" />
+          <p class="site-author-name" itemprop="name">Allen Zheng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
             </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
         
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GFW的原理"><span class="nav-number">1.</span> <span class="nav-text">GFW的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#重建"><span class="nav-number">1.1.</span> <span class="nav-text">重建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析"><span class="nav-number">1.2.</span> <span class="nav-text">分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS-查询"><span class="nav-number">1.2.1.</span> <span class="nav-text">DNS 查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-请求"><span class="nav-number">1.2.2.</span> <span class="nav-text">HTTP 请求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-响应"><span class="nav-number">1.2.3.</span> <span class="nav-text">HTTP 响应</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP代理协议"><span class="nav-number">1.2.4.</span> <span class="nav-text">HTTP代理协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SOCKS4-5代理协议"><span class="nav-number">1.2.5.</span> <span class="nav-text">SOCKS4/5代理协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SMTP-协议"><span class="nav-number">1.2.6.</span> <span class="nav-text">SMTP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#电驴-ed2k-协议"><span class="nav-number">1.2.7.</span> <span class="nav-text">电驴(ed2k)协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对翻墙流量的分析识别"><span class="nav-number">1.2.8.</span> <span class="nav-text">对翻墙流量的分析识别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应对"><span class="nav-number">2.</span> <span class="nav-text">应对</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#封IP"><span class="nav-number">2.1.</span> <span class="nav-text">封IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS劫持"><span class="nav-number">2.2.</span> <span class="nav-text">DNS劫持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-RST阻断"><span class="nav-number">2.3.</span> <span class="nav-text">TCP RST阻断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封端口"><span class="nav-number">2.4.</span> <span class="nav-text">封端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS间歇性丢包"><span class="nav-number">2.5.</span> <span class="nav-text">HTTPS间歇性丢包</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
     </div>
-</footer>
-    </div>
-    
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
+  </aside>
 
 
+        
+      </div>
+    </main>
 
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Zheng</span>
 </div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
 <script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
 </script>
 
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
 
-  </div>
+  
+
+
 </body>
 </html>

@@ -1,23 +1,91 @@
-<!DOCTYPE html>
-<html lang="zh-Hans">
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
 <head>
-
-    <!--[if lt IE 9]>
-        <style>body {display: none; background: none !important} </style>
-        <meta http-equiv="Refresh" Content="0; url=//outdatedbrowser.com/" />
-    <![endif]-->
-
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<meta name="author" content="Allen Zheng" />
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
     
     
-        <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Allen, Blogs, Coder, Java" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/blog-img/favicon.png?v=5.0.2" />
+
+
+
+
 
 
 <meta property="og:type" content="website">
@@ -27,512 +95,589 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Allen's Blog">
 
-<link rel="apple-touch-icon" href= "/apple-touch-icon.png">
 
 
-    <link rel="alternate" href="/atom.xml" title="Allen&#39;s Blog" type="application/atom+xml">
-
-
-
-    <link rel="shortcut icon" href="/assets/images/blog-img/favicon.png">
-
-
-
-
-
-    <link href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet">
-
-
-
-    <script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
-    <link href="//cdn.bootcss.com/pace/1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
-
-
-<link rel="stylesheet" href="/css/style.css">
-
-
-
-<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-
-
-<title>Allen&#39;s Blog</title>
-
-<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-<script>
-    var yiliaConfig = {
-        fancybox: true,
-        animate: false,
-        isHome: true,
-        isPost: false,
-        isArchive: false,
-        isTag: false,
-        isCategory: false,
-        fancybox_js: "//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.js",
-        scrollreveal: "//cdn.bootcss.com/scrollReveal.js/3.1.4/scrollreveal.min.js",
-        search: undefined
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'alleeen',
+      author: '博主'
     }
+  };
 </script>
 
 
-    <script> yiliaConfig.jquery_ui = [false]; </script>
 
 
-
-    <script> yiliaConfig.rootUrl = "\/";</script>
-
+  <link rel="canonical" href="http://allenn.cn/"/>
 
 
-
-<!-- Baidu tongji -->
-
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
-
-
-<!-- Google Analytics -->
-
-<script type="text/javascript">
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-36907890-1', 'auto');
-ga('send', 'pageview');
-
-</script>
-
-<!-- End Google Analytics -->
-
+  <title> Allen's Blog </title>
 </head>
 
-<body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-    <header id="header" class="inner">
-        <a href="/" class="profilepic">
-            <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
-        </a>
-        <hgroup>
-          <h1 class="header-author"><a href="/">Allen Zheng</a></h1>
-        </hgroup>
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
-        
-
-        
+  
 
 
-        
-            <div id="switch-btn" class="switch-btn">
-                <div class="icon">
-                    <div class="icon-ctn">
-                        <div class="icon-wrap icon-house" data-idx="0">
-                            <div class="birdhouse"></div>
-                            <div class="birdhouse_holes"></div>
-                        </div>
-                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
-                            <div class="ribbon"></div>
-                        </div>
-                        
-                        <div class="icon-wrap icon-link hide" data-idx="2">
-                            <div class="loopback_l"></div>
-                            <div class="loopback_r"></div>
-                        </div>
-                        
-                        
-                        <div class="icon-wrap icon-me hide" data-idx="3">
-                            <div class="user"></div>
-                            <div class="shoulder"></div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-                <div class="tips-box hide">
-                    <div class="tips-arrow"></div>
-                    <ul class="tips-inner">
-                        <li>菜单</li>
-                        <li>标签</li>
-                        
-                        <li>友情链接</li>
-                        
-                        
-                        <li>关于我</li>
-                        
-                    </ul>
-                </div>
-            </div>
-        
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-36907890-1', 'auto');
+  ga('send', 'pageview');
+</script>
 
-        <div id="switch-area" class="switch-area">
-            <div class="switch-wrap">
-                <section class="switch-part switch-part1">
-                    <nav class="header-menu">
-                        <ul>
-                        
-                            <li><a href="/">主页</a></li>
-                        
-                            <li><a href="/archives/">所有文章</a></li>
-                        
-                            <li><a href="/tags/">标签云</a></li>
-                        
-                        </ul>
-                    </nav>
-                    <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" href="https://github.com/allenn" title="GitHub"></a>
-                            
-                                <a class="fa 新浪微博" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
-                            
-                                <a class="fa Email" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
-                            
-                                <a class="fa Facebook" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
-                            
-                                <a class="fa RSS" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-                    </nav>
-                </section>
-                
-                
-                <section class="switch-part switch-part2">
-                    <div class="widget tagcloud" id="js-tagcloud">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/EdgeMax/">EdgeMax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GFW/">GFW</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDK/">JDK</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Macbook/">Macbook</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Scala/">Scala</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/">Shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/api/">api</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/升级/">升级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/单元测试/">单元测试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/吐槽/">吐槽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/多线程/">多线程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/并发/">并发</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毕业/">毕业</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/研究/">研究</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路由器/">路由器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/跳出循环/">跳出循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
-                    </div>
-                </section>
-                
-                
-                
-                <section class="switch-part switch-part3">
-                    <div id="js-friends">
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://hexo.io">Hexo</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="https://github.com/">GitHub</a>
-                    
-                      <a class="main-nav-link switch-friends-link" href="http://ifeve.com/">并发编程网</a>
-                    
-                    </div>
-                </section>
-                
 
-                
-                
-                <section class="switch-part switch-part4">
-                
-                    <div id="js-aboutme">讲真，没想好写点什么</div>
-                </section>
-                
-            </div>
-        </div>
-    </header>                
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Allen's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
 </div>
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-      <div class="overlay">
-          <div class="slider-trigger"></div>
-          <h1 class="header-author js-mobile-header hide"><a href="/" title="回到主页">Allen Zheng</a></h1>
-      </div>
-    <div class="intrude-less">
-        <header id="header" class="inner">
-            <a href="/" class="profilepic">
-                <img src="/assets/images/blog-img/avatar.jpg" class="animated zoomIn">
-            </a>
-            <hgroup>
-              <h1 class="header-author"><a href="/" title="回到主页">Allen Zheng</a></h1>
-            </hgroup>
-            
-            <nav class="header-menu">
-                <ul>
-                
-                    <li><a href="/">主页</a></li>
-                
-                    <li><a href="/archives/">所有文章</a></li>
-                
-                    <li><a href="/tags/">标签云</a></li>
-                
-                <div class="clearfix"></div>
-                </ul>
-            </nav>
-            <nav class="header-nav">
-                        <ul class="social">
-                            
-                                <a class="fa GitHub" target="_blank" href="https://github.com/allenn" title="GitHub"></a>
-                            
-                                <a class="fa 新浪微博" target="_blank" href="http://weibo.com/allenzheng1225" title="新浪微博"></a>
-                            
-                                <a class="fa Email" target="_blank" href="mailto:&#120;&#117;&#100;&#111;&#110;&#103;&#122;&#104;&#101;&#110;&#103;&#49;&#50;&#50;&#53;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;?Subject=Hello" title="Email"></a>
-                            
-                                <a class="fa Facebook" target="_blank" href="https://www.facebook.com/allencheng1225" title="Facebook"></a>
-                            
-                                <a class="fa Twitter" target="_blank" href="https://twitter.com/xudongzheng1225" title="Twitter"></a>
-                            
-                                <a class="fa RSS" target="_blank" href="/atom.xml" title="RSS"></a>
-                            
-                        </ul>
-            </nav>
-        </header>                
-    </div>
-    <link class="menu-list" tags="标签" friends="友情链接" about="关于我"/>
-</nav>
-      <div class="body-wrap">
-  
-    <article id="post-2016-10-20-edgemax-ss-tutorial" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" class="article-date">
-      <time datetime="2016-10-20T14:21:39.000Z" itemprop="datePublished">2016-10-20</time>
-</a>
 
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
 
-    </div>
+<nav class="site-nav">
   
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+
+  
+    <ul id="menu" class="menu">
+      
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/">使用 EdgeMax 路由器自动翻墙</a>
-    </h1>
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
   
 
-      </header>
-      
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
     
-    <div class="article-entry" itemprop="articleBody">
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" itemprop="url">
+                  使用 EdgeMax 路由器自动翻墙
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T22:21:39+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
           
-              <p>作为肉身在墙内的计算机科学技术人员，不能上google实在是一件很遗憾的事情。</p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>作为肉身在墙内的计算机科学技术人员，不能上google实在是一件很遗憾的事情。</p>
 <blockquote>
 <p>什么？你说用百度？你站出来，我是你老板我肯定会开除你。</p>
 </blockquote>
 <p> 百度搜索简直是垃圾中的战斗机，在使用百度时，你不得不忍受他的各种广告，各种竞价排名，而且英文资料极少。很多领先的开源作品、解决方案、论文什么的基本都是国外的。这些资料你查不到，你说什么与国际先进技术接轨？总之，没用过 Google 之前，你可能没什么感觉，但是用过了之后再用”某度”，你会抱怨，这搜的是些什么破玩意儿。。。但是，因为众所周知的原因，我们无法直接访问 Google，不能访问一些很优秀的国外网站，比如 slideshare（里面有很多优秀的PPT、文档）等等。那么怎么办？答案就是：翻墙！</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/网络技术/">网络技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EdgeMax/">EdgeMax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GFW/">GFW</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路由器/">路由器</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-10-20-learn-gfw" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-10/2016-10-20-learn-gfw/" class="article-date">
-      <time datetime="2016-10-20T08:21:39.000Z" itemprop="datePublished">2016-10-20</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-10/2016-10-20-learn-gfw/">全面学习GFW</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-10/2016-10-20-learn-gfw/" itemprop="url">
+                  全面学习GFW
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-20T16:21:39+08:00" content="2016-10-20">
+              2016-10-20
+            </time>
+          </span>
+
           
-              <p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz">https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz</a></p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz">翻墙路由器的实现与原理</a></p>
 <p>注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。</p>
 <p>GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是：</p>
 <p>首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW的最天然，最朴素的角度。在这个方面做得非常极致的是一个叫做<a href="https://en.greatfire.org/">greatfire</a>的网站。这个网站长期监控成千上万个网站和关键词。通过长期监控，不但可以掌握WHAT被封锁了，还可以知道WHEN被封的，WHEN被解封的。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/网络技术/">网络技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GFW/">GFW</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/研究/">研究</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-10/2016-10-20-learn-gfw/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-after-update-macosx-git-failed" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-09/after-update-macosx-git-failed/" class="article-date">
-      <time datetime="2016-09-24T05:50:39.000Z" itemprop="datePublished">2016-09-24</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-10/2016-10-20-learn-gfw/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-09/after-update-macosx-git-failed/">解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-09/after-update-macosx-git-failed/" itemprop="url">
+                  解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-24T13:50:39+08:00" content="2016-09-24">
+              2016-09-24
+            </time>
+          </span>
+
           
-        <p>前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：<code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code>。去google了一圈，找到了一个github上homebrew issues里很老的帖子，按着里面说的，重装了一下xcode command line，结果就正常了……</p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：<code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code>。去google了一圈，找到了一个github上homebrew issues里很老的帖子，按着里面说的，重装了一下xcode command line，结果就正常了……</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
 <p>不过看帖子里并不是所有人重装都能解决问题，有些人似乎还要手动切换下xcode的路径才能解决。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo xcode-select -switch /</div></pre></td></tr></table></figure>
 <p>因为帖子标题说是在升级到“冲浪湾”时遇到了这问题，所以看来这问题属于每次升级时候都会碰到的月经型问题了OTL。问题解决后，我又去各处翻了下问题出现的原因，可惜没有找到。个人推断可能是因为git所需的lib关联到了command line tools，升级时改动了lib的路径所致吧。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mac-OS-X/">Mac OS X</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/升级/">升级</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-sed-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-09/sed-usage/" class="article-date">
-      <time datetime="2016-09-17T11:27:03.000Z" itemprop="datePublished">2016-09-17</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-09/sed-usage/">Sed 命令详解</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-              <p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。</p>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-09/sed-usage/" itemprop="url">
+                  Sed 命令详解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-17T19:27:03+08:00" content="2016-09-17">
+              2016-09-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。</p>
 <h2 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed [option] &apos;command&apos; input_file</div></pre></td></tr></table></figure>
 <p>常用的option有如下几种：</p>
 <ul>
@@ -542,526 +687,966 @@ ga('send', 'pageview');
 <li><code>-r</code> 让sed命令支持扩展的正则表达式(默认是基础正则表达式)；</li>
 <li><code>-i</code> 直接修改读取的文件内容，默认下，sed 不会直接修改文件，当提供<code>-i</code>选项时 sed 会直接修改文件内容。</li>
 </ul>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shell/">Shell</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sed/">sed</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-09/sed-usage/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-how-to-break-loop-scala" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-09/how-to-break-loop-scala/" class="article-date">
-      <time datetime="2016-09-16T11:27:03.000Z" itemprop="datePublished">2016-09-16</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-09/sed-usage/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-09/how-to-break-loop-scala/">由 Java 到 Scala：如何优雅的跳出循环</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-09/how-to-break-loop-scala/" itemprop="url">
+                  由 Java 到 Scala：如何优雅的跳出循环
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-16T19:27:03+08:00" content="2016-09-16">
+              2016-09-16
+            </time>
+          </span>
+
           
-              <p>在开发过程中，我们经常会遇到这样的需求：循环执行某个操作，当满足一定条件的时候循环终止。最常见的场景就是累加数组中的元素，一直到大于某个值，用伪代码来描述就是：</p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在开发过程中，我们经常会遇到这样的需求：循环执行某个操作，当满足一定条件的时候循环终止。最常见的场景就是累加数组中的元素，一直到大于某个值，用伪代码来描述就是：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DO LOOP&#123;</div><div class="line">  DO SOME THING</div><div class="line">  IF SOME CONDITION</div><div class="line">    BREAK</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Scala/">Scala</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/跳出循环/">跳出循环</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-09/how-to-break-loop-scala/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-why-not-concurrency-arraylist" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-09/why-not-concurrency-arraylist/" class="article-date">
-      <time datetime="2016-09-07T11:27:03.000Z" itemprop="datePublished">2016-09-07</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-09/how-to-break-loop-scala/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-09/why-not-concurrency-arraylist/">为什么java.util.concurrent 包里没有并发的ArrayList实现？</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-09/why-not-concurrency-arraylist/" itemprop="url">
+                  为什么java.util.concurrent 包里没有并发的ArrayList实现？
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-07T19:27:03+08:00" content="2016-09-07">
+              2016-09-07
+            </time>
+          </span>
+
           
-        <p>问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？</p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？</p>
 <p>答：我认为在 java.util.concurrent 包中没有加入并发的 ArrayList 实现的主要原因是：很难去开发一个通用并且没有并发瓶颈的线程安全的 List。像 ConcurrentHashMap 这样的类的真正价值（The real point / value of classes）并不是它们保证了线程安全。而在于它们在保证线程安全的同时不存在并发瓶颈。举个例子，ConcurrentHashMap 采用了锁分段技术和弱一致性的Map迭代器去规避并发瓶颈。所以问题在于，像“Array List”这样的数据结构，你不知道如何去规避并发的瓶颈。拿contains() 这样一个操作来说，当你进行搜索的时候如何避免锁住整个 list？另一方面，Queue 和 Deque (基于Linked List)有并发的实现是因为他们的接口相比List的接口有更多的限制，这些限制使得实现并发成为可能。CopyOnWriteArrayList 是一个有趣的例子，它规避了只读操作（如 get/contains）并发的瓶颈，但是它为了做到这点，在修改操作中做了很多工作和修改可见性规则。 此外，修改操作还会锁住整个List，因此这也是一个并发瓶颈。所以从理论上来说，CopyOnWriteArrayList 并不算是一个通用的并发 List。</p>
 
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多线程/">多线程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/并发/">并发</a></li></ul>
-    </div>
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-play-trick-with-powermock" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-09/play-trick-with-powermock/" class="article-date">
-      <time datetime="2016-09-01T15:31:03.000Z" itemprop="datePublished">2016-09-01</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-09/play-trick-with-powermock/">玩花招的PowerMock</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
           
-              <p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/">逸言</a>，感谢原作者的精彩分享</p>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-09/play-trick-with-powermock/" itemprop="url">
+                  玩花招的PowerMock
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-01T23:31:03+08:00" content="2016-09-01">
+              2016-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/转载/" itemprop="url" rel="index">
+                    <span itemprop="name">转载</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/">逸言</a>，感谢原作者的精彩分享</p>
 <p>当我们面对一个遗留系统时，常见的问题是没有测试。正如Michael Feathers在Working Effectively with Legacy Code一书中对“遗留代码”的定义。他将其简单归纳为“没有测试的代码”。真是太贴切了！正是因为没有测试，使得我们对遗留代码的任何重构都有些战战兢兢，甚至成为开发人员抵制重构的借口。从收益与成本的比例来看，对于这样的系统，我一贯认为不要盲目进行重构。因为重构的真正适用场景其实是发生在开发期间，而非维护期间。当然，提升自己的重构能力，尤其学会运用IDE提供的自动重构工具，可以在一定程度上保障重构的质量。然而，安全的做法，还是需要为其编写测试。</p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/转载/">转载</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PowerMock/">PowerMock</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单元测试/">单元测试</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-09/play-trick-with-powermock/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-make-mine-blogs-1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-08/make-mine-blogs-1/" class="article-date">
-      <time datetime="2016-08-30T08:21:39.000Z" itemprop="datePublished">2016-08-30</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-09/play-trick-with-powermock/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-08/make-mine-blogs-1/">Allen&#39;s Blogs 创建历程（1）</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-          
-              <p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
-          
       
     </div>
-    
-    <div class="article-info article-info-index">
+
+    <div>
       
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/随便乱写/">随便乱写</a>
     </div>
 
-
+    <div>
       
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blogs/">Blogs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jekyll/">Jekyll</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/软件工程师的自我宣传/">软件工程师的自我宣传</a></li></ul>
     </div>
 
+    <footer class="post-footer">
       
-        <p class="article-more-link">
-          <a href="/articles/2016-08/make-mine-blogs-1/#more">阅读全文 >></a>
-        </p>
+
       
-      <div class="clearfix"></div>
-    </div>
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
+      
 
   
-    <article id="post-2016-08-24-how-to-use-github" class="article article-type-post" itemscope itemprop="blogPost">
   
-    <div class="article-meta">
-      <a href="/articles/2016-08/2016-08-24-how-to-use-github/" class="article-date">
-      <time datetime="2016-08-24T08:21:39.000Z" itemprop="datePublished">2016-08-24</time>
-</a>
 
-
-    </div>
   
-  <div class="article-inner">
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+      <header class="post-header">
+
         
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-08/make-mine-blogs-1/" itemprop="url">
+                  Allen's Blogs 创建历程（1）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-30T16:21:39+08:00" content="2016-08-30">
+              2016-08-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随便乱写/" itemprop="url" rel="index">
+                    <span itemprop="name">随便乱写</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-08/make-mine-blogs-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-08/2016-08-24-how-to-use-github/">Github的正确使用方法</a>
-    </h1>
   
 
-      </header>
-      
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
     
-    <div class="article-entry" itemprop="articleBody">
-      
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-08/2016-08-24-how-to-use-github/" itemprop="url">
+                  Github的正确使用方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-24T16:21:39+08:00" content="2016-08-24">
+              2016-08-24
+            </time>
+          </span>
+
           
-              <p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
 <p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
-          
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
-
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github/">Github</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-08/2016-08-24-how-to-use-github/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="post-2016-08-19-resolve-java-app-ssl-error" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/" class="article-date">
-      <time datetime="2016-08-19T14:21:39.000Z" itemprop="datePublished">2016-08-19</time>
-</a>
-
-
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-08/2016-08-24-how-to-use-github/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">在公司内网如何更新IntelliJ的插件</a>
-    </h1>
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/" itemprop="url">
+                  在公司内网如何更新IntelliJ的插件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-19T22:21:39+08:00" content="2016-08-19">
+              2016-08-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
-      
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body" itemprop="articleBody">
+
       
+      
+
+      
+        
+          <p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
           
-              <p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
+
+
           
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-    <div class="article-category tagcloud">
-    <a class="article-category-link" href="/categories/软件技术/">软件技术</a>
-    </div>
 
-
-      
-    <div class="article-tag tagcloud">
-        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IntelliJ/">IntelliJ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
-    </div>
-
-      
-        <p class="article-more-link">
-          <a href="/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/#more">阅读全文 >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
-</div>
-      <footer id="footer">
-    <div class="outer">
-        <div id="footer-info">
-            <div class="footer-left">
-                <i class="fa fa-copyright"></i> 
-                2016 Allen Zheng
-            </div>
-            <div class="footer-right">
-                <a href="http://hexo.io/" target="_blank" title="快速、简洁且高效的博客框架">Hexo</a>  Theme <a href="https://github.com/MOxFIVE/hexo-theme-yelee" target="_blank" title="简而不减 Hexo 双栏博客主题  v3.5">Yelee</a> by MOxFIVE <i class="fa fa-heart animated infinite pulse"></i>
-            </div>
         </div>
         
-            <div class="visit">
-                
-                    <span id="busuanzi_container_site_pv" style='display:none'>
-                        <span id="site-visit" title="本站到访数"><i class="fa fa-user" aria-hidden="true"></i><span id="busuanzi_value_site_uv"></span>
-                        </span>
-                    </span>
-                
-                
-                    <span>| </span>
-                
-                
-                    <span id="busuanzi_container_page_pv" style='display:none'>
-                        <span id="page-visit"  title="本页阅读量"><i class="fa fa-eye animated infinite pulse" aria-hidden="true"></i><span id="busuanzi_value_page_pv"></span>
-                        </span>
-                    </span>
-                
-            </div>
-        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
-</footer>
-    </div>
-    
-<script data-main="/js/main.js" src="//cdn.bootcss.com/require.js/2.2.0/require.min.js"></script>
-
-
-
-<div class="scroll" id="scroll">
-    <a href="#" title="返回顶部"><i class="fa fa-arrow-up"></i></a>
-    <a href="#comments" onclick="load$hide();" title="查看评论"><i class="fa fa-comments-o"></i></a>
-    <a href="#footer" title="转到底部"><i class="fa fa-arrow-down"></i></a>
-</div>
-<script>
-    // Open in New Window
-    
-        var oOpenInNew = {
-            
-            
-            
-            
-            
-            
-             archives: ".archive-article-title", 
-             miniArchives: "a.post-list-link", 
-            
-             friends: "#js-friends a", 
-             socail: ".social a" 
-        }
-        for (var x in oOpenInNew) {
-            $(oOpenInNew[x]).attr("target", "_blank");
-        }
-    
-</script>
-
-<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
   </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/blog-img/avatar.jpg"
+               alt="Allen Zheng" />
+          <p class="site-author-name" itemprop="name">Allen Zheng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Zheng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
 </body>
 </html>
