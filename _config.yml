@@ -78,7 +78,7 @@ baidusitemap:
 ## Themes: https://hexo.io/themes/
 #theme: landscape
 #theme: yilia
-theme: yelee
+theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
