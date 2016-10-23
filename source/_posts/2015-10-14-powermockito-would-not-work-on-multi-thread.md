@@ -7,7 +7,7 @@ ads: true
 categories: 软件技术
 tags:
   - Java
-	- 单元测试
+  - 单元测试
 ---
 
 在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
