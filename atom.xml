@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://allenn.cn/"/>
-  <updated>2016-10-23T14:14:59.165Z</updated>
+  <updated>2016-10-23T14:19:57.067Z</updated>
   <id>http://allenn.cn/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://allenn.cn/articles/2016-10/2016-10-20-edgemax-ss-tutorial/"/>
     <id>http://allenn.cn/articles/2016-10/2016-10-20-edgemax-ss-tutorial/</id>
     <published>2016-10-20T14:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>作为肉身在墙内的计算机科学技术人员，不能上google实在是一件很遗憾的事情。</p>
 <blockquote>
@@ -118,7 +118,7 @@
     <link href="http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/"/>
     <id>http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/</id>
     <published>2016-10-20T08:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz" target="_blank" rel="external">翻墙路由器的实现与原理</a></p>
 <p>注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。</p>
@@ -228,7 +228,7 @@
     <link href="http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/"/>
     <id>http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/</id>
     <published>2016-09-24T05:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：<code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code>。去google了一圈，找到了一个github上homebrew issues里很老的帖子，按着里面说的，重装了一下xcode command line，结果就正常了……</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
@@ -259,7 +259,7 @@
     <link href="http://allenn.cn/articles/2016-09/sed-usage/"/>
     <id>http://allenn.cn/articles/2016-09/sed-usage/</id>
     <published>2016-09-17T11:27:03.000Z</published>
-    <updated>2016-10-23T14:14:59.169Z</updated>
+    <updated>2016-10-23T14:19:57.071Z</updated>
     
     <content type="html"><![CDATA[<p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。</p>
 <h2 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sed [option] &apos;command&apos; input_file</div></pre></td></tr></table></figure>
@@ -382,7 +382,7 @@
     <link href="http://allenn.cn/articles/2016-09/how-to-break-loop-scala/"/>
     <id>http://allenn.cn/articles/2016-09/how-to-break-loop-scala/</id>
     <published>2016-09-16T11:27:03.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>在开发过程中，我们经常会遇到这样的需求：循环执行某个操作，当满足一定条件的时候循环终止。最常见的场景就是累加数组中的元素，一直到大于某个值，用伪代码来描述就是：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DO LOOP&#123;</div><div class="line">  DO SOME THING</div><div class="line">  IF SOME CONDITION</div><div class="line">    BREAK</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -430,7 +430,7 @@
     <link href="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/"/>
     <id>http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/</id>
     <published>2016-09-07T11:27:03.000Z</published>
-    <updated>2016-10-23T14:14:59.169Z</updated>
+    <updated>2016-10-23T14:19:57.071Z</updated>
     
     <content type="html"><![CDATA[<p>问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？</p>
 <p>答：我认为在 java.util.concurrent 包中没有加入并发的 ArrayList 实现的主要原因是：很难去开发一个通用并且没有并发瓶颈的线程安全的 List。像 ConcurrentHashMap 这样的类的真正价值（The real point / value of classes）并不是它们保证了线程安全。而在于它们在保证线程安全的同时不存在并发瓶颈。举个例子，ConcurrentHashMap 采用了锁分段技术和弱一致性的Map迭代器去规避并发瓶颈。所以问题在于，像“Array List”这样的数据结构，你不知道如何去规避并发的瓶颈。拿contains() 这样一个操作来说，当你进行搜索的时候如何避免锁住整个 list？另一方面，Queue 和 Deque (基于Linked List)有并发的实现是因为他们的接口相比List的接口有更多的限制，这些限制使得实现并发成为可能。CopyOnWriteArrayList 是一个有趣的例子，它规避了只读操作（如 get/contains）并发的瓶颈，但是它为了做到这点，在修改操作中做了很多工作和修改可见性规则。 此外，修改操作还会锁住整个List，因此这也是一个并发瓶颈。所以从理论上来说，CopyOnWriteArrayList 并不算是一个通用的并发 List。</p>
@@ -458,7 +458,7 @@
     <link href="http://allenn.cn/articles/2016-09/play-trick-with-powermock/"/>
     <id>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</id>
     <published>2016-09-01T15:31:03.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.071Z</updated>
     
     <content type="html"><![CDATA[<p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/" target="_blank" rel="external">逸言</a>，感谢原作者的精彩分享</p>
 <p>当我们面对一个遗留系统时，常见的问题是没有测试。正如Michael Feathers在Working Effectively with Legacy Code一书中对“遗留代码”的定义。他将其简单归纳为“没有测试的代码”。真是太贴切了！正是因为没有测试，使得我们对遗留代码的任何重构都有些战战兢兢，甚至成为开发人员抵制重构的借口。从收益与成本的比例来看，对于这样的系统，我一贯认为不要盲目进行重构。因为重构的真正适用场景其实是发生在开发期间，而非维护期间。当然，提升自己的重构能力，尤其学会运用IDE提供的自动重构工具，可以在一定程度上保障重构的质量。然而，安全的做法，还是需要为其编写测试。</p>
@@ -521,7 +521,7 @@
     <link href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/"/>
     <id>http://allenn.cn/articles/2016-08/make-mine-blogs-1/</id>
     <published>2016-08-30T08:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.071Z</updated>
     
     <content type="html"><![CDATA[<p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248" target="_blank" rel="external">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
 <a id="more"></a>
@@ -586,7 +586,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</id>
     <published>2016-08-24T08:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
 <p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
@@ -653,7 +653,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</id>
     <published>2016-08-19T14:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="external">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
 <a id="more"></a>
@@ -699,7 +699,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</id>
     <published>2016-08-14T15:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。</p>
 <ol>
@@ -739,7 +739,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</id>
     <published>2016-08-12T08:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？</p>
 <p><img src="/assets/images/intro-pomodoro-technique/time-lack.png" alt="我真的很缺时间"></p>
@@ -801,7 +801,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</id>
     <published>2016-08-10T08:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
 <a id="more"></a>
@@ -836,7 +836,7 @@
     <link href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
     <id>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</id>
     <published>2015-10-17T05:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -867,7 +867,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</id>
     <published>2015-10-14T08:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
@@ -909,7 +909,7 @@
     <link href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"/>
     <id>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</id>
     <published>2015-10-14T05:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：</p>
 <blockquote>
@@ -957,7 +957,7 @@
     <link href="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/"/>
     <id>http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/</id>
     <published>2013-09-30T08:21:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/" target="_blank" rel="external">http://connect.apple.com/</a></p>
 <a id="more"></a>
@@ -992,7 +992,7 @@
     <link href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/"/>
     <id>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</id>
     <published>2010-06-20T05:50:39.000Z</published>
-    <updated>2016-10-23T14:14:59.165Z</updated>
+    <updated>2016-10-23T14:19:57.067Z</updated>
     
     <content type="html"><![CDATA[<p>最近听到的消息有点多，</p>
 <p>FOR EXAMPLE,</p>
