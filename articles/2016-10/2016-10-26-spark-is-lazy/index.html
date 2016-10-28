@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Spark,Scala,函数式编程,惰性计算," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/blog-img/favicon.png?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="今天在检视项目代码的时候，无意中发现了下面一段代码：
+class RddTransformer&amp;#123;  def doTransform(data: RDD[Data]): RDD[NewData]=&amp;#123;    val newDataRdd = data.flatmap(DataTransformer.doTransform)    if(DataTransformer.excepti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark 的惰性运算">
+<meta property="og:url" content="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/index.html">
+<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:description" content="今天在检视项目代码的时候，无意中发现了下面一段代码：
+class RddTransformer&amp;#123;  def doTransform(data: RDD[Data]): RDD[NewData]=&amp;#123;    val newDataRdd = data.flatmap(DataTransformer.doTransform)    if(DataTransformer.excepti">
+<meta property="og:image" content="http://allenn.cn/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png">
+<meta property="og:updated_time" content="2016-10-28T16:56:09.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark 的惰性运算">
+<meta name="twitter:description" content="今天在检视项目代码的时候，无意中发现了下面一段代码：
+class RddTransformer&amp;#123;  def doTransform(data: RDD[Data]): RDD[NewData]=&amp;#123;    val newDataRdd = data.flatmap(DataTransformer.doTransform)    if(DataTransformer.excepti">
+<meta name="twitter:image" content="http://allenn.cn/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '604590',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/"/>
+
+
+  <title> Spark 的惰性运算 | Allen's Blog </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-36907890-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Allen's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark 的惰性运算
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-26T16:21:39+08:00" content="2016-10-26">
+              2016-10-26
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/大数据/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/articles/2016-10/2016-10-26-spark-is-lazy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="articles/2016-10/2016-10-26-spark-is-lazy/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天在检视项目代码的时候，无意中发现了下面一段代码：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RddTransformer</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">RDD</span>[<span class="type">Data</span>]): <span class="type">RDD</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">val</span> newDataRdd = data.flatmap(<span class="type">DataTransformer</span>.doTransform)</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(<span class="type">DataTransformer</span>.exceptionCount &gt; <span class="number">0</span>) &#123;</div><div class="line">      logger.error(<span class="string">s"There are some illegal data, count: <span class="subst">$&#123;DataTransformer.exceptionCount&#125;</span>"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newDataRdd</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">DataTransformer</span></span>&#123;</div><div class="line">  <span class="keyword">var</span> exceptionCount:<span class="type">Int</span> = <span class="number">0</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">Data</span>): <span class="type">Option</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">if</span>(data.isIllegal)&#123;</div><div class="line">      exceptionCount += <span class="number">1</span></div><div class="line">      <span class="type">None</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      <span class="comment">// do something transform data to new data</span></div><div class="line">      .....</div><div class="line"></div><div class="line">      <span class="type">Some</span>(newData)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>作者的意图很简单，就是将RDD中的数据转换为新的数据格式，并统计非法数据的个数。咋一看代码，似乎没有什么问题，可是，这段代码真的能得到正确的结果么？答案是否定的，事实上，不管RDD中包含多少非法数据，<code>if(DataTransformer.exceptionCount &gt; 0)</code>这个条件永远都不会为真。为什么？你现在肯定充满了疑惑，让我们先来看看 Spark 的文档上对 RDD 操作的解释：</p>
+<blockquote>
+<p>All transformations in Spark are lazy, in that they do not compute their results right away. Instead, they just remember the transformations applied to some base dataset (e.g. a file). The transformations are only computed when an action requires a result to be returned to the driver program. (<a href="http://spark.apache.org/docs/latest/programming-guide.html#rdd-operations" target="_blank" rel="external">RDD Operations</a>)</p>
+<p>在 Spark 中，所有的 transformation() 类型操作都是延迟计算的，Spark 只是记录了将要对数据集进行的操作。只有需要数据集将数据返回到 Driver 程序时（即触发 Action 类型操作），所有已记录的 transformation() 才会执行。</p>
+</blockquote>
+<p>回到上面的代码，由于针对<code>RDD[Data]</code>的<code>flatmap</code>操作属于 transformation() 类型操作，所以<code>val newDataRdd = data.flatmap(DataTransformer.doTransform)</code>这段代码只是记录了一下对 RDD 的操作，并没有真正的去执行<code>DataTransformer.doTransform</code>方法中的代码。我们可以尝试在 Spark Shell 中实验一下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">scala&gt; var counter = 0</div><div class="line">counter: Int = 0</div><div class="line"></div><div class="line">scala&gt; var rdd = sc.parallelize(Seq(1,2,3,4,5,6)).map(x =&gt; counter += x)</div><div class="line">rdd: spark.RDD[Int] = spark.MappedRDD@2ee9b6e3</div><div class="line"></div><div class="line">scala&gt; counter</div><div class="line">counter: Int = 0</div></pre></td></tr></table></figure>
+<p>显然累加操作并没有被执行，根据 Shell 终端的输出，Spark 似乎只是记录了一下我们的操作，并返回了一个新的 RDD。当对 RDD 进行 transformation() 操作的时候，在 Spark 内部究竟发生了什么？我们先看一个图，典型的 Spark Job 逻辑执行图如下所示：</p>
+<p><img src="/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png" alt="GeneralLogicalPlan"></p>
+<p>根据上图，Spark Job 经过下面四个步骤可以得到最终执行结果：</p>
+<ul>
+<li>从数据源（可以是本地 file，内存数据结构， HDFS，HBase 等）读取数据创建最初的 RDD。上一段代码中的 parallelize() 相当于 createRDD()。</li>
+<li>对 RDD 进行一系列的 transformation() 操作，每一个 transformation() 会产生一个或多个包含不同类型 T 的 RDD[T]。T 可以是 Scala 里面的基本类型或数据结构，不限于 (K, V)。但如果是 (K, V)，K 不能是 Array 等复杂类型（因为难以在复杂类型上定义 partition 函数）。</li>
+<li>对最后的 final RDD 进行 action() 操作，每个 partition 计算后产生结果 result。</li>
+<li>将 result 回送到 driver 端，进行最后的 f(list[result]) 计算。例子中的 count() 实际包含了action() 和 sum() 两步计算。</li>
+</ul>
+<p>由此可知，RDD 中数据的计算是惰性的，一系列 transformation() 操作只有在遇到 action() 操作时候，才会真的去计算 RDD 分区内的数据。你一定很好奇这整个过程是如何实现的，那我们就来看看 RDD 的计算实现。</p>
+<h2 id="数据计算过程"><a href="#数据计算过程" class="headerlink" title="数据计算过程"></a>数据计算过程</h2><p>下面的代码段，展现了<code>RDD.flatmap()</code>和<code>MapPartitionsRDD</code>的实现，在代码中，我们看到，当调用<code>RDD</code>的<code>map</code>并传入一个函数<code>f</code>的时候，Spark 并没有做什么运算，而是用<code>f</code>作为一个入参创建了一个叫<code>MapPartitionsRDD</code>的对象并返回给调用者。而在<code>MapPartitionsRDD.scala</code>中，我们也看到只有当<code>compute</code>方法被调用的时候，我们之前传入的函数<code>f</code>才会真正的被执行</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"></div><div class="line">  <span class="comment">// RDD.scala</span></div><div class="line">  ...</div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Return a new RDD by applying a function to all elements of this RDD.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">flatmap</span></span>[<span class="type">U</span>: <span class="type">ClassTag</span>](f: <span class="type">T</span> =&gt; <span class="type">U</span>): <span class="type">RDD</span>[<span class="type">U</span>] = withScope &#123;</div><div class="line">    <span class="keyword">val</span> cleanF = sc.clean(f)</div><div class="line">    <span class="keyword">new</span> <span class="type">MapPartitionsRDD</span>[<span class="type">U</span>, <span class="type">T</span>](<span class="keyword">this</span>, (context, pid, iter) =&gt; iter.map(cleanF))</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// MapPartitionsRDD.scala</span></div><div class="line">  <span class="keyword">private</span>[spark] <span class="class"><span class="keyword">class</span> <span class="title">MapPartitionsRDD</span>[<span class="type">U</span>: <span class="type">ClassTag</span>, <span class="type">T</span>: <span class="type">ClassTag</span>](<span class="params"></span></span></div><div class="line">    var prev: <span class="type">RDD</span>[<span class="type">T</span>],</div><div class="line">    f: (<span class="type">TaskContext</span>, <span class="type">Int</span>, <span class="type">Iterator</span>[<span class="type">T</span>]) <span class="title">=&gt;</span> <span class="title">Iterator</span>[<span class="type">U</span>],  <span class="title">//</span> (<span class="params"><span class="type">TaskContext</span>, partition index, iterator</span>)</div><div class="line">    preservesPartitioning: <span class="type">Boolean</span> = <span class="literal">false</span>)</div><div class="line">  <span class="keyword">extends</span> <span class="type">RDD</span>[<span class="type">U</span>](prev) &#123;</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="keyword">val</span> partitioner = <span class="keyword">if</span> (preservesPartitioning) firstParent[<span class="type">T</span>].partitioner <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">getPartitions</span></span>: <span class="type">Array</span>[<span class="type">Partition</span>] = firstParent[<span class="type">T</span>].partitions</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">compute</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">U</span>] =</div><div class="line">    f(context, split.index, firstParent[<span class="type">T</span>].iterator(split, context))</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">clearDependencies</span></span>() &#123;</div><div class="line">    <span class="keyword">super</span>.clearDependencies()</div><div class="line">    prev = <span class="literal">null</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际计算过程大概是这样的：</p>
+<ol>
+<li>根据动作操作来将一个应用程序划分成多个作业。</li>
+<li>一个作业经历 DAG 调度和任务调度之后，被划分成一个一个的任务，对应 Task 类。</li>
+<li>任务被分配到不同核心去执行，执行 Task.run。</li>
+<li>Task.run 会调用阶段末 RDD 的 iterator 方法，获取该 RDD 某个分区内的数据记录，而 iterator 方法有可能会调用 RDD 类的 compute 方法来负责父 RDD 与子 RDD 之间的计算逻辑。</li>
+</ol>
+<p>整个过程会比较复杂，在此不进行展开，我们只需要知道 Apache Spark 最终会调用 RDD 的 iterator 和 compute 方法来计算分区数据即可。</p>
+<h3 id="compute-方法"><a href="#compute-方法" class="headerlink" title="compute 方法"></a>compute 方法</h3><p>在 RDD 中，<code>compute()</code>被定义为抽象方法，要求其所有子类都必须实现，该方法接受的参数之一是一个<code>Partition</code>对象，目的是计算该分区中的数据。以之前<code>flatmap</code>操作生成得到的<code>MapPartitionsRDD</code>类为例。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">compute</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">U</span>] =</div><div class="line">  f(context, split.index, firstParent[<span class="type">T</span>].iterator(split, context))</div></pre></td></tr></table></figure>
+<p>其中，<code>firstParent</code>在 RDD 中定义。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/** Returns the first parent RDD */</span></div><div class="line"><span class="keyword">protected</span>[spark] <span class="function"><span class="keyword">def</span> <span class="title">firstParent</span></span>[<span class="type">U</span>: <span class="type">ClassTag</span>] = &#123;</div><div class="line">  dependencies.head.rdd.asInstanceOf[<span class="type">RDD</span>[<span class="type">U</span>]]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>MapPartitionsRDD</code>类的<code>compute</code>方法调用当前 RDD 内的第一个父 RDD 的<code>iterator</code>方法，该方的目的是拉取父 RDD 对应分区内的数据，它返回一个迭代器对象，迭代器内部存储的每个元素即父 RDD 对应分区内已经计算完毕的数据记录。得到的迭代器作为<code>f</code>方法的一个参数。<code>compute</code>方法会将迭代器中的记录一一输入<code>f</code>方法，得到的新迭代器即为所求分区中的数据。</p>
+<h3 id="iterator方法"><a href="#iterator方法" class="headerlink" title="iterator方法"></a>iterator方法</h3><p><code>iterator</code>方法的实现在 RDD 类中。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Internal method to this RDD; will read from cache if applicable, or otherwise compute it.</div><div class="line"> * This should ''not'' be called by users directly, but is available for implementors of custom</div><div class="line"> * subclasses of RDD.</div><div class="line"> */</div><div class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">iterator</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (storageLevel != <span class="type">StorageLevel</span>.<span class="type">NONE</span>) &#123;</div><div class="line">    <span class="type">SparkEnv</span>.get.cacheManager.getOrCompute(<span class="keyword">this</span>, split, context, storageLevel)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    computeOrReadCheckpoint(split, context)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>iterator</code>方法首先检查当前 RDD 的存储级别，如果存储级别不为<code>None</code>，说明分区的数据要么已经存储在文件系统当中，要么当前 RDD 曾经执行过<code>cache</code>、<code>persise</code>等持久化操作，因此需要想办法把数据从存储介质中提取出来。<code>iterator</code>方法继续调用<code>CacheManager</code>的<code>getOrCompute</code>方法。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/** Gets or computes an RDD partition. Used by RDD.iterator() when an RDD is cached. */</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">getOrCompute</span></span>[<span class="type">T</span>](</div><div class="line">     rdd: <span class="type">RDD</span>[<span class="type">T</span>],</div><div class="line">     partition: <span class="type">Partition</span>,</div><div class="line">     context: <span class="type">TaskContext</span>,</div><div class="line">     storageLevel: <span class="type">StorageLevel</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">   <span class="keyword">val</span> key = <span class="type">RDDBlockId</span>(rdd.id, partition.index)</div><div class="line">   blockManager.get(key) <span class="keyword">match</span> &#123;</div><div class="line">      <span class="keyword">case</span> <span class="type">Some</span>(blockResult) =&gt;</div><div class="line">        <span class="comment">// Partition is already materialized, so just return its values</span></div><div class="line">        context.taskMetrics.inputMetrics = <span class="type">Some</span>(blockResult.inputMetrics)</div><div class="line">        <span class="keyword">new</span> <span class="type">InterruptibleIterator</span>(context, blockResult.data.asInstanceOf[<span class="type">Iterator</span>[<span class="type">T</span>]])    </div><div class="line">      <span class="keyword">case</span> <span class="type">None</span> =&gt;</div><div class="line">        <span class="comment">// 省略部分源码</span></div><div class="line">        <span class="keyword">val</span> computedValues = rdd.computeOrReadCheckpoint(partition, context)</div><div class="line">        <span class="keyword">val</span> cachedValues = putInBlockManager(key, computedValues, storageLevel, updatedBlocks)</div><div class="line">        <span class="keyword">new</span> <span class="type">InterruptibleIterator</span>(context, cachedValues)</div><div class="line">   &#125;</div><div class="line">   <span class="comment">// 省略部分源码</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>getOrCompute</code>方法会根据 RDD 编号与分区编号计算得到当前分区在存储层对应的块编号，通过存储层提供的数据读取接口提取出块的数据。这时候会有两种可能情况发生：</p>
+<ul>
+<li>数据之前已经存储在存储介质当中，可能是数据本身就在存储介质（如读取 HDFS 中的文件创建得到的 RDD）当中，也可能是 RDD 经过持久化操作并经历了一次计算过程。这时候就能成功提取得到数据并将其返回。</li>
+<li>数据不在存储介质当中，可能是数据已经丢失，或者 RDD 经过持久化操作，但是是当前分区数据是第一次被计算，因此会出现拉取得到数据为 None 的情况。这就意味着我们需要计算分区数据，继续调用 RDD 类 computeOrReadCheckpoint 方法来计算数据，并将计算得到的数据缓存到存储介质中，下次就无需再重复计算。</li>
+<li>如果当前RDD的存储级别为 None，说明为未经持久化的 RDD，需要重新计算 RDD 内的数据，这时候调用 RDD 类的 computeOrReadCheckpoint 方法，该方法也在持久化 RDD 的分区获取数据失败时被调用。</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Compute an RDD partition or read it from a checkpoint if the RDD is checkpointing.</div><div class="line"> */</div><div class="line"><span class="keyword">private</span>[spark] <span class="function"><span class="keyword">def</span> <span class="title">computeOrReadCheckpoint</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (isCheckpointed) firstParent[<span class="type">T</span>].iterator(split, context) <span class="keyword">else</span> compute(split, context)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>computeOrReadCheckpoint</code>方法会检查当前 RDD 是否已经被标记成检查点，如果未被标记成检查点，则执行自身的<code>compute</code>方法来计算分区数据，否则就直接拉取父 RDD 分区内的数据。</p>
+<h2 id="如何正确的获取计算结果"><a href="#如何正确的获取计算结果" class="headerlink" title="如何正确的获取计算结果"></a>如何正确的获取计算结果</h2><p>说了那么多理论，我们回到问题本身，怎么才是获取运算结果的正确方法？你也许会说，既然 transformation() 操作是惰性的，那么在之后马上触发一个 action() 操作就 OK 了。但这也是不正确的，这就涉及到了 Spark 的另外一个重要概念：分布式，在这里就不展开讲了，有兴趣可以参考官方文档：<a href="http://spark.apache.org/docs/latest/programming-guide.html#understanding-closures-a-nameclosureslinka" target="_blank" rel="external">Understanding closures </a>。</p>
+<p>下面是一个正确的实现：</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RddTransformer</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">RDD</span>[<span class="type">Data</span>]): <span class="type">RDD</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">val</span> newDataRdd = data.flatmap(<span class="type">DataTransformer</span>.doTransform).cache()</div><div class="line"></div><div class="line">    <span class="keyword">val</span> exceptionCount = newDataRdd.filter(_.isEmpty).count()</div><div class="line">    <span class="keyword">if</span>(exceptionCount &gt; <span class="number">0</span>) &#123;</div><div class="line">      logger.error(<span class="string">s"There are some illegal data, count: <span class="subst">$&#123;DataTransformer.exceptionCount&#125;</span>"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newDataRdd</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">DataTransformer</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">Data</span>): <span class="type">Option</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">if</span>(data.isIllegal)&#123;</div><div class="line">      <span class="type">None</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      <span class="comment">// do something transform data to new data</span></div><div class="line">      .....</div><div class="line"></div><div class="line">      <span class="type">Some</span>(newData)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spark/" rel="tag">#Spark</a>
+          
+            <a href="/tags/Scala/" rel="tag">#Scala</a>
+          
+            <a href="/tags/函数式编程/" rel="tag">#函数式编程</a>
+          
+            <a href="/tags/惰性计算/" rel="tag">#惰性计算</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" rel="next" title="使用 EdgeMax 路由器自动翻墙">
+                <i class="fa fa-chevron-left"></i> 使用 EdgeMax 路由器自动翻墙
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="articles/2016-10/2016-10-26-spark-is-lazy/"
+     data-title="Spark 的惰性运算"
+     data-content=""
+     data-url="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="articles/2016-10/2016-10-26-spark-is-lazy/"
+           data-title="Spark 的惰性运算" data-url="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/blog-img/avatar.jpg"
+               alt="Allen Zheng" />
+          <p class="site-author-name" itemprop="name">Allen Zheng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/xudongzheng1225" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/allenzheng1225" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ifeve.com/" title="并发编程网" target="_blank">并发编程网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据计算过程"><span class="nav-number">1.</span> <span class="nav-text">数据计算过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#compute-方法"><span class="nav-number">1.1.</span> <span class="nav-text">compute 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iterator方法"><span class="nav-number">1.2.</span> <span class="nav-text">iterator方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何正确的获取计算结果"><span class="nav-number">2.</span> <span class="nav-text">如何正确的获取计算结果</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Zheng</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"alleeen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+</body>
+</html>
