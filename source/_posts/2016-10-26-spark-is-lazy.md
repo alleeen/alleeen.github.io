@@ -63,18 +63,20 @@ counter: Int = 0
 
 ```
 
-显然累加操作并没有被执行，根据 Shell 终端的输出，Spark 似乎只是记录了一下我们的操作，并返回了一个新的 RDD。当对 RDD 进行 transformation() 操作的时候，在 Spark 内部究竟发生了什么？我们先看一个图，典型的 Spark Job 逻辑执行图如下所示：
+显然累加操作并没有被执行，根据 Shell 终端的输出，Spark 似乎只是记录了一下我们的操作，并返回了一个新的 RDD。当对 RDD 进行 transformation() 操作的时候，在 Spark 内部究竟发生了什么？在解释这个问题之前，先来看看 Spark 作业的执行逻辑。
+
+## Spark Job 执行逻辑
 
 ![GeneralLogicalPlan](/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png)
 
-根据上图，Spark Job 经过下面四个步骤可以得到最终执行结果：
+典型的 Spark Job 逻辑执行图如下所示，Spark Job 经过下面四个步骤可以得到最终执行结果：
 
 + 从数据源（可以是本地 file，内存数据结构， HDFS，HBase 等）读取数据创建最初的 RDD。上一段代码中的 parallelize() 相当于 createRDD()。
 + 对 RDD 进行一系列的 transformation() 操作，每一个 transformation() 会产生一个或多个包含不同类型 T 的 RDD[T]。T 可以是 Scala 里面的基本类型或数据结构，不限于 (K, V)。但如果是 (K, V)，K 不能是 Array 等复杂类型（因为难以在复杂类型上定义 partition 函数）。
 + 对最后的 final RDD 进行 action() 操作，每个 partition 计算后产生结果 result。
 + 将 result 回送到 driver 端，进行最后的 f(list[result]) 计算。例子中的 count() 实际包含了action() 和 sum() 两步计算。
 
-由此可知，RDD 中数据的计算是惰性的，一系列 transformation() 操作只有在遇到 action() 操作时候，才会真的去计算 RDD 分区内的数据。你一定很好奇这整个过程是如何实现的，那我们就来看看 RDD 的计算实现。
+Spark 在每次 transformation() 的时候使用了新产生的 RDD 来记录计算逻辑，这样就把作用在 RDD 上的所有计算逻辑串起来形成了一个链条，逻辑执行图上表示的实际上就是是 Spark Job 的计算链。当然某些 transformation() 比较复杂，会包含多个子 transformation()，因而会生成多个 RDD。这就是实际 RDD 个数会比我们想象的多一些的原因。当对 RDD 进行 action() 时，Spark 会调用在计算链条末端最后一个 RDD 的`compute()`方法，这个方法会接收它上一个 RDD 或者数据源的 input records，并执行自身定义的计算逻辑，从而输出结果。一句话总结 Spark 执行 action() 的流程就是：从计算链的最后一个 RDD 开始，依次从上一个 RDD 获取数据并执行计算逻辑，最后输出结果。
 
 ## 数据计算过程
 
