@@ -7,15 +7,22 @@
     </url>
     
     <url>
+        <loc>http://allenn.cn/categories/</loc>
+        <lastmod>2016-12-16T04:19:25.071Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
         <loc>http://allenn.cn/tags/</loc>
-        <lastmod>2016-09-18T14:08:33.288Z</lastmod>
+        <lastmod>2016-12-16T04:19:25.071Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>http://allenn.cn/404.html</loc>
-        <lastmod>2016-09-18T14:08:33.276Z</lastmod>
+        <lastmod>2016-12-16T04:19:25.051Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
