@@ -160,8 +160,10 @@ sudo /etc/init.d/dnsmasq restart
   # shadowsocks
   iptables -t nat -N SHADOWSOCKS
 
-  iptables -t nat -A SHADOWSOCKS -p tcp --dport 33348 -j RETURN
-  iptables -t nat -A SHADOWSOCKS -d 103.192.224.122 -j RETURN
+  iptables -t nat -A SHADOWSOCKS -p tcp --dport 23596 -j RETURN
+  # 23596 是 ss 代理服务器的端口，即远程 shadowsocks 服务器提供服务的端口，如果你有多个 ip 可用,但端口一致，就设置这个
+  iptables -t nat -A SHADOWSOCKS -d 123.456.789.111 -j RETURN
+  # 123.456.789.111 是 ss 代理服务器的 ip, 如果你只有一个 ss服务器的 ip，却能选择不同端口,就设置此条
 
   # ignore internal ip
   iptables -t nat -A SHADOWSOCKS -d 0.0.0.0/8 -j RETURN
