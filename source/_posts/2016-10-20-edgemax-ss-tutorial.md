@@ -48,13 +48,13 @@ shadowsocks-libev 安装好后，会在`/etc/init.d/`中安装一个启动脚本
 
 ```
 {
-"server”:”127.0.0.1″,
+"server":"127.0.0.1",
 "server_port":8388,
-"local”: "0.0.0.0”,
-"local_port”:1080,
-"password”:”barfoo!”,
-"timeout”:60,
-"method”:null
+"local_server": "0.0.0.0",
+"local_port":1080,
+"password":"barfoo!",
+"timeout":60,
+"method":null
 }
 ```
 
@@ -375,4 +375,9 @@ print 'moving generated file to dnsmasg directory'
 shutil.move(outfile, rulesfile)
 
 print 'done!'
+
 ```
+
+## 一键式安装包
+
+捣鼓了一个一键式安装包，脚本归档在 Github 上，需要的朋友可以直接前往下载：[https://github.com/allenn/er-ss](https://github.com/allenn/er-ss)
