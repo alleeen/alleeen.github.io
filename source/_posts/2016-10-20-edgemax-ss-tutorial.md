@@ -50,7 +50,7 @@ shadowsocks-libev 安装好后，会在`/etc/init.d/`中安装一个启动脚本
 {
 "server":"127.0.0.1",
 "server_port":8388,
-"local_server": "0.0.0.0",
+"local_address": "0.0.0.0",
 "local_port":1080,
 "password":"barfoo!",
 "timeout":60,
