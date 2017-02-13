@@ -103,7 +103,7 @@
 
  百度搜索简直是垃圾中的战斗机，在使用百度时，你不得不忍受他的各种广告，各种竞价排名，而且英文资料极少。很多领先的开源作品、解决方案、论文什么的基本都是国外的。这些资料你查不到，你说什么与国际先进技术接轨？总之，没用过 Google 之前，你可能没什么感觉，但">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-edgemas-ss-tutorial/proxy-flow.png">
-<meta property="og:updated_time" content="2017-02-10T14:04:08.772Z">
+<meta property="og:updated_time" content="2017-02-13T14:43:15.621Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 EdgeMax 路由器自动翻墙">
 <meta name="twitter:description" content="作为肉身在墙内的计算机科学技术人员，不能上google实在是一件很遗憾的事情。
@@ -431,7 +431,7 @@
 <h3 id="ChinaDNS"><a href="#ChinaDNS" class="headerlink" title="ChinaDNS"></a>ChinaDNS</h3><p>项目地址：<a href="https://github.com/shadowsocks/ChinaDNS" target="_blank" rel="external">https://github.com/shadowsocks/ChinaDNS</a>，可下载源码在路由器上进行编译，或者直接下载<a href="https://www.onlyos.com/wp-content/uploads/2015/08/chinadns-1.3.2.zip" target="_blank" rel="external">安装包</a>，请注意这个安装包只适用于 EdgeRouter Lite 3，其他 EdgeMax 产品需要自行编译。</p>
 <h3 id="DNSMasq"><a href="#DNSMasq" class="headerlink" title="DNSMasq"></a>DNSMasq</h3><p>EdgeMax 中已经集成了 DNSMasq 无需另外安装。</p>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="shadowsocks-libev-1"><a href="#shadowsocks-libev-1" class="headerlink" title="shadowsocks-libev"></a>shadowsocks-libev</h3><p>shadowsocks-libev 安装好后，会在<code>/etc/init.d/</code>中安装一个启动脚本：<code>shadowsock-libev</code>，在路由器启动时会默认启动<code>ss-redir</code>服务，如果需要重启 Shadowsocks，可以使用命令：<code>sudo /etc/init.d/shadowsock-libev [start|stop|restart]</code>。Shadowsocks 的配置在文件<code>/etc/shadowsocks-libev/config.json</code>中，在这个文件中配置 Shadowsocks 需要链接的服务器信息：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;server&quot;:&quot;127.0.0.1&quot;,</div><div class="line">&quot;server_port&quot;:8388,</div><div class="line">&quot;local_server&quot;: &quot;0.0.0.0&quot;,</div><div class="line">&quot;local_port&quot;:1080,</div><div class="line">&quot;password&quot;:&quot;barfoo!&quot;,</div><div class="line">&quot;timeout&quot;:60,</div><div class="line">&quot;method&quot;:null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;</div><div class="line">&quot;server&quot;:&quot;127.0.0.1&quot;,</div><div class="line">&quot;server_port&quot;:8388,</div><div class="line">&quot;local_address&quot;: &quot;0.0.0.0&quot;,</div><div class="line">&quot;local_port&quot;:1080,</div><div class="line">&quot;password&quot;:&quot;barfoo!&quot;,</div><div class="line">&quot;timeout&quot;:60,</div><div class="line">&quot;method&quot;:null</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>配置完成后，<code>sudo /etc/init.d/shadowsock-libev restart</code>，这样 Shadowsocks 就在你的路由器上运行了。</p>
 <h3 id="ChinaDNS-1"><a href="#ChinaDNS-1" class="headerlink" title="ChinaDNS"></a>ChinaDNS</h3><p>使用源码编译后，会生成一个二进制文件：chinadns，可以将这个文件复制到<code>/usr/bin</code>中方便后面使用。ChinaDNS 需要一个文件来标识哪些 IP 属于国内，这个文件可以从<a href="http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest" target="_blank" rel="external">这里下载</a>：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 下载 ip 列表到： /tmp/chnroute.txt</div><div class="line">curl &apos;http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest&apos; | grep ipv4 | grep CN | awk -F| ‘&#123; printf(“%s/%dn”, $4, 32-log($5)/log(2)) &#125;’ &gt; /tmp/chnroute.txt</div></pre></td></tr></table></figure>
