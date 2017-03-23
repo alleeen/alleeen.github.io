@@ -15,7 +15,7 @@ tags: [Spark,Scala,大数据]
 
 - Jobs 是提交到调度器（scheduler）的顶层工作项（the top-level work items）。举个例子，当用户调用诸如`count()`这样的 action 方法时，Spark 会通过`submitJob`方法将这个 Job 提交到调度器。每个 Job 可能需要执行多个 Stage 来构建它的过程数据。
 
-- 
+- Stages 是 Job 中计算中间结果的任务集，其中每个任务会在 RDD 的每个分区上运行相同的函数。Stages 是以 RDD 上的 transform 是否需要进行 Shuffle 来进行划分的，
 
 *
 *  - Jobs (represented by [[ActiveJob]]) are the top-level work items submitted to the scheduler.
