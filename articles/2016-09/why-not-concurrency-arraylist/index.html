@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="Allen's Blog">
 <meta property="og:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？
 答：我认为在">
-<meta property="og:updated_time" content="2017-03-23T15:09:13.603Z">
+<meta property="og:updated_time" content="2017-03-23T15:13:44.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么java.util.concurrent 包里没有并发的ArrayList实现？">
 <meta name="twitter:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？
@@ -377,7 +377,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/articles/2016-09/why-not-concurrency-arraylist/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="articles/2016-09/why-not-concurrency-arraylist/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2016-09/why-not-concurrency-arraylist/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -489,25 +489,6 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="articles/2016-09/why-not-concurrency-arraylist/"
-     data-title="为什么java.util.concurrent 包里没有并发的ArrayList实现？"
-     data-content=""
-     data-url="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -519,8 +500,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="articles/2016-09/why-not-concurrency-arraylist/"
-           data-title="为什么java.util.concurrent 包里没有并发的ArrayList实现？" data-url="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -771,36 +755,38 @@
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"alleeen"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
   
-    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2016-09/why-not-concurrency-arraylist/';
+
+      var disqus_title = "为什么java.util.concurrent 包里没有并发的ArrayList实现？";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
       
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
   
-
-
-
 
 
 

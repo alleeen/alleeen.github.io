@@ -98,7 +98,7 @@
 <meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
 
 除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
-<meta property="og:updated_time" content="2017-03-23T15:09:13.603Z">
+<meta property="og:updated_time" content="2017-03-23T15:13:44.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
 <meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
@@ -380,7 +380,7 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -509,25 +509,6 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"
-     data-title="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法"
-     data-content=""
-     data-url="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
-  <div class="ds-share-inline">
-    <ul  class="ds-share-icons-16">
-
-      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
-      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
-      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
-      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
-      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-
-    </ul>
-    <div class="ds-share-icons-more">
-    </div>
-  </div>
-</div>
-      
     </div>
   </div>
 
@@ -539,8 +520,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/"
-           data-title="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法" data-url="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -816,36 +800,38 @@
 
   
 
-  
-    
-  
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"alleeen"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
 
   
-    
+
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/';
+
+      var disqus_title = "在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
       
-      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
   
-
-
-
 
 
 
