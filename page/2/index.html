@@ -29,6 +29,9 @@
 
 
 
+
+
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
@@ -102,7 +105,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -135,11 +138,13 @@
   
 
 
+
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
           m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
   ga('create', 'UA-36907890-1', 'auto');
   ga('send', 'pageview');
 </script>
@@ -162,6 +167,8 @@
 
 
 
+
+
   
   
     
@@ -173,27 +180,29 @@
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Allen's Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Allen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
   </div>
-    
-      <h1 class="site-subtitle" itemprop="description"></h1>
-    
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -248,7 +257,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
             
-            Sitemap
+            站点地图
           </a>
         </li>
       
@@ -291,20 +300,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -333,7 +339,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-24T16:21:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-24T16:21:39+08:00">
                 2016-08-24
               </time>
             
@@ -382,8 +388,8 @@
           
 
           
-
           
+
           
 
           
@@ -430,6 +436,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -447,20 +455,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -489,7 +494,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-19T22:21:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-19T22:21:39+08:00">
                 2016-08-19
               </time>
             
@@ -538,8 +543,8 @@
           
 
           
-
           
+
           
 
           
@@ -585,6 +590,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -602,20 +609,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -644,7 +648,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-14T23:21:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-14T23:21:39+08:00">
                 2016-08-14
               </time>
             
@@ -693,8 +697,8 @@
           
 
           
-
           
+
           
 
           
@@ -749,6 +753,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -766,20 +772,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -808,7 +811,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-12T16:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-12T16:50:39+08:00">
                 2016-08-12
               </time>
             
@@ -857,8 +860,8 @@
           
 
           
-
           
+
           
 
           
@@ -906,6 +909,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -923,20 +928,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -965,7 +967,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-10T16:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-10T16:50:39+08:00">
                 2016-08-10
               </time>
             
@@ -1014,8 +1016,8 @@
           
 
           
-
           
+
           
 
           
@@ -1061,6 +1063,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1078,20 +1082,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -1120,7 +1121,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-17T13:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-17T13:50:39+08:00">
                 2015-10-17
               </time>
             
@@ -1169,8 +1170,8 @@
           
 
           
-
           
+
           
 
           
@@ -1217,6 +1218,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1234,20 +1237,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -1276,7 +1276,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-14T16:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-14T16:50:39+08:00">
                 2015-10-14
               </time>
             
@@ -1325,8 +1325,8 @@
           
 
           
-
           
+
           
 
           
@@ -1375,6 +1375,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1392,20 +1394,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -1434,7 +1433,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-14T13:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-14T13:50:39+08:00">
                 2015-10-14
               </time>
             
@@ -1483,8 +1482,8 @@
           
 
           
-
           
+
           
 
           
@@ -1533,6 +1532,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1550,20 +1551,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -1592,7 +1590,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-09-30T16:21:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-09-30T16:21:39+08:00">
                 2013-09-30
               </time>
             
@@ -1641,8 +1639,8 @@
           
 
           
-
           
+
           
 
           
@@ -1688,6 +1686,8 @@
       
 
       
+
+      
       
         <div class="post-eof"></div>
       
@@ -1705,20 +1705,17 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2010-06/2010-06-20-graduate/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Allen Zheng">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Allen's Blog">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Allen's Blog" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
 
     
       <header class="post-header">
@@ -1747,7 +1744,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2010-06-20T13:50:39+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2010-06-20T13:50:39+08:00">
                 2010-06-20
               </time>
             
@@ -1796,8 +1793,8 @@
           
 
           
-
           
+
           
 
           
@@ -1840,6 +1837,8 @@
 
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1893,7 +1892,9 @@
                src="/assets/images/blog-img/avatar.jpg"
                alt="Allen Zheng" />
           <p class="site-author-name" itemprop="name">Allen Zheng</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
         
@@ -1995,6 +1996,8 @@
 
       
 
+      
+
     </div>
   </aside>
 
@@ -2034,9 +2037,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
   </div>
 
   
@@ -2143,6 +2150,7 @@
 
 
 
+
   
   
 
@@ -2169,6 +2177,8 @@
 
   
 
+
+  
 
 </body>
 </html>
