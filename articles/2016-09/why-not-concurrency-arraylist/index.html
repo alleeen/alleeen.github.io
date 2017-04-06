@@ -91,19 +91,17 @@
 
 
 
-<meta name="description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？
-答：我认为在">
+<meta name="description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？ 答：我认为在">
+<meta name="keywords" content="Java,多线程,并发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="为什么java.util.concurrent 包里没有并发的ArrayList实现？">
 <meta property="og:url" content="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？
-答：我认为在">
-<meta property="og:updated_time" content="2017-04-03T03:45:09.993Z">
+<meta property="og:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？ 答：我认为在">
+<meta property="og:updated_time" content="2017-04-06T15:59:31.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么java.util.concurrent 包里没有并发的ArrayList实现？">
-<meta name="twitter:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？
-答：我认为在">
+<meta name="twitter:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？ 答：我认为在">
 
 
 
@@ -462,8 +460,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2016-09/play-trick-with-powermock/" rel="next" title="玩花招的PowerMock">
-                <i class="fa fa-chevron-left"></i> 玩花招的PowerMock
+              <a href="/articles/2016-09/how-to-break-loop-scala/" rel="next" title="由 Java 到 Scala：如何优雅的跳出循环">
+                <i class="fa fa-chevron-left"></i> 由 Java 到 Scala：如何优雅的跳出循环
               </a>
             
           </div>
@@ -472,8 +470,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2016-09/how-to-break-loop-scala/" rel="prev" title="由 Java 到 Scala：如何优雅的跳出循环">
-                由 Java 到 Scala：如何优雅的跳出循环 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2016-09/play-trick-with-powermock/" rel="prev" title="玩花招的PowerMock">
+                玩花招的PowerMock <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -548,7 +546,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -557,7 +555,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

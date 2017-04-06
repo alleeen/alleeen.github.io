@@ -91,22 +91,17 @@
 
 
 
-<meta name="description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta name="description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta name="keywords" content="Java,单元测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
 <meta property="og:url" content="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/index.html">
 <meta property="og:site_name" content="Allen's Blog">
-<meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
-<meta property="og:updated_time" content="2017-04-03T03:45:09.989Z">
+<meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta property="og:updated_time" content="2017-04-06T15:59:31.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
-<meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：
-
-除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
+<meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
 
 
 
@@ -482,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2013-09/mac-install-jdk_1_6/" rel="next" title="Mac OS X 安装 JDK备忘">
-                <i class="fa fa-chevron-left"></i> Mac OS X 安装 JDK备忘
+              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="next" title="Mock 与 Stub">
+                <i class="fa fa-chevron-left"></i> Mock 与 Stub
               </a>
             
           </div>
@@ -492,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="prev" title="Mock 与 Stub">
-                Mock 与 Stub <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2013-09/mac-install-jdk_1_6/" rel="prev" title="Mac OS X 安装 JDK备忘">
+                Mac OS X 安装 JDK备忘 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +572,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -586,7 +581,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
