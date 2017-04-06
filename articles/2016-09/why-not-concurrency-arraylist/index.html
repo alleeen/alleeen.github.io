@@ -98,7 +98,7 @@
 <meta property="og:url" content="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/index.html">
 <meta property="og:site_name" content="Allen's Blog">
 <meta property="og:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？ 答：我认为在">
-<meta property="og:updated_time" content="2017-04-06T15:59:31.962Z">
+<meta property="og:updated_time" content="2017-04-06T16:00:05.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么java.util.concurrent 包里没有并发的ArrayList实现？">
 <meta name="twitter:description" content="问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？ 答：我认为在">
@@ -375,6 +375,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2016-09/why-not-concurrency-arraylist/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2016-09/why-not-concurrency-arraylist/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -498,7 +508,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -760,36 +775,41 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2016-09/why-not-concurrency-arraylist/';
+
+      var disqus_title = "为什么java.util.concurrent 包里没有并发的ArrayList实现？";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129802"></script>
-      <!-- UY END -->
-    
-  
 
 
-
-
-
-  
 
 
 
