@@ -1,0 +1,919 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Ubnt,Wi-Fi,无线覆盖," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/blog-img/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下">
+<meta name="keywords" content="Ubnt,Wi-Fi,无线覆盖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubnt UniFi 产品开箱">
+<meta property="og:url" content="http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/index.html">
+<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:description" content="家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/huxingtu.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2384.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2378.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2380.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2376.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2385.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2401.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2402.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2403.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2405.JPG">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/setup-timezoom.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/ap-online.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/ap-online.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/login-page.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/home-page.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2415.JPG">
+<meta property="og:updated_time" content="2017-05-01T08:43:12.358Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubnt UniFi 产品开箱">
+<meta name="twitter:description" content="家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下">
+<meta name="twitter:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/huxingtu.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '604590',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/"/>
+
+
+
+
+
+  <title> Ubnt UniFi 产品开箱 | Allen's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-36907890-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Allen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ubnt UniFi 产品开箱
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-30T16:21:39+08:00">
+                2017-04-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络技术/" itemprop="url" rel="index">
+                    <span itemprop="name">网络技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2017-04/2017-04-30-new-home-network-structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2017-04/2017-04-30-new-home-network-structure/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下不舒服。于是，我就打算把家里的无线网络改造一下。</p>
+<a id="more"></a>
+<h1 id="一些背景和需求"><a href="#一些背景和需求" class="headerlink" title="一些背景和需求"></a>一些背景和需求</h1><p>先放一下家里的户型图，家虽然不算很大，正常来说，这样的户型靠一个普通的无线路由器就能完成全屋的覆盖。但是这套房子有点特殊，房间的墙不是普通的那种空心砖，全是钢筋混凝土浇筑的墙，不管路由器放在哪个房间，总有地方覆盖不到。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/huxingtu.png" alt="户型图"></p>
+<p>鉴于这种原因，就只能采用有线路由器加多个无线 AP 的网络结构，下面是我家网络原有的拓扑图。客厅和弱电箱之间，由于只拉了一条网线，而且我们家电视用的是电信的IPTV，所以只能通过划分不同的 VLAN 来达到一条网线跑两路数据的要求。其实大的网络结构上并没有什么问题，就是两个无线 AP 之间的协同有点让人闹心，所以这次网络改造的主要重点就是解决多个无线 AP 之间的协同问题。</p>
+<h1 id="器材选择"><a href="#器材选择" class="headerlink" title="器材选择"></a>器材选择</h1><p>在这之前其实做过很多功课，传统的解决方案一般都是瘦 AP 加上 AC 控制器，但是这种方案并不适合于我。首先，市面上并没有太多面向家庭或者小企业的廉价 AC + 瘦 AP 解决方案，向华为、思科这种牌子，一个 AP 就要 2K 左右，AC 控制器更是天价；其次，弱电箱太小了，里面已经塞了一台光猫，一台路由器和一个交换机了，实在是再也塞不下一个 AC 控制器了。</p>
+<p>前段时间 Ubnt 面向家用市场推出了一个 Wi-Fi Mesh 解决方案：Amplifi Wi-Fi。路由器和扩展点之间的连接走的是无线，省去了拉网线的烦恼，整个产品整体颜值也高，而且由于是全套解决方案，扩展点之间的协作就更加没有问题了。对于这个产品，我曾经有种草了很久，但是最近看到各路评测的开箱，发现这个产品根本不支持 VLAN 这就没法满足我看 IPTV 的需求了，而且扩展点和主路由之间的无线通讯肯定没有有线来的快，所以只能 PASS 这个产品。</p>
+<p>后来我把目光放到了 Ubnt 的 UniFi 产品上，UniFi 的 AP 有个特点，就是可以用软 AC 进行控制，而且不要求 AC 实时在线。使用软 AC 配置好网络后，关闭 AC，整个网络依然可以正常工作，这样就省去了需要硬 AC的烦恼。而且现在家里用的路由器也是 Ubnt 的产品，本着凑一套的思路，我最终选择了 Ubnt UniFi。</p>
+<h1 id="开箱"><a href="#开箱" class="headerlink" title="开箱"></a>开箱</h1><p>通过万能的淘宝购买了三件 Ubnt 产品：UBNT US-8-60W 千兆 PoE 交换机、UBNT UAP-AC LITE 吸顶 PoE 无线 AP 和 UBNT UAP-AC-IW 入墙面板无线 AP，整套价格 2K 出头。好了，下面正式进入开箱环节。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2384.JPG" alt="开箱"></p>
+<p>第一个出场的是交换机，因为两个 AP 都需要 PoE 供电，所以一个具备 PoE 输出功能的交换机不可或缺。产品的包装盒十分简洁，没有什么多余的东西，盒子里面的附件除了机器本体外，还有一个 220V 的电源和一个简要的安装说明。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2378.JPG" alt="UBNT US-8-60W 千兆PoE网管型交换机"></p>
+<p>将交换机装入弱电箱，接上电源和路由器之间的网线。请忽略杂乱的布线，开发商装的弱电箱不是怎么给力，所以也就懒得去折腾了。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2380.JPG" alt="弱电箱"></p>
+<p>接下来是 UBNT UAP-AC LITE，产品包装同样很简洁，飞碟型的造型也很漂亮。家用的话买 LITE 也就足够了，尺寸比较小巧一点。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2376.JPG" alt="吸顶天线"></p>
+<p>安装后的效果，别问我为什么吸顶天线不吸顶，因为天花板上没有预留网线，就那么简单。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2385.JPG" alt="吸顶天线安装"></p>
+<p>最后一个出场的就是 UBNT UAP-AC-IW，它是 Ubnt 的一款新产品，以前 Ubnt 也有一款入墙式无线 AP，但是那货不支持国内的 86 盒，所以没法用。这个面板有三部分组成，安装底座、AP 本体和外盖板。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2401.JPG" alt="面板外包装"></p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2402.JPG" alt="面板"></p>
+<p>先将面板底座装到 86 盒上</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2403.JPG" alt="面板底座"></p>
+<p>接好线，盖上面板后的效果</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2405.JPG" alt="面板安装完成"></p>
+<p>一切安装就绪后，就可以用 UniFi Controller 来配置网络了。</p>
+<h1 id="配置网络"><a href="#配置网络" class="headerlink" title="配置网络"></a>配置网络</h1><p>先到 Ubnt 官方网站将 UniFi Controller 软件下载好，并在电脑上安装。安装后，启动控制器，就可以开始配置网络了。刚开始需要配置时区信息。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/setup-timezoom.png" alt="配置时区"></p>
+<p>然后下一页就能看见设备上线了。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/ap-online.png" alt="选择设备"></p>
+<p>设置好 Wi-Fi 信息</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/ap-online.png" alt="设置Wi-Fi"></p>
+<p>接下来设置好软件登陆信息就可以进入软件主界面了</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/login-page.png" alt="主页"></p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/home-page.png" alt="主页"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>整套产品安装部署过程还是比较简单的，通过 UniFi Controller 可以集中管理网络中的 UniFi 设备，包括 AP 和交换机，省去了单独登陆各个设备单独进行配置的麻烦。两个 AP 在覆盖方面的表现也非常棒，房间中再也没有信号死角，而且设备在房间中移动也再也没有之前那种网络闪断的情况，这让我非常满意。</p>
+<p><img src="/assets/images/2017-04-30-new-home-network-structure/IMG_2415.JPG" alt="覆盖情况"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>生活不止眼前的苟且,还有那片海</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/assets/images/weixin.png" alt="Allen Zheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/assets/images/alipay.png" alt="Allen Zheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Ubnt/" rel="tag"># Ubnt</a>
+          
+            <a href="/tags/Wi-Fi/" rel="tag"># Wi-Fi</a>
+          
+            <a href="/tags/无线覆盖/" rel="tag"># 无线覆盖</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/" rel="prev" title="Fetch Size 与 JDBC 内存管理">
+                Fetch Size 与 JDBC 内存管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/blog-img/avatar.jpg"
+               alt="Allen Zheng" />
+          <p class="site-author-name" itemprop="name">Allen Zheng</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/xudongzheng1225" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/allenzheng1225" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ifeve.com/" title="并发编程网" target="_blank">并发编程网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一些背景和需求"><span class="nav-number">1.</span> <span class="nav-text">一些背景和需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#器材选择"><span class="nav-number">2.</span> <span class="nav-text">器材选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开箱"><span class="nav-number">3.</span> <span class="nav-text">开箱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置网络"><span class="nav-number">4.</span> <span class="nav-text">配置网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Zheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2017-04/2017-04-30-new-home-network-structure/';
+
+      var disqus_title = "Ubnt UniFi 产品开箱";
+
+
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+  
+
+</body>
+</html>
