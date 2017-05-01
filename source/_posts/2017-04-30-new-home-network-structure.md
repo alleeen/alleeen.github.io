@@ -32,37 +32,37 @@ tags: [Ubnt,Wi-Fi,无线覆盖]
 
 通过万能的淘宝购买了三件 Ubnt 产品：UBNT US-8-60W 千兆 PoE 交换机、UBNT UAP-AC LITE 吸顶 PoE 无线 AP 和 UBNT UAP-AC-IW 入墙面板无线 AP，整套价格 2K 出头。好了，下面正式进入开箱环节。
 
-![开箱](/assets/images/2017-04-30-new-home-network-structure/IMG_2384.JPG)
+![开箱](/assets/images/2017-04-30-new-home-network-structure/IMG_2384.jpg)
 
 第一个出场的是交换机，因为两个 AP 都需要 PoE 供电，所以一个具备 PoE 输出功能的交换机不可或缺。产品的包装盒十分简洁，没有什么多余的东西，盒子里面的附件除了机器本体外，还有一个 220V 的电源和一个简要的安装说明。
 
-![UBNT US-8-60W 千兆PoE网管型交换机](/assets/images/2017-04-30-new-home-network-structure/IMG_2378.JPG)
+![UBNT US-8-60W 千兆PoE网管型交换机](/assets/images/2017-04-30-new-home-network-structure/IMG_2378.jpg)
 
 将交换机装入弱电箱，接上电源和路由器之间的网线。请忽略杂乱的布线，开发商装的弱电箱不是怎么给力，所以也就懒得去折腾了。
 
-![弱电箱](/assets/images/2017-04-30-new-home-network-structure/IMG_2380.JPG)
+![弱电箱](/assets/images/2017-04-30-new-home-network-structure/IMG_2380.jpg)
 
 接下来是 UBNT UAP-AC LITE，产品包装同样很简洁，飞碟型的造型也很漂亮。家用的话买 LITE 也就足够了，尺寸比较小巧一点。
 
-![吸顶天线](/assets/images/2017-04-30-new-home-network-structure/IMG_2376.JPG)
+![吸顶天线](/assets/images/2017-04-30-new-home-network-structure/IMG_2376.jpg)
 
 安装后的效果，别问我为什么吸顶天线不吸顶，因为天花板上没有预留网线，就那么简单。
 
-![吸顶天线安装](/assets/images/2017-04-30-new-home-network-structure/IMG_2385.JPG)
+![吸顶天线安装](/assets/images/2017-04-30-new-home-network-structure/IMG_2385.jpg)
 
 最后一个出场的就是 UBNT UAP-AC-IW，它是 Ubnt 的一款新产品，以前 Ubnt 也有一款入墙式无线 AP，但是那货不支持国内的 86 盒，所以没法用。这个面板有三部分组成，安装底座、AP 本体和外盖板。
 
-![面板外包装](/assets/images/2017-04-30-new-home-network-structure/IMG_2401.JPG)
+![面板外包装](/assets/images/2017-04-30-new-home-network-structure/IMG_2401.jpg)
 
-![面板](/assets/images/2017-04-30-new-home-network-structure/IMG_2402.JPG)
+![面板](/assets/images/2017-04-30-new-home-network-structure/IMG_2402.jpg)
 
 先将面板底座装到 86 盒上
 
-![面板底座](/assets/images/2017-04-30-new-home-network-structure/IMG_2403.JPG)
+![面板底座](/assets/images/2017-04-30-new-home-network-structure/IMG_2403.jpg)
 
 接好线，盖上面板后的效果
 
-![面板安装完成](/assets/images/2017-04-30-new-home-network-structure/IMG_2405.JPG)
+![面板安装完成](/assets/images/2017-04-30-new-home-network-structure/IMG_2405.jpg)
 
 一切安装就绪后，就可以用 UniFi Controller 来配置网络了。
 
@@ -90,4 +90,4 @@ tags: [Ubnt,Wi-Fi,无线覆盖]
 
 整套产品安装部署过程还是比较简单的，通过 UniFi Controller 可以集中管理网络中的 UniFi 设备，包括 AP 和交换机，省去了单独登陆各个设备单独进行配置的麻烦。两个 AP 在覆盖方面的表现也非常棒，房间中再也没有信号死角，而且设备在房间中移动也再也没有之前那种网络闪断的情况，这让我非常满意。
 
-![覆盖情况](/assets/images/2017-04-30-new-home-network-structure/IMG_2415.JPG)
+![覆盖情况](/assets/images/2017-04-30-new-home-network-structure/IMG_2415.jpg)
