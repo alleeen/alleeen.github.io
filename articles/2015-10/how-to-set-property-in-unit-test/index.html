@@ -96,9 +96,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何在单元测试中设置系统环境变量">
 <meta property="og:url" content="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/index.html">
-<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
-<meta property="og:updated_time" content="2017-05-01T15:14:47.325Z">
+<meta property="og:updated_time" content="2017-05-08T16:05:09.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在单元测试中设置系统环境变量">
 <meta name="twitter:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
@@ -375,6 +375,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2015-10/how-to-set-property-in-unit-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2015-10/how-to-set-property-in-unit-test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -462,8 +472,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" rel="next" title="CompletionService小技巧">
-                <i class="fa fa-chevron-left"></i> CompletionService小技巧
+              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="next" title="Mock 与 Stub">
+                <i class="fa fa-chevron-left"></i> Mock 与 Stub
               </a>
             
           </div>
@@ -472,8 +482,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="prev" title="Mock 与 Stub">
-                Mock 与 Stub <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" rel="prev" title="CompletionService小技巧">
+                CompletionService小技巧 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -489,6 +499,44 @@
 
     <div class="post-spread">
       
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -500,7 +548,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -762,36 +815,41 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2015-10/how-to-set-property-in-unit-test/';
+
+      var disqus_title = "如何在单元测试中设置系统环境变量";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129802"></script>
-      <!-- UY END -->
-    
-  
 
 
-
-
-
-  
 
 
 

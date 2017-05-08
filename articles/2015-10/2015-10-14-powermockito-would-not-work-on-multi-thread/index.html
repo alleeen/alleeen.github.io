@@ -96,9 +96,9 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
 <meta property="og:url" content="http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/index.html">
-<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
-<meta property="og:updated_time" content="2017-05-01T15:14:47.325Z">
+<meta property="og:updated_time" content="2017-05-08T16:05:09.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
 <meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
@@ -375,6 +375,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -477,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="next" title="Mock 与 Stub">
-                <i class="fa fa-chevron-left"></i> Mock 与 Stub
+              <a href="/articles/2013-09/mac-install-jdk_1_6/" rel="next" title="Mac OS X 安装 JDK备忘">
+                <i class="fa fa-chevron-left"></i> Mac OS X 安装 JDK备忘
               </a>
             
           </div>
@@ -487,8 +497,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2013-09/mac-install-jdk_1_6/" rel="prev" title="Mac OS X 安装 JDK备忘">
-                Mac OS X 安装 JDK备忘 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="prev" title="Mock 与 Stub">
+                Mock 与 Stub <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -504,6 +514,44 @@
 
     <div class="post-spread">
       
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -515,7 +563,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -802,36 +855,41 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/';
+
+      var disqus_title = "在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129802"></script>
-      <!-- UY END -->
-    
-  
 
 
-
-
-
-  
 
 
 

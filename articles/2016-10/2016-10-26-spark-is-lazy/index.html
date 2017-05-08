@@ -96,10 +96,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark 的惰性运算">
 <meta property="og:url" content="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/index.html">
-<meta property="og:site_name" content="Allen's Blog">
+<meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="今天在检视项目代码的时候，无意中发现了下面一段代码： class RddTransformer&amp;#123;  def doTransform(data: RDD[Data]): RDD[NewData]=&amp;#123;    val newDataRdd = data.flatmap(DataTransformer.doTransform)    if(DataTransformer.excepti">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png">
-<meta property="og:updated_time" content="2017-05-01T15:14:47.325Z">
+<meta property="og:updated_time" content="2017-05-08T16:05:09.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark 的惰性运算">
 <meta name="twitter:description" content="今天在检视项目代码的时候，无意中发现了下面一段代码： class RddTransformer&amp;#123;  def doTransform(data: RDD[Data]): RDD[NewData]=&amp;#123;    val newDataRdd = data.flatmap(DataTransformer.doTransform)    if(DataTransformer.excepti">
@@ -388,6 +388,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2016-10/2016-10-26-spark-is-lazy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2016-10/2016-10-26-spark-is-lazy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -419,7 +429,7 @@
 <p>在 Spark 中，所有的 transformation() 类型操作都是延迟计算的，Spark 只是记录了将要对数据集进行的操作。只有需要数据集将数据返回到 Driver 程序时（即触发 Action 类型操作），所有已记录的 transformation() 才会执行。</p>
 </blockquote>
 <p>回到上面的代码，由于针对<code>RDD[Data]</code>的<code>flatmap</code>操作属于 transformation() 类型操作，所以<code>val newDataRdd = data.flatmap(DataTransformer.doTransform)</code>这段代码只是记录了一下对 RDD 的操作，并没有真正的去执行<code>DataTransformer.doTransform</code>方法中的代码。我们可以尝试在 Spark Shell 中实验一下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">scala&gt; var counter = 0</div><div class="line">counter: Int = 0</div><div class="line"></div><div class="line">scala&gt; var rdd = sc.parallelize(Seq(1,2,3,4,5,6)).map(x =&gt; counter += x)</div><div class="line">rdd: spark.RDD[Int] = spark.MappedRDD@2ee9b6e3</div><div class="line"></div><div class="line">scala&gt; counter</div><div class="line">counter: Int = 0</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">scala&gt;</span> var counter = 0</div><div class="line">counter: Int = 0</div><div class="line"><span class="meta"></span></div><div class="line">scala&gt; var rdd = sc.parallelize(Seq(1,2,3,4,5,6)).map(x =&gt; counter += x)</div><div class="line">rdd: spark.RDD[Int] = spark.MappedRDD@2ee9b6e3</div><div class="line"><span class="meta"></span></div><div class="line">scala&gt; counter</div><div class="line">counter: Int = 0</div></pre></td></tr></table></figure>
 <p>显然累加操作并没有被执行，根据 Shell 终端的输出，Spark 似乎只是记录了一下我们的操作，并返回了一个新的 RDD。当对 RDD 进行 transformation() 操作的时候，在 Spark 内部究竟发生了什么？在解释这个问题之前，先来看看 Spark 作业的执行逻辑。</p>
 <h2 id="Spark-Job-执行逻辑"><a href="#Spark-Job-执行逻辑" class="headerlink" title="Spark Job 执行逻辑"></a>Spark Job 执行逻辑</h2><p><img src="/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png" alt="GeneralLogicalPlan"></p>
 <p>典型的 Spark Job 逻辑执行图如下所示，Spark Job 经过下面四个步骤可以得到最终执行结果：</p>
@@ -523,8 +533,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/" rel="next" title="Fetch Size 与 JDBC 内存管理">
-                <i class="fa fa-chevron-left"></i> Fetch Size 与 JDBC 内存管理
+              <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" rel="next" title="使用 EdgeMax 路由器自动翻墙">
+                <i class="fa fa-chevron-left"></i> 使用 EdgeMax 路由器自动翻墙
               </a>
             
           </div>
@@ -533,8 +543,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/articles/2016-10/2016-10-20-edgemax-ss-tutorial/" rel="prev" title="使用 EdgeMax 路由器自动翻墙">
-                使用 EdgeMax 路由器自动翻墙 <i class="fa fa-chevron-right"></i>
+              <a href="/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/" rel="prev" title="Fetch Size 与 JDBC 内存管理">
+                Fetch Size 与 JDBC 内存管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,6 +560,44 @@
 
     <div class="post-spread">
       
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -561,7 +609,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="uyan_frame"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -848,36 +901,41 @@
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'alleeen';
+      var disqus_identifier = 'articles/2016-10/2016-10-26-spark-is-lazy/';
+
+      var disqus_title = "Spark 的惰性运算";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
 
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
 
-
-
-
+    </script>
   
 
 
 
 
 
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2129802"></script>
-      <!-- UY END -->
-    
-  
 
 
-
-
-
-  
 
 
 
