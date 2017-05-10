@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-8.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-9.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2016-10-20-learn-gfw/learn-gfw-10.png">
-<meta property="og:updated_time" content="2017-05-08T16:05:09.048Z">
+<meta property="og:updated_time" content="2017-05-10T15:10:54.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="全面学习GFW">
 <meta name="twitter:description" content="摘自：翻墙路由器的实现与原理 注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。 GFW会是一个长期的存在。要学会与之共存，必须先了解GFW是什么。做为局外人，学习GFW有六个角度。渐进的来看分别是： 首先我们学习到的是WHAT和WHEN。比如说，你经常听到人的议论是“昨天”，“github”被封了。其中的昨天就是WHEN，github就是WHAT。这是学习GFW">
@@ -125,7 +125,7 @@
     fancybox: true,
     motion: true,
     duoshuo: {
-      userId: '604590',
+      userId: 'undefined',
       author: '博主'
     },
     algolia: {
@@ -391,8 +391,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/articles/2016-10/2016-10-20-learn-gfw/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="articles/2016-10/2016-10-20-learn-gfw/" itemprop="commentCount"></span>
+                <a class="cloud-tie-join-count" href="/articles/2016-10/2016-10-20-learn-gfw/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -636,12 +636,7 @@
           
   <div class="comments" id="comments">
     
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
+      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
     
   </div>
 
@@ -928,37 +923,27 @@
 
   
 
-    <script type="text/javascript">
-      var disqus_shortname = 'alleeen';
-      var disqus_identifier = 'articles/2016-10/2016-10-20-learn-gfw/';
-
-      var disqus_title = "全面学习GFW";
 
 
-      function run_disqus_script(disqus_script) {
-        var dsq = document.createElement('script');
-        dsq.type = 'text/javascript';
-        dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      }
 
-      run_disqus_script('count.js');
+	
 
-      
-        var disqus_config = function () {
-            this.page.url = disqus_url;
-            this.page.identifier = disqus_identifier;
-            this.page.title = disqus_title;
-        };
-        run_disqus_script('embed.js');
-      
 
-    </script>
+
+
+
   
-
-
-
+    
+    <script>
+      var cloudTieConfig = {
+        url: document.location.href, 
+        sourceId: "",
+        productKey: "a3d4b8344d2048498a701e23a83fa76f",
+        target: "cloud-tie-wrapper"
+      };
+    </script>
+    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
+  
 
 
 
