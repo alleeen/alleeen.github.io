@@ -76,7 +76,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Java,单元测试," />
+  <meta name="keywords" content="Java,JDK 源码,Collection," />
 
 
 
@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
-<meta name="keywords" content="Java,单元测试">
+<meta name="description" content="在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。 JDK的注释中说  返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。  用人话说  如果一个数是0, 则返回0； 如果是负数, 则返回 -214">
+<meta name="keywords" content="Java,JDK 源码,Collection">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何在单元测试中设置系统环境变量">
-<meta property="og:url" content="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/index.html">
+<meta property="og:title" content="Integer的highestOneBit方法源码解析">
+<meta property="og:url" content="http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
-<meta property="og:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
+<meta property="og:description" content="在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。 JDK的注释中说  返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。  用人话说  如果一个数是0, 则返回0； 如果是负数, 则返回 -214">
 <meta property="og:updated_time" content="2017-05-25T15:16:19.825Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何在单元测试中设置系统环境变量">
-<meta name="twitter:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
+<meta name="twitter:title" content="Integer的highestOneBit方法源码解析">
+<meta name="twitter:description" content="在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。 JDK的注释中说  返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。  用人话说  如果一个数是0, 则返回0； 如果是负数, 则返回 -214">
 
 
 
@@ -132,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
+  <link rel="canonical" href="http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/"/>
 
 
 
 
 
-  <title>如何在单元测试中设置系统环境变量 | Allen's Blog</title>
+  <title>Integer的highestOneBit方法源码解析 | Allen's Blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +306,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Zheng">
@@ -323,7 +323,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">如何在单元测试中设置系统环境变量</h2>
+          <h2 class="post-title" itemprop="name headline">Integer的highestOneBit方法源码解析</h2>
         
 
         <div class="post-meta">
@@ -335,8 +335,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-17T13:50:39+08:00">
-                2015-10-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T16:21:39+08:00">
+                2017-05-25
               </time>
             
 
@@ -376,7 +376,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/2015-10/how-to-set-property-in-unit-test/#comments" itemprop="discussionUrl">
+                <a class="cloud-tie-join-count" href="/articles/2017-05/2017-05-25-Integer-highestOneBit/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count join-count" itemprop="commentCount"></span>
                 </a>
               </span>
@@ -402,12 +402,34 @@
       
 
       
-        <p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <p>在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。</p>
+<p>JDK的注释中说</p>
+<blockquote>
+<p>返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。</p>
+</blockquote>
+<p>用人话说</p>
+<ul>
+<li>如果一个数是0, 则返回0；</li>
+<li>如果是负数, 则返回 -2147483648：【1000,0000,0000,0000,0000,0000,0000,0000】(二進制表示的數)；</li>
+<li>如果是正数, 返回的则是跟它最靠近的比它小的2的N次方</li>
+</ul>
 <a id="more"></a>
-<p>但是我们很快就会发现，这种设置方法在只有一个测试用例的时候是OK的，当你的测试类里有多个@Test标签时，就会发生一些很奇怪的问题。比如某些用例读到了环境变量，有些却没有读取到。主要的原因是System.setProperty(“xxx.xxx”, “xxx.xxx”);方法是会作用在整个JVM上的，而多个测试用例是会在同一个JVM上面运行的，而JUnit的@Before标签标示的方法又会在每个测试用例启动前运行，这样就会导致环境变量相互覆盖。特别是开启并发执行单元测试功能时，这种现象更加严重。那么如何设置环境变量才是安全的呢？首先，我们要抛弃在setUp方法里设置环境变量的做法，然后在POM文件中做如下配置：</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 单元测试时，系统参数iemp.home的路径--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">test.home</span>&gt;</span>$&#123;project.build.directory&#125;/opt/server<span class="tag">&lt;/<span class="name">test.home</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.18.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">        ....</div><div class="line">        <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">home</span>&gt;</span>$&#123;test.home&#125;<span class="tag">&lt;/<span class="name">home</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>这样我们就可以很轻松的在单元测试中读取系统环境变量了。</p>
+<p>比如 17：</p>
+<p>二进制是【0000,0000,0000,0000,0000,0000,0001,0001】</p>
+<p>highestOneBit(17)返回的是最高位的1个1, 其它全是0 的二进制數：【0000,0000,0000,0000,0000,0000,0001,0000】，其实就是16。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将一个整数（二进制）设置最高位为1，其它位为0，然后返回改变后的值</div><div class="line"> * 如果这个整数是0返回0</div><div class="line"> * <span class="doctag">@param</span> i</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="comment">// 例如1000</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">1</span>); <span class="comment">// 使前2位变为1，相当于i = i | (i &gt;&gt; 1); i = 1000 | 0100 = 1100</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">2</span>); <span class="comment">// 使前4位变为1，由于上一步确保了前两位都是1，所以这一次移动两位，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">4</span>); <span class="comment">// 使前8位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">8</span>); <span class="comment">// 使前16位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt; <span class="number">16</span>); <span class="comment">// 使前32位变为1，1111</span></div><div class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>); <span class="comment">// i &gt;&gt;&gt; 1 无符号右移，使最高位为0，其余位为1，相减即得出结果，1111 - 0111 = 1000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>”|“是按位操作符的或操作符，按位操作符有与操作符（&amp;），或操作符（|），异或操作符（^），取反操作符（~），其中运算规则如下：</p>
+<ul>
+<li>&amp;：两个输入位都为1才会输出1，否则输出0，如：10 &amp; 11 -&gt; 10</li>
+<li>|：有一个输入位为1就会输出1，如：100 | 110 -&gt; 110</li>
+<li>^：如果输入为的某一个是1，但不全都是1，那么输出1，如：110 ^ 100 -&gt; 010</li>
+<li>~：这个就不用说了吧</li>
+</ul>
+</li>
+<li><p>”&gt;&gt;&gt;“是无符号右移操作符，移位操作符分为有符号左移位操作符（&lt;&lt;）、有符号右移位操作符（&gt;&gt;）、无符号右移操作符（&gt;&gt;&gt;）。<br>有符号左移时低位补0；有符号右移时，若符号为正则高位补0，反之补1；无符号右移操作符无论正负都在高位补0.</p>
+</li>
+</ol>
 
       
     </div>
@@ -460,7 +482,9 @@
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/单元测试/" rel="tag"># 单元测试</a>
+            <a href="/tags/JDK-源码/" rel="tag"># JDK 源码</a>
+          
+            <a href="/tags/Collection/" rel="tag"># Collection</a>
           
         </div>
       
@@ -473,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2015-10/2015-10-14-unit-test-mock/" rel="next" title="Mock 与 Stub">
-                <i class="fa fa-chevron-left"></i> Mock 与 Stub
+              <a href="/articles/2017-04/2017-04-30-new-home-network-structure/" rel="next" title="Ubnt UniFi 产品开箱">
+                <i class="fa fa-chevron-left"></i> Ubnt UniFi 产品开箱
               </a>
             
           </div>
@@ -482,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/2016-08/2016-08-10-java-CompletionService-tips/" rel="prev" title="CompletionService小技巧">
-                CompletionService小技巧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

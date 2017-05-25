@@ -303,6 +303,154 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/articles/2017-05/2017-05-25-Integer-highestOneBit/" itemprop="url">Integer的highestOneBit方法源码解析</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-25T16:21:39+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。</p>
+<p>JDK的注释中说</p>
+<blockquote>
+<p>返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。</p>
+</blockquote>
+<p>用人话说</p>
+<ul>
+<li>如果一个数是0, 则返回0；</li>
+<li>如果是负数, 则返回 -2147483648：【1000,0000,0000,0000,0000,0000,0000,0000】(二進制表示的數)；</li>
+<li>如果是正数, 返回的则是跟它最靠近的比它小的2的N次方</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/articles/2017-05/2017-05-25-Integer-highestOneBit/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1562,145 +1710,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-09/play-trick-with-powermock/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Allen Zheng">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Allen's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/articles/2016-09/play-trick-with-powermock/" itemprop="url">玩花招的PowerMock</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-01T23:31:03+08:00">
-                2016-09-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/转载/" itemprop="url" rel="index">
-                    <span itemprop="name">转载</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/" target="_blank" rel="external">逸言</a>，感谢原作者的精彩分享</p>
-<p>当我们面对一个遗留系统时，常见的问题是没有测试。正如Michael Feathers在Working Effectively with Legacy Code一书中对“遗留代码”的定义。他将其简单归纳为“没有测试的代码”。真是太贴切了！正是因为没有测试，使得我们对遗留代码的任何重构都有些战战兢兢，甚至成为开发人员抵制重构的借口。从收益与成本的比例来看，对于这样的系统，我一贯认为不要盲目进行重构。因为重构的真正适用场景其实是发生在开发期间，而非维护期间。当然，提升自己的重构能力，尤其学会运用IDE提供的自动重构工具，可以在一定程度上保障重构的质量。然而，安全的做法，还是需要为其编写测试。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/articles/2016-09/play-trick-with-powermock/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1750,7 +1759,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1772,7 +1781,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">42</span>
+                <span class="site-state-item-count">44</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
