@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -117,7 +120,7 @@
 <meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/login-page.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/home-page.png">
 <meta property="og:image" content="http://allenn.cn/assets/images/2017-04-30-new-home-network-structure/IMG_2415.jpg">
-<meta property="og:updated_time" content="2017-05-25T15:56:52.444Z">
+<meta property="og:updated_time" content="2017-07-10T15:10:38.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubnt UniFi 产品开箱">
 <meta name="twitter:description" content="家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下">
@@ -130,7 +133,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -156,10 +159,6 @@
 
 
   <title>Ubnt UniFi 产品开箱 | Allen's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -193,6 +192,10 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -271,16 +274,6 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
           </a>
         </li>
       
@@ -393,8 +386,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/2017-04/2017-04-30-new-home-network-structure/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                <a href="/articles/2017-04/2017-04-30-new-home-network-structure/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2017-04/2017-04-30-new-home-network-structure/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -516,7 +510,7 @@
       
 
       
-        
+      
       
 
       
@@ -599,7 +593,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -617,6 +616,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
     <div class="sidebar-inner">
 
       
@@ -897,6 +897,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://alleeen.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/';
+          this.page.identifier = 'articles/2017-04/2017-04-30-new-home-network-structure/';
+          this.page.title = 'Ubnt UniFi 产品开箱';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alleeen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -907,19 +927,6 @@
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "a3d4b8344d2048498a701e23a83fa76f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-
 
 
 
@@ -952,6 +959,8 @@
 })();
 </script>
 
+
+  
 
   
 

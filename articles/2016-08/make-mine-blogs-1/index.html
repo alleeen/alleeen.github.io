@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -102,7 +105,7 @@
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
 <meta property="og:image" content="http://allenn.cn/assets/images/make-mine-blogs-1/user-repo@2x.png">
-<meta property="og:updated_time" content="2017-05-25T15:56:52.444Z">
+<meta property="og:updated_time" content="2017-07-10T15:10:38.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Allen&#39;s Blogs 创建历程（1）">
 <meta name="twitter:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
@@ -115,7 +118,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -141,10 +144,6 @@
 
 
   <title>Allen's Blogs 创建历程（1） | Allen's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -178,6 +177,10 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -256,16 +259,6 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
           </a>
         </li>
       
@@ -378,8 +371,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/2016-08/make-mine-blogs-1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                <a href="/articles/2016-08/make-mine-blogs-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2016-08/make-mine-blogs-1/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -420,7 +414,7 @@
 <li>git：命令行输入git –version检查是否已安装，下载地址：<a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a></li>
 </ul>
 <p>在国内 gem 源地址可能已经被墙（万恶的 GFW），所以你可能需要将 gem 源替换为淘宝的镜像源：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 移除官方镜像源</div><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">// 添加淘宝镜像源，或者其他镜像地址</div><div class="line">$ gem sources <span class="_">-a</span> http://ruby.taobao.org/</div><div class="line">// 验证是否替换成功</div><div class="line">$ gem sources <span class="_">-l</span></div></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 移除官方镜像源</div><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">// 添加淘宝镜像源，或者其他镜像地址</div><div class="line">$ gem sources -a http://ruby.taobao.org/</div><div class="line">// 验证是否替换成功</div><div class="line">$ gem sources -l</div></pre></td></tr></table></figure>
 <p>如果终端中出现下面的显示则代表替换成功。</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
 <p>接着开始安装 Jekyll</p>
@@ -503,7 +497,7 @@
       
 
       
-        
+      
       
 
       
@@ -586,7 +580,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -604,6 +603,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
     <div class="sidebar-inner">
 
       
@@ -884,6 +884,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://alleeen.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://allenn.cn/articles/2016-08/make-mine-blogs-1/';
+          this.page.identifier = 'articles/2016-08/make-mine-blogs-1/';
+          this.page.title = 'Allen\'s Blogs 创建历程（1）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alleeen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -894,19 +914,6 @@
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "a3d4b8344d2048498a701e23a83fa76f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-
 
 
 
@@ -939,6 +946,8 @@
 })();
 </script>
 
+
+  
 
   
 

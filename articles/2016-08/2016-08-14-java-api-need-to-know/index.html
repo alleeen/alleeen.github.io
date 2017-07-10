@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -101,7 +104,7 @@
 <meta property="og:url" content="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。  java.lang包下的80％以上的类的功能的灵活运用。 java.util包下的80％以上的类的灵活运用，特别是集合类体系、正规表达式、时间、">
-<meta property="og:updated_time" content="2017-05-25T15:56:52.440Z">
+<meta property="og:updated_time" content="2017-07-10T15:10:38.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java核心API需要掌握的程度">
 <meta name="twitter:description" content="最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。  java.lang包下的80％以上的类的功能的灵活运用。 java.util包下的80％以上的类的灵活运用，特别是集合类体系、正规表达式、时间、">
@@ -113,7 +116,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -139,10 +142,6 @@
 
 
   <title>Java核心API需要掌握的程度 | Allen's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -176,6 +175,10 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -254,16 +257,6 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
           </a>
         </li>
       
@@ -376,8 +369,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/2016-08/2016-08-14-java-api-need-to-know/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                <a href="/articles/2016-08/2016-08-14-java-api-need-to-know/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2016-08/2016-08-14-java-api-need-to-know/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -474,7 +468,7 @@
       
 
       
-        
+      
       
 
       
@@ -557,7 +551,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -575,6 +574,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
     <div class="sidebar-inner">
 
       
@@ -830,6 +830,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://alleeen.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/';
+          this.page.identifier = 'articles/2016-08/2016-08-14-java-api-need-to-know/';
+          this.page.title = 'Java核心API需要掌握的程度';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alleeen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -840,19 +860,6 @@
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "a3d4b8344d2048498a701e23a83fa76f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-
 
 
 
@@ -885,6 +892,8 @@
 })();
 </script>
 
+
+  
 
   
 

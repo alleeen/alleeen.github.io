@@ -16,6 +16,9 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -101,7 +104,7 @@
 <meta property="og:url" content="http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="安装JDK1.6oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 http://connect.apple.com/">
-<meta property="og:updated_time" content="2017-05-25T15:56:52.444Z">
+<meta property="og:updated_time" content="2017-07-10T15:10:38.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac OS X 安装 JDK备忘">
 <meta name="twitter:description" content="安装JDK1.6oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 http://connect.apple.com/">
@@ -113,7 +116,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -139,10 +142,6 @@
 
 
   <title>Mac OS X 安装 JDK备忘 | Allen's Blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
   
 
 
@@ -176,6 +175,10 @@
 
 
 
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -254,16 +257,6 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            站点地图
           </a>
         </li>
       
@@ -376,8 +369,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a class="cloud-tie-join-count" href="/articles/2013-09/mac-install-jdk_1_6/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count join-count" itemprop="commentCount"></span>
+                <a href="/articles/2013-09/mac-install-jdk_1_6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2013-09/mac-install-jdk_1_6/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -471,7 +465,7 @@
       
 
       
-        
+      
       
 
       
@@ -554,7 +548,12 @@
           
   <div class="comments" id="comments">
     
-      <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -572,6 +571,7 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
     <div class="sidebar-inner">
 
       
@@ -852,6 +852,26 @@
 
   
 
+    
+      <script id="dsq-count-scr" src="https://alleeen.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/';
+          this.page.identifier = 'articles/2013-09/mac-install-jdk_1_6/';
+          this.page.title = 'Mac OS X 安装 JDK备忘';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alleeen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
 
 
 
@@ -862,19 +882,6 @@
 
 
   
-    
-    <script>
-      var cloudTieConfig = {
-        url: document.location.href, 
-        sourceId: "",
-        productKey: "a3d4b8344d2048498a701e23a83fa76f",
-        target: "cloud-tie-wrapper"
-      };
-    </script>
-    <script src="https://img1.ws.126.net/f2e/tie/yun/sdk/loader.js"></script>
-  
-
-
 
 
 
@@ -907,6 +914,8 @@
 })();
 </script>
 
+
+  
 
   
 
