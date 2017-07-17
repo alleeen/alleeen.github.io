@@ -104,7 +104,7 @@
 <meta property="og:url" content="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
-<meta property="og:updated_time" content="2017-07-10T15:10:38.753Z">
+<meta property="og:updated_time" content="2017-07-17T14:45:04.853Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何在单元测试中设置系统环境变量">
 <meta name="twitter:description" content="有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如： @Befor">
@@ -444,6 +444,21 @@
     <div>
       
         
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Allen Zheng
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/" title="如何在单元测试中设置系统环境变量">http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
 
       
     </div>
@@ -495,34 +510,23 @@
     <div class="post-spread">
       
         
-  <div class="bdsharebuttonbox">
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
-    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
-    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a class="bds_count" data-cmd="count"></a>
-  </div>
   <script>
     window._bd_share_config = {
       "common": {
         "bdText": "",
-        "bdMini": "2",
+        "bdMini": "1",
         "bdMiniList": false,
         "bdPic": ""
-      },
-      "share": {
-        "bdSize": "16",
-        "bdStyle": "0"
       },
       "image": {
         "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
         "viewText": "分享到：",
         "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
       }
     }
   </script>
