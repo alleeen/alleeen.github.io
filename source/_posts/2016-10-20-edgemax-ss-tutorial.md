@@ -4,7 +4,7 @@ title:  "使用 EdgeMax 路由器自动翻墙"
 date:   2016-10-20 22:21:39
 comments: true
 ads: true
-categories: 网络技术
+categories: [网络技术]
 tags: [GFW,防火墙,EdgeMax,路由器]
 ---
 
@@ -380,4 +380,4 @@ print 'done!'
 
 ## 一键式安装包
 
-捣鼓了一个一键式安装包，脚本归档在 Github 上，需要的朋友可以直接前往下载：[https://github.com/allenn/er-ss](https://github.com/allenn/er-ss)
+现在风声紧，一键安装就不提供了。
