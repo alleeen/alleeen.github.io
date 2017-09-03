@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Blogs,Jekyll,软件工程师的自我宣传," />
+  <meta name="keywords" content="Java,多线程," />
 
 
 
@@ -97,20 +97,18 @@
 
 
 
-<meta name="description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
-<meta name="keywords" content="Blogs,Jekyll,软件工程师的自我宣传">
+<meta name="description" content="这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。 sub-job 1 done in 3ssub-job 2 done in 3ssub-job 3 done in 2ssub-job 4 done in 5ssub-job 5 done in 6ssub-j">
+<meta name="keywords" content="Java,多线程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Allen&#39;s Blogs 创建历程（1）">
-<meta property="og:url" content="http://allenn.cn/articles/2016-08/make-mine-blogs-1/index.html">
+<meta property="og:title" content="一起 Static 和 Synchronized 引发的血案">
+<meta property="og:url" content="http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
-<meta property="og:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
+<meta property="og:description" content="这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。 sub-job 1 done in 3ssub-job 2 done in 3ssub-job 3 done in 2ssub-job 4 done in 5ssub-job 5 done in 6ssub-j">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://allenn.cn/assets/images/make-mine-blogs-1/user-repo@2x.png">
 <meta property="og:updated_time" content="2017-09-03T15:22:34.797Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen&#39;s Blogs 创建历程（1）">
-<meta name="twitter:description" content="很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：《软技能：代码之外的生存指南》，里面第二篇：自我">
-<meta name="twitter:image" content="http://allenn.cn/assets/images/make-mine-blogs-1/user-repo@2x.png">
+<meta name="twitter:title" content="一起 Static 和 Synchronized 引发的血案">
+<meta name="twitter:description" content="这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。 sub-job 1 done in 3ssub-job 2 done in 3ssub-job 3 done in 2ssub-job 4 done in 5ssub-job 5 done in 6ssub-j">
 
 
 
@@ -138,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/"/>
+  <link rel="canonical" href="http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/"/>
 
 
 
 
 
-  <title>Allen's Blogs 创建历程（1） | Allen's Blog</title>
+  <title>一起 Static 和 Synchronized 引发的血案 | Allen's Blog</title>
   
 
 
@@ -302,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Allen Zheng">
@@ -319,7 +317,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Allen's Blogs 创建历程（1）</h2>
+          <h2 class="post-title" itemprop="name headline">一起 Static 和 Synchronized 引发的血案</h2>
         
 
         <div class="post-meta">
@@ -331,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-30T16:21:39+08:00">
-                2016-08-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-03T16:21:39+08:00">
+                2017-09-03
               </time>
             
 
@@ -354,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随便乱写/" itemprop="url" rel="index">
-                    <span itemprop="name">随便乱写</span>
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
                   </a>
                 </span>
 
@@ -372,9 +370,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/articles/2016-08/make-mine-blogs-1/#comments" itemprop="discussionUrl">
+                <a href="/articles/2017-09/2017-09-03-static-synchronized-accident/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="articles/2016-08/make-mine-blogs-1/" itemprop="commentCount"></span>
+                        data-disqus-identifier="articles/2017-09/2017-09-03-static-synchronized-accident/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -399,45 +397,31 @@
       
 
       
-        <p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248" target="_blank" rel="external">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
+        <p>这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sub-job 1 done in 3s</div><div class="line">sub-job 2 done in 3s</div><div class="line">sub-job 3 done in 2s</div><div class="line">sub-job 4 done in 5s</div><div class="line">sub-job 5 done in 6s</div><div class="line">sub-job 6 done in 8s</div><div class="line">sub-job 7 done in 9s</div><div class="line">...</div><div class="line">whole process is down in 3235s</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="Jekyll-amp-GitHub-Pages"><a href="#Jekyll-amp-GitHub-Pages" class="headerlink" title="Jekyll &amp; GitHub Pages"></a>Jekyll &amp; GitHub Pages</h2><p>自我总结一下，之前没有坚持下来很大一个原因就是一个字：“懒”，再加上之前的那些 Blogs 系统多多少少会有点不足。我也曾经尝试过购买 VPS 主机，自己搭建 Blogs，我甚至还为之购买了域名，可是后来发现，为何 VPS 是何等的费时费力。要安装软件，要安装数据库，还要防止被盗链导致流量不够用，哎，都是泪，不说了。到最近，无意中看到一篇译文，似乎是<a href="http://tom.preston-werner.com/2008/11/17/blogging-like-a-hacker.html" target="_blank" rel="external">《像黑客一样写博客》</a>，瞬间就被带上车了，开始使用 Jekyll 和 GitHub Pages 架设我的静态博客。</p>
-<p>要在使用 GitHub Pages 服务，首先需要创建一个名字叫 “[你的用户名].github.io” 的项目：</p>
-<p><img src="/assets/images/make-mine-blogs-1/user-repo@2x.png" alt="图片来自：GitHub"></p>
-<p>接着把新建好的项目 Clone 下来，有两种方式 Clone 项目，一种是点击项目右上角的绿色“Set up in desktop”按钮使用 Github 客户端 Clone 项目；另外一种就是通过终端命令行来 Clone 项目。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> [you project addr] [your locale dir]</div></pre></td></tr></table></figure>
-<p>Clone 完成后，需要在本地搭建 Jekyll 的写作环境，正式开启静态博客之旅。</p>
-<h3 id="Jekyll-环境准备"><a href="#Jekyll-环境准备" class="headerlink" title="Jekyll 环境准备"></a>Jekyll 环境准备</h3><p>首先安装必要工具</p>
+<p>其实整体业务流程很简单，大致的流程就是系统创建了很多汇总任务，把它们丢到线程池中去执行。这些任务在执行的过程中，为了提高效率，会创建一些子任务并并发的运行它们，当子任务运行结束后，父任务就会结束，所以出现这种现象是非常不科学的。我的第一感觉就是是不是任务间存在不合理的锁竞争导致线程相互等待？仔细检查代码，果然发现了问题，在汇总任务的父类中有这样一个方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="title">format</span><span class="params">(DateTime dt)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"P"</span> + dt.toString(<span class="string">"yyyyMMHHmmss"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法是汇总任务根据时间生成目标汇总时间周期用的，之所以会封装成一个方法，估计是为了代码复用考虑。封装本身并没有错，但是要命的是，开发人员将方法声明为<code>static synchronized</code>，让我们先回忆一下这个两个关键字的作用：</p>
 <ul>
-<li>Ruby：Mac OS X 10.5以上都自带</li>
-<li>RubyGems：Mac OS X 10.5以上都自带</li>
-<li>Xcode Command-Line Tools： 安装Xcode会自动安装，检查Preferences → Downloads → Components是否有Command-Line Tools这项提供下载，如果没有说明已安装</li>
-<li>git：命令行输入git –version检查是否已安装，下载地址：<a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a></li>
+<li><p>synchronized</p>
+<p>synchronized 关键字放在方法声明上时，表示该方法为<code>Synchronized Methods</code>，即同步方法，在<a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html" target="_blank" rel="external">The Java™ Tutorials</a>中对同步方法有以下描述：</p>
+<blockquote>
+<p>First, it is not possible for two invocations of synchronized methods on the same object to interleave. When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block (suspend execution) until the first thread is done with the object.</p>
+<p>Second, when a synchronized method exits, it automatically establishes a happens-before relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.</p>
+</blockquote>
+<p>简单来说就是当一个方法声明为同步方法的时候，不可能出现多个线程同时调用同一个对象（注意是同一个对象，这点很重要）上的该方法，只有当一个线程调用结束，其他线程才有可能获取锁并执行该方法。</p>
+</li>
+<li><p>static</p>
+<p>在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，当然也可以修饰代码块。被static修饰的成员变量和成员方法是独立于该类的，它不依赖于某个特定的实例变量，也就是说它被该类的所有实例共享。所有实例的引用都指向同一个地方，任何一个实例对其的修改都会导致其他实例的变化。</p>
+</li>
 </ul>
-<p>在国内 gem 源地址可能已经被墙（万恶的 GFW），所以你可能需要将 gem 源替换为淘宝的镜像源：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 移除官方镜像源</div><div class="line">$ gem sources --remove https://rubygems.org/</div><div class="line">// 添加淘宝镜像源，或者其他镜像地址</div><div class="line">$ gem sources -a http://ruby.taobao.org/</div><div class="line">// 验证是否替换成功</div><div class="line">$ gem sources -l</div></pre></td></tr></table></figure>
-<p>如果终端中出现下面的显示则代表替换成功。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">*** CURRENT SOURCES ***</div><div class="line">http://ruby.taobao.org/</div></pre></td></tr></table></figure>
-<p>接着开始安装 Jekyll</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">// 更新下 gem</div><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
-<p>MAC 系统版本如果是 El Capitan 使用下面这个命令。这是因为 Apple 在 OS X El Capitan 中全面启用了名为 System Integrity Protection (SIP) 的系统完整性保护技术。受此影响，大部分系统文件即使在 root 用户下也无法直接进行修改，所以需要把安装路径替换为用户有写入权限的目录。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">sudo gem update -n /usr/<span class="built_in">local</span>/bin --system</div></pre></td></tr></table></figure>
-<p>如果你嫌每次都要打安装路径比较麻烦，你也可以把它变成默认配置，在用户根目录下创建一个名为<code>.gemrc</code>的文件，在里面写入<code>gem: -n/usr/local/bin</code>，并保存。或者使用下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">echo &quot;gem: -n/usr/local/bin&quot; &gt;&gt; ~/.gemrc</div></pre></td></tr></table></figure>
-<p>接下来安装 Jekyll</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ sudo gem install jekyll</div><div class="line">// 如果提示权限错误，请使用下面的命令</div><div class="line">$ sudo gem install jekyll -n /usr/<span class="built_in">local</span>/bin</div></pre></td></tr></table></figure>
-<p>OK，这样 Jekyll 环境就安装完成了，接下来导入 Jekyll 后，就可以开始写作了。在网络上有很多漂亮的 Jekyll 主题可供你选择，你可以访问<a href="http://jekyllthemes.io/" target="_blank" rel="external">jekyllthemes.io</a>找到你喜欢的主题并下载下来，或者通过 Google 搜索，如果还不满意，你也可以选择自己创建一个主题。选择好你喜欢的 Jekyll 的主题后，将主题复制到前面从 Github 上 Clone 的项目文件夹中去。一个典型的 Jekyll Blogs 的目录结构应该如下面所示：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">.</div><div class="line">├── _config.yml</div><div class="line">├── _drafts</div><div class="line">|   ├── begin-with-the-crazy-ideas.textile</div><div class="line">|   └── on-simplicity-in-technology.markdown</div><div class="line">├── _includes</div><div class="line">|   ├── footer.html</div><div class="line">|   └── header.html</div><div class="line">├── _layouts</div><div class="line">|   ├── default.html</div><div class="line">|   └── post.html</div><div class="line">├── _posts</div><div class="line">|   ├── 2007-10-29-why-every-programmer-should-play-nethack.textile</div><div class="line">|   └── 2009-04-26-barcamp-boston-4-roundup.textile</div><div class="line">├── _data</div><div class="line">|   └── members.yml</div><div class="line">├── _site</div><div class="line">├── .jekyll-metadata</div><div class="line">└── index.html</div></pre></td></tr></table></figure>
-<p>在该目录下执行：</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ jekyll server // 简写 jekyll s</div></pre></td></tr></table></figure>
-<p>在浏览器地址栏中输入：<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000/</a> 就可以看到刚才新建的 Blog 长什么样子了。在这里新增、修改、删除文章都可以实时的看到，只需要刷新页面即可。你可以试着修改那篇默认文章看看效果。</p>
-<h3 id="开始写作"><a href="#开始写作" class="headerlink" title="开始写作"></a>开始写作</h3><p>Jekyll 博客的配置全在 Blogs 根目录的<code>_config.yml</code>文件中，一般来说，只要没有什么特殊的需求，只需要修改诸如：博客名、所有者名字、email等信息即可，如果有更多的需求，请参考所用主题的说明和 Jekyll 的文档：<a href="https://jekyllrb.com/docs/configuration/" target="_blank" rel="external">https://jekyllrb.com/docs/configuration/</a>。我的 Blog 的基本配置如下，可以参考：</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><div class="line"><span class="attr">name:</span> <span class="string">Allen</span></div><div class="line"><span class="attr">description:</span> <span class="string">Blogging</span> <span class="string">about</span> <span class="string">stuffs</span></div><div class="line"><span class="attr">meta_description:</span> <span class="string">"Allen's Blog"</span></div><div class="line"></div><div class="line"><span class="attr">markdown:</span> <span class="string">krmark</span></div><div class="line"><span class="attr">redcarpet:</span></div><div class="line"></div><div class="line"><span class="attr">highlighter:</span> <span class="string">pygments</span></div><div class="line"><span class="attr">logo:</span> <span class="literal">false</span></div><div class="line"><span class="attr">paginate:</span> <span class="number">20</span></div><div class="line"><span class="attr">baseurl:</span> <span class="string">/</span></div><div class="line"><span class="attr">domain_name:</span> <span class="string">'http://allenn.cn/'</span></div><div class="line"><span class="attr">google_analytics:</span> <span class="string">'UA-XXXXXXXX-X'</span></div><div class="line"></div><div class="line"><span class="comment"># Details for the RSS feed generator</span></div><div class="line"><span class="attr">url:</span>            <span class="string">'/rss.xml'</span></div><div class="line"><span class="attr">author:</span>         <span class="string">'Allen'</span></div></pre></td></tr></table></figure>
-<p>好了，一切准备就绪，我们可以开始写作了。按照 Jekyll 的规范，文章是放在<code>_posts</code>目录下的，并且需要以时间戳开头，比如：<code>2007-10-29-why-every-programmer-should-play-nethack.md</code>，在文章的开头，需要增加一些描述性的东西，这样 Jekyll 才能正确的处理我们写的文章。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">---</div><div class="line">layout: post</div><div class="line">title:  &quot;在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法&quot;</div><div class="line">date:   2015-10-14 13:50:39</div><div class="line">comments: true</div><div class="line">categories: 软件技术</div><div class="line">tags: [Java, 单元测试]</div><div class="line">---</div></pre></td></tr></table></figure>
-<p>写好描述后，就可以开始愉快的写正文啦，当你洋洋洒洒的写完你的大作后，你可以使用下面的命令将你的文章提交到 Github 上，完成之后过几分钟应该就能看到新的文章已经在你的个人博客主页上了。</p>
-<figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">$ git add .</div><div class="line">$ git commit -m <span class="string">'xxxxx'</span></div><div class="line">$ git push origin master</div></pre></td></tr></table></figure>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，使用 GitHub Pages + Jekyll 搭建简单的静态博客是非常容易上手的，只要有一点编程基础应该都能搞得定，而且不用像自己搭建 VPS 那样要时不时去维护主机，当然了，Jekyll 也并非完美，下篇文章我将分享我用 Jekyll 时踩到的一些坑。</p>
+<p>那么<code>synchronized</code>加上<code>static</code>会出现什么效果？按照上面的分析<code>static</code>是整个类共享的，不仅仅是一个对象，那么<code>static synchronized</code>修饰的变量、方法或者代码段就是在类的粒度上进行同步，而不是仅仅是在对象粒度上。对于这个问题，<a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-8.html#jls-8.4.3.6" target="_blank" rel="external">Java machine language specification</a>中也有描述：</p>
+<blockquote>
+<p>For a class (static) method, the monitor associated with the Class object for the method’s class is used.</p>
+<p>For an instance method, the monitor associated with this (the object for which the method was invoked) is used.</p>
+</blockquote>
+<p>所以在我们的业务代码中，如果在父类中声明了一个<code>static synchronized</code>的方法，就意味着每个继承它的子类及其对象在调用这个方法时都会争夺这个锁，那么造成任务执行效率低下也就是必然的了。</p>
 
       
     </div>
@@ -487,7 +471,7 @@
     </li>
     <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/" title="Allen's Blogs 创建历程（1）">http://allenn.cn/articles/2016-08/make-mine-blogs-1/</a>
+      <a href="http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/" title="一起 Static 和 Synchronized 引发的血案">http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明： </strong>
@@ -503,11 +487,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Blogs/" rel="tag"># Blogs</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/Jekyll/" rel="tag"># Jekyll</a>
-          
-            <a href="/tags/软件工程师的自我宣传/" rel="tag"># 软件工程师的自我宣传</a>
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
           
         </div>
       
@@ -520,8 +502,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/articles/2016-08/2016-08-24-how-to-use-github/" rel="next" title="Github的正确使用方法">
-                <i class="fa fa-chevron-left"></i> Github的正确使用方法
+              <a href="/articles/2017-08/2017-08-06-fix-sougou-intellij-compatibility/" rel="next" title="解决在 IntelliJ IDEA 时，搜狗输入法不跟随问题">
+                <i class="fa fa-chevron-left"></i> 解决在 IntelliJ IDEA 时，搜狗输入法不跟随问题
               </a>
             
           </div>
@@ -529,10 +511,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/articles/2016-09/play-trick-with-powermock/" rel="prev" title="玩花招的PowerMock">
-                玩花招的PowerMock <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -614,17 +592,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/assets/images/blog-img/avatar.jpg"
@@ -736,22 +705,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Jekyll-amp-GitHub-Pages"><span class="nav-number">1.</span> <span class="nav-text">Jekyll & GitHub Pages</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jekyll-环境准备"><span class="nav-number">1.1.</span> <span class="nav-text">Jekyll 环境准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始写作"><span class="nav-number">1.2.</span> <span class="nav-text">开始写作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -896,9 +849,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://allenn.cn/articles/2016-08/make-mine-blogs-1/';
-          this.page.identifier = 'articles/2016-08/make-mine-blogs-1/';
-          this.page.title = 'Allen\'s Blogs 创建历程（1）';
+          this.page.url = 'http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/';
+          this.page.identifier = 'articles/2017-09/2017-09-03-static-synchronized-accident/';
+          this.page.title = '一起 Static 和 Synchronized 引发的血案';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://alleeen.disqus.com/embed.js';

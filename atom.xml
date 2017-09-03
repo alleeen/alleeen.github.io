@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://allenn.cn/"/>
-  <updated>2017-08-06T12:10:20.810Z</updated>
+  <updated>2017-09-03T15:22:34.797Z</updated>
   <id>http://allenn.cn/</id>
   
   <author>
@@ -16,11 +16,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>一起 Static 和 Synchronized 引发的血案</title>
+    <link href="http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/"/>
+    <id>http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/</id>
+    <published>2017-09-03T08:21:39.000Z</published>
+    <updated>2017-09-03T15:22:34.797Z</updated>
+    
+    <content type="html"><![CDATA[<p>这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sub-job 1 done in 3s</div><div class="line">sub-job 2 done in 3s</div><div class="line">sub-job 3 done in 2s</div><div class="line">sub-job 4 done in 5s</div><div class="line">sub-job 5 done in 6s</div><div class="line">sub-job 6 done in 8s</div><div class="line">sub-job 7 done in 9s</div><div class="line">...</div><div class="line">whole process is down in 3235s</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>其实整体业务流程很简单，大致的流程就是系统创建了很多汇总任务，把它们丢到线程池中去执行。这些任务在执行的过程中，为了提高效率，会创建一些子任务并并发的运行它们，当子任务运行结束后，父任务就会结束，所以出现这种现象是非常不科学的。我的第一感觉就是是不是任务间存在不合理的锁竞争导致线程相互等待？仔细检查代码，果然发现了问题，在汇总任务的父类中有这样一个方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">synchronized</span> <span class="title">format</span><span class="params">(DateTime dt)</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="string">"P"</span> + dt.toString(<span class="string">"yyyyMMHHmmss"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个方法是汇总任务根据时间生成目标汇总时间周期用的，之所以会封装成一个方法，估计是为了代码复用考虑。封装本身并没有错，但是要命的是，开发人员将方法声明为<code>static synchronized</code>，让我们先回忆一下这个两个关键字的作用：</p>
+<ul>
+<li><p>synchronized</p>
+<p>synchronized 关键字放在方法声明上时，表示该方法为<code>Synchronized Methods</code>，即同步方法，在<a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html" target="_blank" rel="external">The Java™ Tutorials</a>中对同步方法有以下描述：</p>
+<blockquote>
+<p>First, it is not possible for two invocations of synchronized methods on the same object to interleave. When one thread is executing a synchronized method for an object, all other threads that invoke synchronized methods for the same object block (suspend execution) until the first thread is done with the object.</p>
+<p>Second, when a synchronized method exits, it automatically establishes a happens-before relationship with any subsequent invocation of a synchronized method for the same object. This guarantees that changes to the state of the object are visible to all threads.</p>
+</blockquote>
+<p>简单来说就是当一个方法声明为同步方法的时候，不可能出现多个线程同时调用同一个对象（注意是同一个对象，这点很重要）上的该方法，只有当一个线程调用结束，其他线程才有可能获取锁并执行该方法。</p>
+</li>
+<li><p>static</p>
+<p>在Java中static表示“全局”或者“静态”的意思，用来修饰成员变量和成员方法，当然也可以修饰代码块。被static修饰的成员变量和成员方法是独立于该类的，它不依赖于某个特定的实例变量，也就是说它被该类的所有实例共享。所有实例的引用都指向同一个地方，任何一个实例对其的修改都会导致其他实例的变化。</p>
+</li>
+</ul>
+<p>那么<code>synchronized</code>加上<code>static</code>会出现什么效果？按照上面的分析<code>static</code>是整个类共享的，不仅仅是一个对象，那么<code>static synchronized</code>修饰的变量、方法或者代码段就是在类的粒度上进行同步，而不是仅仅是在对象粒度上。对于这个问题，<a href="http://docs.oracle.com/javase/specs/jls/se7/html/jls-8.html#jls-8.4.3.6" target="_blank" rel="external">Java machine language specification</a>中也有描述：</p>
+<blockquote>
+<p>For a class (static) method, the monitor associated with the Class object for the method’s class is used.</p>
+<p>For an instance method, the monitor associated with this (the object for which the method was invoked) is used.</p>
+</blockquote>
+<p>所以在我们的业务代码中，如果在父类中声明了一个<code>static synchronized</code>的方法，就意味着每个继承它的子类及其对象在调用这个方法时都会争夺这个锁，那么造成任务执行效率低下也就是必然的了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这两天在定位一个网上问题的时候发现一个很诡异的现象，系统夜间的汇总任务跑了很长一段时间才能结束，而且日志显示这些汇总任务的每个子任务都很快就结束了，但整体任务还是耗费了很长一段时间才结束。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sub-job 1 done in 3s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 2 done in 3s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 3 done in 2s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 4 done in 5s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 5 done in 6s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 6 done in 8s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sub-job 7 done in 9s&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;whole process is down in 3235s&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+    
+    </summary>
+    
+      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
+    
+      <category term="多线程" scheme="http://allenn.cn/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>解决在 IntelliJ IDEA 时，搜狗输入法不跟随问题</title>
     <link href="http://allenn.cn/articles/2017-08/2017-08-06-fix-sougou-intellij-compatibility/"/>
     <id>http://allenn.cn/articles/2017-08/2017-08-06-fix-sougou-intellij-compatibility/</id>
     <published>2017-08-06T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>最近从华为离职并入职了新的公司，在新领的电脑配置好开发环境后就开始愉快的打码。可是在我要输入中文注释的时候，发现在 IDE 里面没法正常使用搜狗输入法，表现为输入法候选框不跟随光标，输入后不弹出候选字。</p>
 <p><img src="/assets/images/2017-08-06-fix-sougou-intellij-compatibility/screen_print.png" alt="输入法不跟随"></p>
@@ -58,7 +108,7 @@
     <link href="http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/"/>
     <id>http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/</id>
     <published>2017-05-25T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。</p>
 <p>JDK的注释中说</p>
@@ -75,7 +125,7 @@
 <p>比如 17：</p>
 <p>二进制是【0000,0000,0000,0000,0000,0000,0001,0001】</p>
 <p>highestOneBit(17)返回的是最高位的1个1, 其它全是0 的二进制數：【0000,0000,0000,0000,0000,0000,0001,0000】，其实就是16。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 将一个整数（二进制）设置最高位为1，其它位为0，然后返回改变后的值</div><div class="line"> * 如果这个整数是0返回0</div><div class="line"> * <span class="doctag">@param</span> i</div><div class="line"> * <span class="doctag">@return</span></div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="comment">// 例如1000</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">1</span>); <span class="comment">// 使前2位变为1，相当于i = i | (i &gt;&gt; 1); i = 1000 | 0100 = 1100</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">2</span>); <span class="comment">// 使前4位变为1，由于上一步确保了前两位都是1，所以这一次移动两位，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">4</span>); <span class="comment">// 使前8位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">8</span>); <span class="comment">// 使前16位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt; <span class="number">16</span>); <span class="comment">// 使前32位变为1，1111</span></div><div class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>); <span class="comment">// i &gt;&gt;&gt; 1 无符号右移，使最高位为0，其余位为1，相减即得出结果，1111 - 0111 = 1000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将一个整数（二进制）设置最高位为1，其它位为0，然后返回改变后的值</span></div><div class="line"><span class="comment"> * 如果这个整数是0返回0</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="comment">// 例如1000</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">1</span>); <span class="comment">// 使前2位变为1，相当于i = i | (i &gt;&gt; 1); i = 1000 | 0100 = 1100</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">2</span>); <span class="comment">// 使前4位变为1，由于上一步确保了前两位都是1，所以这一次移动两位，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">4</span>); <span class="comment">// 使前8位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">8</span>); <span class="comment">// 使前16位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt; <span class="number">16</span>); <span class="comment">// 使前32位变为1，1111</span></div><div class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>); <span class="comment">// i &gt;&gt;&gt; 1 无符号右移，使最高位为0，其余位为1，相减即得出结果，1111 - 0111 = 1000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ol>
 <li><p>”|“是按位操作符的或操作符，按位操作符有与操作符（&amp;），或操作符（|），异或操作符（^），取反操作符（~），其中运算规则如下：</p>
 <ul>
@@ -122,7 +172,7 @@
     <link href="http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/"/>
     <id>http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/</id>
     <published>2017-04-30T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>家里的无线网络覆盖一直有些问题，虽然说已经在家里部署了两个无线AP，但是还是一些小问题，首先信号覆盖还是有一些死角，比如说，卫生间，一进卫生间，信号强度瞬间掉到只有一格；其次就是两个 AP 之间相互协作好像有点问题，经常出现终端在 AP 1 的旁边，却连接到了 AP 2 上，只能手动断开 Wi-Fi，并重新连接。虽然说，这不是什么大问题，但对于一个有强迫症的 IT 男来说，这就像背痒一样，不挠一下不舒服。于是，我就打算把家里的无线网络改造一下。</p>
 <a id="more"></a>
@@ -185,7 +235,7 @@
     <link href="http://allenn.cn/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/"/>
     <id>http://allenn.cn/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/</id>
     <published>2016-12-13T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>接触到 JDBC 的 Fetch Size 这个属性缘起一个性能问题，项目中需要将一个有千万级数据量的表中的记录导出到文件中去。按照正常的路数，先初始化连接；接着写好 SQL 语句，比如<code>SELECT * FROM DIM_USERS</code>；然后启动查询，拿到 ResultSet，最后遍历 ResultSet 将每行记录输出到文件中去。可在接下来的测试中，发现性能并不理想，在表中数据量小的时候，执行速度尚可接受，可是在进行大数据量压力测试的时候，发现代码往往要执行40分钟以上，这在实际生产环境上是万万不可接受的。</p>
 <a id="more"></a>
@@ -265,7 +315,7 @@
     <link href="http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/"/>
     <id>http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/</id>
     <published>2016-10-26T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>今天在检视项目代码的时候，无意中发现了下面一段代码：</p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">RddTransformer</span></span>&#123;</div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">RDD</span>[<span class="type">Data</span>]): <span class="type">RDD</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">val</span> newDataRdd = data.flatmap(<span class="type">DataTransformer</span>.doTransform)</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(<span class="type">DataTransformer</span>.exceptionCount &gt; <span class="number">0</span>) &#123;</div><div class="line">      logger.error(<span class="string">s"There are some illegal data, count: <span class="subst">$&#123;DataTransformer.exceptionCount&#125;</span>"</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    newDataRdd</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">object</span> <span class="title">DataTransformer</span></span>&#123;</div><div class="line">  <span class="keyword">var</span> exceptionCount:<span class="type">Int</span> = <span class="number">0</span></div><div class="line"></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">doTransform</span></span>(data: <span class="type">Data</span>): <span class="type">Option</span>[<span class="type">NewData</span>]=&#123;</div><div class="line">    <span class="keyword">if</span>(data.isIllegal)&#123;</div><div class="line">      exceptionCount += <span class="number">1</span></div><div class="line">      <span class="type">None</span></div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">      <span class="comment">// do something transform data to new data</span></div><div class="line">      .....</div><div class="line"></div><div class="line">      <span class="type">Some</span>(newData)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -276,7 +326,7 @@
 <p>在 Spark 中，所有的 transformation() 类型操作都是延迟计算的，Spark 只是记录了将要对数据集进行的操作。只有需要数据集将数据返回到 Driver 程序时（即触发 Action 类型操作），所有已记录的 transformation() 才会执行。</p>
 </blockquote>
 <p>回到上面的代码，由于针对<code>RDD[Data]</code>的<code>flatmap</code>操作属于 transformation() 类型操作，所以<code>val newDataRdd = data.flatmap(DataTransformer.doTransform)</code>这段代码只是记录了一下对 RDD 的操作，并没有真正的去执行<code>DataTransformer.doTransform</code>方法中的代码。我们可以尝试在 Spark Shell 中实验一下：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">scala&gt;</span> var counter = 0</div><div class="line">counter: Int = 0</div><div class="line"><span class="meta"></span></div><div class="line">scala&gt; var rdd = sc.parallelize(Seq(1,2,3,4,5,6)).map(x =&gt; counter += x)</div><div class="line">rdd: spark.RDD[Int] = spark.MappedRDD@2ee9b6e3</div><div class="line"><span class="meta"></span></div><div class="line">scala&gt; counter</div><div class="line">counter: Int = 0</div></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line"><span class="meta">scala&gt;</span> var counter = 0</div><div class="line">counter: Int = 0</div><div class="line"></div><div class="line"><span class="meta">scala&gt;</span> var rdd = sc.parallelize(Seq(1,2,3,4,5,6)).map(x =&gt; counter += x)</div><div class="line">rdd: spark.RDD[Int] = spark.MappedRDD@2ee9b6e3</div><div class="line"></div><div class="line"><span class="meta">scala&gt;</span> counter</div><div class="line">counter: Int = 0</div></pre></td></tr></table></figure>
 <p>显然累加操作并没有被执行，根据 Shell 终端的输出，Spark 似乎只是记录了一下我们的操作，并返回了一个新的 RDD。当对 RDD 进行 transformation() 操作的时候，在 Spark 内部究竟发生了什么？在解释这个问题之前，先来看看 Spark 作业的执行逻辑。</p>
 <h2 id="Spark-Job-执行逻辑"><a href="#Spark-Job-执行逻辑" class="headerlink" title="Spark Job 执行逻辑"></a>Spark Job 执行逻辑</h2><p><img src="/assets/images/2016-10-26-spark-is-lazy/GeneralLogicalPlan.png" alt="GeneralLogicalPlan"></p>
 <p>典型的 Spark Job 逻辑执行图如下所示，Spark Job 经过下面四个步骤可以得到最终执行结果：</p>
@@ -288,7 +338,7 @@
 </ul>
 <p>Spark 在每次 transformation() 的时候使用了新产生的 RDD 来记录计算逻辑，这样就把作用在 RDD 上的所有计算逻辑串起来形成了一个链条，逻辑执行图上表示的实际上就是是 Spark Job 的计算链。当然某些 transformation() 比较复杂，会包含多个子 transformation()，因而会生成多个 RDD。这就是实际 RDD 个数会比我们想象的多一些的原因。当对 RDD 进行 action() 时，Spark 会调用在计算链条末端最后一个 RDD 的<code>compute()</code>方法，这个方法会接收它上一个 RDD 或者数据源的 input records，并执行自身定义的计算逻辑，从而输出结果。一句话总结 Spark 执行 action() 的流程就是：从计算链的最后一个 RDD 开始，依次从上一个 RDD 获取数据并执行计算逻辑，最后输出结果。</p>
 <h2 id="数据计算过程"><a href="#数据计算过程" class="headerlink" title="数据计算过程"></a>数据计算过程</h2><p>下面的代码段，展现了<code>RDD.flatmap()</code>和<code>MapPartitionsRDD</code>的实现，在代码中，我们看到，当调用<code>RDD</code>的<code>map</code>并传入一个函数<code>f</code>的时候，Spark 并没有做什么运算，而是用<code>f</code>作为一个入参创建了一个叫<code>MapPartitionsRDD</code>的对象并返回给调用者。而在<code>MapPartitionsRDD.scala</code>中，我们也看到只有当<code>compute</code>方法被调用的时候，我们之前传入的函数<code>f</code>才会真正的被执行</p>
-<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"></div><div class="line">  <span class="comment">// RDD.scala</span></div><div class="line">  ...</div><div class="line">  <span class="comment">/**</span></div><div class="line">   * Return a new RDD by applying a function to all elements of this RDD.</div><div class="line">   */</div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">flatmap</span></span>[<span class="type">U</span>: <span class="type">ClassTag</span>](f: <span class="type">T</span> =&gt; <span class="type">U</span>): <span class="type">RDD</span>[<span class="type">U</span>] = withScope &#123;</div><div class="line">    <span class="keyword">val</span> cleanF = sc.clean(f)</div><div class="line">    <span class="keyword">new</span> <span class="type">MapPartitionsRDD</span>[<span class="type">U</span>, <span class="type">T</span>](<span class="keyword">this</span>, (context, pid, iter) =&gt; iter.map(cleanF))</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// MapPartitionsRDD.scala</span></div><div class="line">  <span class="keyword">private</span>[spark] <span class="class"><span class="keyword">class</span> <span class="title">MapPartitionsRDD</span>[<span class="type">U</span>: <span class="type">ClassTag</span>, <span class="type">T</span>: <span class="type">ClassTag</span>](<span class="params"></span></span></div><div class="line">    var prev: <span class="type">RDD</span>[<span class="type">T</span>],</div><div class="line">    f: (<span class="type">TaskContext</span>, <span class="type">Int</span>, <span class="type">Iterator</span>[<span class="type">T</span>]) <span class="title">=&gt;</span> <span class="title">Iterator</span>[<span class="type">U</span>],  <span class="title">//</span> (<span class="params"><span class="type">TaskContext</span>, partition index, iterator</span>)</div><div class="line">    preservesPartitioning: <span class="type">Boolean</span> = <span class="literal">false</span>)</div><div class="line">  <span class="keyword">extends</span> <span class="type">RDD</span>[<span class="type">U</span>](prev) &#123;</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="keyword">val</span> partitioner = <span class="keyword">if</span> (preservesPartitioning) firstParent[<span class="type">T</span>].partitioner <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">getPartitions</span></span>: <span class="type">Array</span>[<span class="type">Partition</span>] = firstParent[<span class="type">T</span>].partitions</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">compute</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">U</span>] =</div><div class="line">    f(context, split.index, firstParent[<span class="type">T</span>].iterator(split, context))</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">clearDependencies</span></span>() &#123;</div><div class="line">    <span class="keyword">super</span>.clearDependencies()</div><div class="line">    prev = <span class="literal">null</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"></div><div class="line">  <span class="comment">// RDD.scala</span></div><div class="line">  ...</div><div class="line">  <span class="comment">/**</span></div><div class="line"><span class="comment">   * Return a new RDD by applying a function to all elements of this RDD.</span></div><div class="line"><span class="comment">   */</span></div><div class="line">  <span class="function"><span class="keyword">def</span> <span class="title">flatmap</span></span>[<span class="type">U</span>: <span class="type">ClassTag</span>](f: <span class="type">T</span> =&gt; <span class="type">U</span>): <span class="type">RDD</span>[<span class="type">U</span>] = withScope &#123;</div><div class="line">    <span class="keyword">val</span> cleanF = sc.clean(f)</div><div class="line">    <span class="keyword">new</span> <span class="type">MapPartitionsRDD</span>[<span class="type">U</span>, <span class="type">T</span>](<span class="keyword">this</span>, (context, pid, iter) =&gt; iter.map(cleanF))</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// MapPartitionsRDD.scala</span></div><div class="line">  <span class="keyword">private</span>[spark] <span class="class"><span class="keyword">class</span> <span class="title">MapPartitionsRDD</span>[<span class="type">U</span>: <span class="type">ClassTag</span>, <span class="type">T</span>: <span class="type">ClassTag</span>](<span class="params"></span></span></div><div class="line"><span class="class"><span class="params">    var prev: <span class="type">RDD</span>[<span class="type">T</span>],</span></span></div><div class="line"><span class="class"><span class="params">    f: (<span class="type">TaskContext</span>, <span class="type">Int</span>, <span class="type">Iterator</span>[<span class="type">T</span>]</span>) <span class="title">=&gt;</span> <span class="title">Iterator</span>[<span class="type">U</span>],  <span class="title">//</span> (<span class="params"><span class="type">TaskContext</span>, partition index, iterator</span>)</span></div><div class="line"><span class="class">    <span class="title">preservesPartitioning</span></span>: <span class="type">Boolean</span> = <span class="literal">false</span>)</div><div class="line">  <span class="keyword">extends</span> <span class="type">RDD</span>[<span class="type">U</span>](prev) &#123;</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="keyword">val</span> partitioner = <span class="keyword">if</span> (preservesPartitioning) firstParent[<span class="type">T</span>].partitioner <span class="keyword">else</span> <span class="type">None</span></div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">getPartitions</span></span>: <span class="type">Array</span>[<span class="type">Partition</span>] = firstParent[<span class="type">T</span>].partitions</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">compute</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">U</span>] =</div><div class="line">    f(context, split.index, firstParent[<span class="type">T</span>].iterator(split, context))</div><div class="line"></div><div class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">clearDependencies</span></span>() &#123;</div><div class="line">    <span class="keyword">super</span>.clearDependencies()</div><div class="line">    prev = <span class="literal">null</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>实际计算过程大概是这样的：</p>
 <ol>
 <li>根据动作操作来将一个应用程序划分成多个作业。</li>
@@ -303,7 +353,7 @@
 <figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/** Returns the first parent RDD */</span></div><div class="line"><span class="keyword">protected</span>[spark] <span class="function"><span class="keyword">def</span> <span class="title">firstParent</span></span>[<span class="type">U</span>: <span class="type">ClassTag</span>] = &#123;</div><div class="line">  dependencies.head.rdd.asInstanceOf[<span class="type">RDD</span>[<span class="type">U</span>]]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>MapPartitionsRDD</code>类的<code>compute</code>方法调用当前 RDD 内的第一个父 RDD 的<code>iterator</code>方法，该方的目的是拉取父 RDD 对应分区内的数据，它返回一个迭代器对象，迭代器内部存储的每个元素即父 RDD 对应分区内已经计算完毕的数据记录。得到的迭代器作为<code>f</code>方法的一个参数。<code>compute</code>方法会将迭代器中的记录一一输入<code>f</code>方法，得到的新迭代器即为所求分区中的数据。</p>
 <h3 id="iterator方法"><a href="#iterator方法" class="headerlink" title="iterator方法"></a>iterator方法</h3><p><code>iterator</code>方法的实现在 RDD 类中。</p>
-<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Internal method to this RDD; will read from cache if applicable, or otherwise compute it.</div><div class="line"> * This should ''not'' be called by users directly, but is available for implementors of custom</div><div class="line"> * subclasses of RDD.</div><div class="line"> */</div><div class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">iterator</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (storageLevel != <span class="type">StorageLevel</span>.<span class="type">NONE</span>) &#123;</div><div class="line">    <span class="type">SparkEnv</span>.get.cacheManager.getOrCompute(<span class="keyword">this</span>, split, context, storageLevel)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    computeOrReadCheckpoint(split, context)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Internal method to this RDD; will read from cache if applicable, or otherwise compute it.</span></div><div class="line"><span class="comment"> * This should ''not'' be called by users directly, but is available for implementors of custom</span></div><div class="line"><span class="comment"> * subclasses of RDD.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">final</span> <span class="function"><span class="keyword">def</span> <span class="title">iterator</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (storageLevel != <span class="type">StorageLevel</span>.<span class="type">NONE</span>) &#123;</div><div class="line">    <span class="type">SparkEnv</span>.get.cacheManager.getOrCompute(<span class="keyword">this</span>, split, context, storageLevel)</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    computeOrReadCheckpoint(split, context)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>iterator</code>方法首先检查当前 RDD 的存储级别，如果存储级别不为<code>None</code>，说明分区的数据要么已经存储在文件系统当中，要么当前 RDD 曾经执行过<code>cache</code>、<code>persise</code>等持久化操作，因此需要想办法把数据从存储介质中提取出来。<code>iterator</code>方法继续调用<code>CacheManager</code>的<code>getOrCompute</code>方法。</p>
 <figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/** Gets or computes an RDD partition. Used by RDD.iterator() when an RDD is cached. */</span></div><div class="line"> <span class="function"><span class="keyword">def</span> <span class="title">getOrCompute</span></span>[<span class="type">T</span>](</div><div class="line">     rdd: <span class="type">RDD</span>[<span class="type">T</span>],</div><div class="line">     partition: <span class="type">Partition</span>,</div><div class="line">     context: <span class="type">TaskContext</span>,</div><div class="line">     storageLevel: <span class="type">StorageLevel</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">   <span class="keyword">val</span> key = <span class="type">RDDBlockId</span>(rdd.id, partition.index)</div><div class="line">   blockManager.get(key) <span class="keyword">match</span> &#123;</div><div class="line">      <span class="keyword">case</span> <span class="type">Some</span>(blockResult) =&gt;</div><div class="line">        <span class="comment">// Partition is already materialized, so just return its values</span></div><div class="line">        context.taskMetrics.inputMetrics = <span class="type">Some</span>(blockResult.inputMetrics)</div><div class="line">        <span class="keyword">new</span> <span class="type">InterruptibleIterator</span>(context, blockResult.data.asInstanceOf[<span class="type">Iterator</span>[<span class="type">T</span>]])    </div><div class="line">      <span class="keyword">case</span> <span class="type">None</span> =&gt;</div><div class="line">        <span class="comment">// 省略部分源码</span></div><div class="line">        <span class="keyword">val</span> computedValues = rdd.computeOrReadCheckpoint(partition, context)</div><div class="line">        <span class="keyword">val</span> cachedValues = putInBlockManager(key, computedValues, storageLevel, updatedBlocks)</div><div class="line">        <span class="keyword">new</span> <span class="type">InterruptibleIterator</span>(context, cachedValues)</div><div class="line">   &#125;</div><div class="line">   <span class="comment">// 省略部分源码</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>getOrCompute</code>方法会根据 RDD 编号与分区编号计算得到当前分区在存储层对应的块编号，通过存储层提供的数据读取接口提取出块的数据。这时候会有两种可能情况发生：</p>
@@ -312,7 +362,7 @@
 <li>数据不在存储介质当中，可能是数据已经丢失，或者 RDD 经过持久化操作，但是是当前分区数据是第一次被计算，因此会出现拉取得到数据为 None 的情况。这就意味着我们需要计算分区数据，继续调用 RDD 类 computeOrReadCheckpoint 方法来计算数据，并将计算得到的数据缓存到存储介质中，下次就无需再重复计算。</li>
 <li>如果当前RDD的存储级别为 None，说明为未经持久化的 RDD，需要重新计算 RDD 内的数据，这时候调用 RDD 类的 computeOrReadCheckpoint 方法，该方法也在持久化 RDD 的分区获取数据失败时被调用。</li>
 </ul>
-<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Compute an RDD partition or read it from a checkpoint if the RDD is checkpointing.</div><div class="line"> */</div><div class="line"><span class="keyword">private</span>[spark] <span class="function"><span class="keyword">def</span> <span class="title">computeOrReadCheckpoint</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (isCheckpointed) firstParent[<span class="type">T</span>].iterator(split, context) <span class="keyword">else</span> compute(split, context)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * Compute an RDD partition or read it from a checkpoint if the RDD is checkpointing.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">private</span>[spark] <span class="function"><span class="keyword">def</span> <span class="title">computeOrReadCheckpoint</span></span>(split: <span class="type">Partition</span>, context: <span class="type">TaskContext</span>): <span class="type">Iterator</span>[<span class="type">T</span>] = &#123;</div><div class="line">  <span class="keyword">if</span> (isCheckpointed) firstParent[<span class="type">T</span>].iterator(split, context) <span class="keyword">else</span> compute(split, context)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><code>computeOrReadCheckpoint</code>方法会检查当前 RDD 是否已经被标记成检查点，如果未被标记成检查点，则执行自身的<code>compute</code>方法来计算分区数据，否则就直接拉取父 RDD 分区内的数据。</p>
 <h2 id="如何正确的获取计算结果"><a href="#如何正确的获取计算结果" class="headerlink" title="如何正确的获取计算结果"></a>如何正确的获取计算结果</h2><p>说了那么多理论，我们回到问题本身，怎么才是获取运算结果的正确方法？你也许会说，既然 transformation() 操作是惰性的，那么在之后马上触发一个 action() 操作就 OK 了。但这也是不正确的，这就涉及到了 Spark 的另外一个重要概念：分布式，在这里就不展开讲了，有兴趣可以参考官方文档：<a href="http://spark.apache.org/docs/latest/programming-guide.html#understanding-closures-a-nameclosureslinka" target="_blank" rel="external">Understanding closures </a>。</p>
 <p>下面是一个正确的实现：</p>
@@ -346,7 +396,7 @@
     <link href="http://allenn.cn/articles/2016-10/2016-10-20-edgemax-ss-tutorial/"/>
     <id>http://allenn.cn/articles/2016-10/2016-10-20-edgemax-ss-tutorial/</id>
     <published>2016-10-20T14:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>作为肉身在墙内的计算机科学技术人员，不能上google实在是一件很遗憾的事情。</p>
 <blockquote>
@@ -445,7 +495,7 @@
     <link href="http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/"/>
     <id>http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/</id>
     <published>2016-10-20T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>摘自：<a href="https://docs.google.com/document/d/1mmMiMYbviMxJ-DhTyIGdK7OOg581LSD1CZV4XY1OMG8/edit#heading=h.qgojh5xsppyz" target="_blank" rel="external">翻墙路由器的实现与原理</a></p>
 <p>注：本文只供研究学习网络技术使用，请阅读者在24小时内忘记本文内容，谢绝网监请喝茶。</p>
@@ -555,7 +605,7 @@
     <link href="http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/"/>
     <id>http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/</id>
     <published>2016-09-24T05:50:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>前天把小mac升级到了10.11，结果今天在终端里使用git的时候，弹出一行莫名其妙的错误：<code>xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</code>。去google了一圈，找到了一个github上homebrew issues里很老的帖子，按着里面说的，重装了一下xcode command line，结果就正常了……</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
@@ -586,7 +636,7 @@
     <link href="http://allenn.cn/articles/2016-09/sed-usage/"/>
     <id>http://allenn.cn/articles/2016-09/sed-usage/</id>
     <published>2016-09-17T11:27:03.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>sed是stream editor的简称，也就是流编辑器。它一次处理一行内容，处理时，把当前处理的行存储在临时缓冲区中，称为“模式空间”（pattern space），接着用sed命令处理缓冲区中的内容，处理完成后，把缓冲区的内容送往屏幕。接着处理下一行，这样不断重复，直到文件末尾。文件内容并没有改变，除非你使用重定向存储输出。</p>
 <h2 id="使用语法"><a href="#使用语法" class="headerlink" title="使用语法"></a>使用语法</h2><figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">sed [option] 'command' input_file</div></pre></td></tr></table></figure>
@@ -709,7 +759,7 @@
     <link href="http://allenn.cn/articles/2016-09/how-to-break-loop-scala/"/>
     <id>http://allenn.cn/articles/2016-09/how-to-break-loop-scala/</id>
     <published>2016-09-16T11:27:03.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>在开发过程中，我们经常会遇到这样的需求：循环执行某个操作，当满足一定条件的时候循环终止。最常见的场景就是累加数组中的元素，一直到大于某个值，用伪代码来描述就是：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">DO LOOP&#123;</div><div class="line">  DO SOME THING</div><div class="line">  IF SOME CONDITION</div><div class="line">    BREAK</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -744,9 +794,9 @@
       <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
-    
       <category term="Scala" scheme="http://allenn.cn/tags/Scala/"/>
+    
+      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
     
       <category term="跳出循环" scheme="http://allenn.cn/tags/%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF/"/>
     
@@ -757,7 +807,7 @@
     <link href="http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/"/>
     <id>http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/</id>
     <published>2016-09-07T11:27:03.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>问：JDK 5在 java.util.concurrent 里引入了 ConcurrentHashMap，在需要支持高并发的场景，我们可以使用它代替 HashMap。但是为什么没有 ArrayList 的并发实现呢？难道在多线程场景下我们只有 Vector 这一种线程安全的数组实现可以选择么？为什么在 java.util.concurrent 没有一个类可以代替 Vector 呢？</p>
 <p>答：我认为在 java.util.concurrent 包中没有加入并发的 ArrayList 实现的主要原因是：很难去开发一个通用并且没有并发瓶颈的线程安全的 List。像 ConcurrentHashMap 这样的类的真正价值（The real point / value of classes）并不是它们保证了线程安全。而在于它们在保证线程安全的同时不存在并发瓶颈。举个例子，ConcurrentHashMap 采用了锁分段技术和弱一致性的Map迭代器去规避并发瓶颈。所以问题在于，像“Array List”这样的数据结构，你不知道如何去规避并发的瓶颈。拿contains() 这样一个操作来说，当你进行搜索的时候如何避免锁住整个 list？另一方面，Queue 和 Deque (基于Linked List)有并发的实现是因为他们的接口相比List的接口有更多的限制，这些限制使得实现并发成为可能。CopyOnWriteArrayList 是一个有趣的例子，它规避了只读操作（如 get/contains）并发的瓶颈，但是它为了做到这点，在修改操作中做了很多工作和修改可见性规则。 此外，修改操作还会锁住整个List，因此这也是一个并发瓶颈。所以从理论上来说，CopyOnWriteArrayList 并不算是一个通用的并发 List。</p>
@@ -785,7 +835,7 @@
     <link href="http://allenn.cn/articles/2016-09/play-trick-with-powermock/"/>
     <id>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</id>
     <published>2016-09-01T15:31:03.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>本文转载至：<a href="http://agiledon.github.io/blog/2013/11/21/play-trick-with-powermock/" target="_blank" rel="external">逸言</a>，感谢原作者的精彩分享</p>
 <p>当我们面对一个遗留系统时，常见的问题是没有测试。正如Michael Feathers在Working Effectively with Legacy Code一书中对“遗留代码”的定义。他将其简单归纳为“没有测试的代码”。真是太贴切了！正是因为没有测试，使得我们对遗留代码的任何重构都有些战战兢兢，甚至成为开发人员抵制重构的借口。从收益与成本的比例来看，对于这样的系统，我一贯认为不要盲目进行重构。因为重构的真正适用场景其实是发生在开发期间，而非维护期间。当然，提升自己的重构能力，尤其学会运用IDE提供的自动重构工具，可以在一定程度上保障重构的质量。然而，安全的做法，还是需要为其编写测试。</p>
@@ -848,7 +898,7 @@
     <link href="http://allenn.cn/articles/2016-08/make-mine-blogs-1/"/>
     <id>http://allenn.cn/articles/2016-08/make-mine-blogs-1/</id>
     <published>2016-08-30T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>很早很早以前我就开始玩博客，陆陆续续注册了很多平台，比如博客中国、cnblogs、javeeye（现在叫iteye）、csdn，也零零散散写了一些文章，不过没有坚持多久，工作忙起来后就不再更新，自我回顾一下好像还真没有什么干货，只算是给互联网里堆了一串01010101的数据罢了。那为什么最近又动了写 Blogs 的心思，原因是最近读了一本书，书名是：<a href="http://product.china-pub.com/4971248" target="_blank" rel="external">《软技能：代码之外的生存指南》</a>，里面<em>第二篇：自我营销</em>中讲到程序员自我营销的重要性，其中一点就提到了写 Blogs。总结来说，程序员写写 Blogs 不仅是自我营销的一种方式，还是一种很好的学习方式，不是说知识能说出来才算学到了么。</p>
 <a id="more"></a>
@@ -913,7 +963,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</id>
     <published>2016-08-24T08:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：</p>
 <p><img src="/assets/images/github-flow/github-flow.png" alt="Github Flow"></p>
@@ -980,7 +1030,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</id>
     <published>2016-08-19T14:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>最近小伙伴们更新IntelliJ后，发现没法安装或者更新插件了，每次尝试在线安装时总会提示SSL错误。特别是要玩Scala的小伙伴更是抓狂，因为本身IntelliJ并不自带Scala的支持，需要下载Scala插件。不得以，只能通过手动下载，但是这样就不能享受插件更新的新功能了，很是不爽。那么报SSL错误的原因是什么呢？其实是因为IntelliJ更新插件时使用了Https连接，在连接时，客户端和服务器是要相互校验证书的，一般来说，只要证书正确，客户端是可以和服务器正常交互的。但是，我们是在公司内网，用的是公司的Proxy连接外网。公司的代理服务器会将证书换成公司自己颁(wei)发(zao)的证书（满满的<a href="https://zh.wikipedia.org/wiki/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB" target="_blank" rel="external">中间人攻击</a>的即视感，公司这样做是要干嘛？你懂的。。。），这时IntelliJ就无法同插件服务器正常通信了，那么怎么解决这个问题呢？那就是导入公司代理服务器的根证书，把公司颁(wei)发(zao)的证书变成可信任的证书。</p>
 <a id="more"></a>
@@ -1026,7 +1076,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</id>
     <published>2016-08-14T15:21:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>最近总结，发现自己没啥提升，准备开始练级，记下这个，给自己一个目标。Java的核心API是非常庞大的,这给开发者来说带来了很大的方便，经常人有评论,java让程序员变傻。但是一些内容我认为是必须掌握的，否则不可以熟练运用java，也不会使用就很难办了。</p>
 <ol>
@@ -1066,7 +1116,7 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</id>
     <published>2016-08-12T08:50:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>少年，你是不是每5分钟就会拿起一次手机？你是不是每天忙忙碌碌但最后好像什么也没干？你是不是日复一日的加班感觉身体被掏空？</p>
 <p><img src="/assets/images/intro-pomodoro-technique/time-lack.png" alt="我真的很缺时间"></p>
@@ -1128,12 +1178,12 @@
     <link href="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/"/>
     <id>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</id>
     <published>2016-08-10T08:50:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.793Z</updated>
     
     <content type="html"><![CDATA[<p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
 <a id="more"></a>
 <p>首先，在初始化<code>ExecutorCompletionService</code>的时候我们需要传入一个<code>Executor</code>，作为<code>ExecutorCompletionService</code>执行任务的容器。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue) &#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line"><span class="function"><span class="params">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后，调用<code>submit</code>方法，向它提交任务。<code>submit</code>方法会将我们提交的任务包装成一个<code>QueueingFuture</code>并提交给<code>Executor</code>来执行。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Future&lt;V&gt; <span class="title">submit</span><span class="params">(Callable&lt;V&gt; task)</span> </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();  </div><div class="line">    RunnableFuture&lt;V&gt; f = newTaskFor(task);  </div><div class="line">    executor.execute(<span class="keyword">new</span> QueueingFuture(f));  </div><div class="line">    <span class="keyword">return</span> f;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>接着，<code>QueueingFuture</code>会在任务执行完成后把执行结果放到队列中。</p>
@@ -1163,10 +1213,10 @@
     <link href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/"/>
     <id>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</id>
     <published>2015-10-17T05:50:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
+    <updated>2017-09-03T15:22:34.797Z</updated>
     
     <content type="html"><![CDATA[<p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line">&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="meta">@Before</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    PowerMockito.mockStatic(XXXSystem.class);</div><div class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <a id="more"></a>
 <p>但是我们很快就会发现，这种设置方法在只有一个测试用例的时候是OK的，当你的测试类里有多个@Test标签时，就会发生一些很奇怪的问题。比如某些用例读到了环境变量，有些却没有读取到。主要的原因是System.setProperty(“xxx.xxx”, “xxx.xxx”);方法是会作用在整个JVM上的，而多个测试用例是会在同一个JVM上面运行的，而JUnit的@Before标签标示的方法又会在每个测试用例启动前运行，这样就会导致环境变量相互覆盖。特别是开启并发执行单元测试功能时，这种现象更加严重。那么如何设置环境变量才是安全的呢？首先，我们要抛弃在setUp方法里设置环境变量的做法，然后在POM文件中做如下配置：</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!-- 单元测试时，系统参数iemp.home的路径--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">test.home</span>&gt;</span>$&#123;project.build.directory&#125;/opt/server<span class="tag">&lt;/<span class="name">test.home</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.18.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></div><div class="line">        ....</div><div class="line">        <span class="tag">&lt;<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">home</span>&gt;</span>$&#123;test.home&#125;<span class="tag">&lt;/<span class="name">home</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">systemPropertyVariables</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></div></pre></td></tr></table></figure>
@@ -1176,49 +1226,7 @@
     <summary type="html">
     
       &lt;p&gt;有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：&lt;/p&gt;
-&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Before&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setUp&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; LicenseException&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    PowerMockito.mockStatic(XXXSystem.class);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    System.setProperty(&lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-    
-    </summary>
-    
-      <category term="软件技术" scheme="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Java" scheme="http://allenn.cn/tags/Java/"/>
-    
-      <category term="单元测试" scheme="http://allenn.cn/tags/%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Mock 与 Stub</title>
-    <link href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/"/>
-    <id>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</id>
-    <published>2015-10-14T08:50:39.000Z</published>
-    <updated>2017-08-06T12:10:20.810Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
-</blockquote>
-<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="external">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="external">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
-<a id="more"></a>
-<h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><p>先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。</p>
-<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>Mock和Stub有两个主要区别：</p>
-<ol>
-<li>校验测试结果的方式不同，Mock倾向于校验行为（Beahavior verification），Stub倾向于校验状态；</li>
-<li>Mock和Stub也代表了两种将测试与设计结合在一起的理念。</li>
-</ol>
-<p>上面的说法比较抽象，让我们通过例子来看看Mock与Stub的区别。</p>
-<h2 id="使用Stub进行单元测试"><a href="#使用Stub进行单元测试" class="headerlink" title="使用Stub进行单元测试"></a>使用Stub进行单元测试</h2><p>下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderStateTester</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TALISKER = <span class="string">"Talisker"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String HIGHLAND_PARK = <span class="string">"Highland Park"</span>;</div><div class="line">    <span class="keyword">private</span> WareHouse warehouse = <span class="keyword">new</span> WareHouseImpl();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        warehouse.add(TALISKER , <span class="number">50</span>);</div><div class="line">        warehouse.add(HIGHLAND_PARK , <span class="number">25</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderIsFilledIfEnoughInWarehouse</span><span class="params">()</span></span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">50</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertTrue(order.isFilled());</div><div class="line">        assertEquals(<span class="number">0</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderDoseNotRemoveIfNotEnough</span><span class="params">()</span> </span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">51</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertFalse(order.isFilled());</div><div class="line">        assertEquals(<span class="number">50</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的例子里，我们需要对Order对象进行测试，为了验证Order.fill方法，我们还需要WareHouse对象。但真正的WareHouse对象内部可能有很复杂的实现，比如读取文件，访问数据库，持有同步锁以维持对象在并发访问时内部数据正确等。实际上在单元测试时我们并不需要去和这些代码发生交互，而且这些复杂的代码还会让我们的单元测试很不稳定。数据库连接失败、必须的配置文件读取失败等都会导致我们的单元测试失败。显然我们并不希望这些外部的因素影响我们的单元测试</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;Mocks-aren’t-stubs&quot;&gt;&lt;a href=&quot;#Mocks-aren’t-stubs&quot; class=&quot;headerlink&quot; title=&quot;Mocks aren’t stubs&quot;&gt;&lt;/a&gt;Mocks aren’t stubs&lt;/h2&gt;&lt;p&gt;这是软件大师&lt;a href=&quot;http://martinfowler.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Martin Fowler&lt;/a&gt;的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击&lt;a href=&quot;http://martinfowler.com/articles/mocksArentStubs.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这里&lt;/a&gt;阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;meta&quot;&gt;@Before&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;setUp&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;throws&lt;/span&gt; LicenseException&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;/span&gt;&amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    PowerMockito.mockStatic(XXXSystem.class);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    System.setProperty(&lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;xxx.xxx&quot;&lt;/span&gt;);&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     

@@ -6,16 +6,18 @@
     
     
   <url>
-    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <loc>http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
-        <title>Mock 与 Stub</title>
-        <pubTime>2015-10-14T08:50:39.000Z</pubTime>
+        <title>Integer的highestOneBit方法源码解析</title>
+        <pubTime>2017-05-25T08:21:39.000Z</pubTime>
         
         <tag>Java</tag>
          
-        <tag>单元测试</tag>
+        <tag>JDK 源码</tag>
+         
+        <tag>Collection</tag>
          
          
            
@@ -28,16 +30,18 @@
 
     
   <url>
-    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <loc>http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
-        <title>CompletionService小技巧</title>
-        <pubTime>2016-08-10T08:50:39.000Z</pubTime>
+        <title>为什么java.util.concurrent 包里没有并发的ArrayList实现？</title>
+        <pubTime>2016-09-07T11:27:03.000Z</pubTime>
         
         <tag>Java</tag>
          
         <tag>多线程</tag>
+         
+        <tag>并发</tag>
          
          
            
@@ -51,7 +55,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-12-intro-pomodoro-technique/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>25分钟改变你的工作效率：番茄工作法</title>
@@ -69,7 +73,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-14-java-api-need-to-know/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Java核心API需要掌握的程度</title>
@@ -91,7 +95,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-19-resolve-java-app-ssl-error/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>在公司内网如何更新IntelliJ的插件</title>
@@ -115,7 +119,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-08/2016-08-24-how-to-use-github/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Github的正确使用方法</title>
@@ -137,7 +141,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-10/2016-10-20-edgemax-ss-tutorial/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>使用 EdgeMax 路由器自动翻墙</title>
@@ -162,8 +166,56 @@
 
     
   <url>
+    <loc>http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>全面学习GFW</title>
+        <pubTime>2016-10-20T08:21:39.000Z</pubTime>
+        
+        <tag>GFW</tag>
+         
+        <tag>防火墙</tag>
+         
+        <tag>研究</tag>
+         
+         
+           
+             
+              <breadCrumb title="网络技术" url="http://allenn.cn/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>Fetch Size 与 JDBC 内存管理</title>
+        <pubTime>2016-12-13T08:21:39.000Z</pubTime>
+        
+        <tag>JDBC</tag>
+         
+        <tag>数据库</tag>
+         
+        <tag>内存管理</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据库" url="http://allenn.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://allenn.cn/articles/2016-10/2016-10-26-spark-is-lazy/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Spark 的惰性运算</title>
@@ -191,126 +243,8 @@
 
     
   <url>
-    <loc>http://allenn.cn/articles/2016-10/2016-10-20-learn-gfw/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>全面学习GFW</title>
-        <pubTime>2016-10-20T08:21:39.000Z</pubTime>
-        
-        <tag>GFW</tag>
-         
-        <tag>防火墙</tag>
-         
-        <tag>研究</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络技术" url="http://allenn.cn/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2016-12/2016-12-13-fetchsize-jdbc-memory/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>Fetch Size 与 JDBC 内存管理</title>
-        <pubTime>2016-12-13T08:21:39.000Z</pubTime>
-        
-        <tag>JDBC</tag>
-         
-        <tag>数据库</tag>
-         
-        <tag>内存管理</tag>
-         
-         
-           
-             
-              <breadCrumb title="数据库" url="http://allenn.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2017-05/2017-05-25-Integer-highestOneBit/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>Integer的highestOneBit方法源码解析</title>
-        <pubTime>2017-05-25T08:21:39.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>JDK 源码</tag>
-         
-        <tag>Collection</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>我的毕业综合症</title>
-        <pubTime>2010-06-20T05:50:39.000Z</pubTime>
-        
-        <tag>吐槽</tag>
-         
-        <tag>毕业</tag>
-         
-         
-           
-             
-              <breadCrumb title="随便乱写" url="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</title>
-        <pubTime>2016-09-24T05:50:39.000Z</pubTime>
-        
-        <tag>Mac OS X</tag>
-         
-        <tag>git</tag>
-         
-        <tag>升级</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://allenn.cn/articles/2017-04/2017-04-30-new-home-network-structure/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Ubnt UniFi 产品开箱</title>
@@ -333,16 +267,110 @@
 
     
   <url>
+    <loc>http://allenn.cn/articles/2016-09/sed-usage/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>Sed 命令详解</title>
+        <pubTime>2016-09-17T11:27:03.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>Shell</tag>
+         
+        <tag>sed</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2017-08/2017-08-06-fix-sougou-intellij-compatibility/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>解决在 IntelliJ IDEA 时，搜狗输入法不跟随问题</title>
+        <pubTime>2017-08-06T08:21:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>IntelliJ</tag>
+         
+        <tag>搜狗输入法</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2017-09/2017-09-03-static-synchronized-accident/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>一起 Static 和 Synchronized 引发的血案</title>
+        <pubTime>2017-09-03T08:21:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>多线程</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2016-09/after-update-macosx-git-failed/</loc>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
+    <data>
+        <display>
+        <title>解决mac升级10.11后，出现的 xcrun: error: invalid active developer path, missing xcrun 错误</title>
+        <pubTime>2016-09-24T05:50:39.000Z</pubTime>
+        
+        <tag>Mac OS X</tag>
+         
+        <tag>git</tag>
+         
+        <tag>升级</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://allenn.cn/articles/2016-09/how-to-break-loop-scala/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>由 Java 到 Scala：如何优雅的跳出循环</title>
         <pubTime>2016-09-16T11:27:03.000Z</pubTime>
         
-        <tag>Java</tag>
-         
         <tag>Scala</tag>
+         
+        <tag>Java</tag>
          
         <tag>跳出循环</tag>
          
@@ -358,7 +386,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>如何在单元测试中设置系统环境变量</title>
@@ -380,7 +408,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2013-09/mac-install-jdk_1_6/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Mac OS X 安装 JDK备忘</title>
@@ -402,7 +430,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-08/make-mine-blogs-1/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>Allen's Blogs 创建历程（1）</title>
@@ -426,7 +454,7 @@
     
   <url>
     <loc>http://allenn.cn/articles/2016-09/play-trick-with-powermock/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.797Z</lastmod>
     <data>
         <display>
         <title>玩花招的PowerMock</title>
@@ -449,57 +477,8 @@
 
     
   <url>
-    <loc>http://allenn.cn/articles/2016-09/sed-usage/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>Sed 命令详解</title>
-        <pubTime>2016-09-17T11:27:03.000Z</pubTime>
-        
-        <tag>Linux</tag>
-         
-        <tag>Shell</tag>
-         
-        <tag>sed</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://allenn.cn/articles/2016-09/why-not-concurrency-arraylist/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
-    <data>
-        <display>
-        <title>为什么java.util.concurrent 包里没有并发的ArrayList实现？</title>
-        <pubTime>2016-09-07T11:27:03.000Z</pubTime>
-        
-        <tag>Java</tag>
-         
-        <tag>多线程</tag>
-         
-        <tag>并发</tag>
-         
-         
-           
-             
-              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
     <loc>http://allenn.cn/articles/2015-10/2015-10-14-powermockito-would-not-work-on-multi-thread/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <lastmod>2017-09-03T15:22:34.793Z</lastmod>
     <data>
         <display>
         <title>在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法</title>
@@ -520,23 +499,66 @@
 
     
   <url>
-    <loc>http://allenn.cn/articles/2017-08/2017-08-06-fix-sougou-intellij-compatibility/</loc>
-    <lastmod>2017-08-06T12:10:20.810Z</lastmod>
+    <loc>http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/</loc>
+    <lastmod>2017-09-03T15:22:34.793Z</lastmod>
     <data>
         <display>
-        <title>解决在 IntelliJ IDEA 时，搜狗输入法不跟随问题</title>
-        <pubTime>2017-08-06T08:21:39.000Z</pubTime>
+        <title>CompletionService小技巧</title>
+        <pubTime>2016-08-10T08:50:39.000Z</pubTime>
         
         <tag>Java</tag>
          
-        <tag>IntelliJ</tag>
-         
-        <tag>搜狗输入法</tag>
+        <tag>多线程</tag>
          
          
            
              
               <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/</loc>
+    <lastmod>2017-09-03T15:22:34.793Z</lastmod>
+    <data>
+        <display>
+        <title>Mock 与 Stub</title>
+        <pubTime>2015-10-14T08:50:39.000Z</pubTime>
+        
+        <tag>Java</tag>
+         
+        <tag>单元测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="软件技术" url="http://allenn.cn/categories/%E8%BD%AF%E4%BB%B6%E6%8A%80%E6%9C%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://allenn.cn/articles/2010-06/2010-06-20-graduate/</loc>
+    <lastmod>2017-09-03T15:22:34.793Z</lastmod>
+    <data>
+        <display>
+        <title>我的毕业综合症</title>
+        <pubTime>2010-06-20T05:50:39.000Z</pubTime>
+        
+        <tag>吐槽</tag>
+         
+        <tag>毕业</tag>
+         
+         
+           
+             
+              <breadCrumb title="随便乱写" url="http://allenn.cn/categories/%E9%9A%8F%E4%BE%BF%E4%B9%B1%E5%86%99/"/>
           
         </display>
     </data>

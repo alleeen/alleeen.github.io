@@ -104,7 +104,8 @@
 <meta property="og:url" content="http://allenn.cn/articles/2016-08/2016-08-10-java-CompletionService-tips/index.html">
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="在上一篇blogs中，我详细的解释了CompletionService的使用方法和ExecutorCompletionService的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。">
-<meta property="og:updated_time" content="2017-08-06T12:10:20.810Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-03T15:22:34.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CompletionService小技巧">
 <meta name="twitter:description" content="在上一篇blogs中，我详细的解释了CompletionService的使用方法和ExecutorCompletionService的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。">
@@ -399,7 +400,7 @@
         <p>在上一篇blogs中，我详细的解释了<code>CompletionService</code>的使用方法和<code>ExecutorCompletionService</code>的详细实现，这篇blogs中，我就介绍使用它的一个小技巧，算是对上一篇blogs的一个补完。在开始之前我们先回顾一下它的实现。</p>
 <a id="more"></a>
 <p>首先，在初始化<code>ExecutorCompletionService</code>的时候我们需要传入一个<code>Executor</code>，作为<code>ExecutorCompletionService</code>执行任务的容器。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue) &#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">ExecutorCompletionService</span><span class="params">(Executor executor,</span></span></div><div class="line"><span class="function"><span class="params">                                 BlockingQueue&lt;Future&lt;V&gt;&gt; completionQueue)</span> </span>&#123;</div><div class="line">    [......]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后，调用<code>submit</code>方法，向它提交任务。<code>submit</code>方法会将我们提交的任务包装成一个<code>QueueingFuture</code>并提交给<code>Executor</code>来执行。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Future&lt;V&gt; <span class="title">submit</span><span class="params">(Callable&lt;V&gt; task)</span> </span>&#123;  </div><div class="line">    <span class="keyword">if</span> (task == <span class="keyword">null</span>) <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();  </div><div class="line">    RunnableFuture&lt;V&gt; f = newTaskFor(task);  </div><div class="line">    executor.execute(<span class="keyword">new</span> QueueingFuture(f));  </div><div class="line">    <span class="keyword">return</span> f;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>接着，<code>QueueingFuture</code>会在任务执行完成后把执行结果放到队列中。</p>
@@ -597,7 +598,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
