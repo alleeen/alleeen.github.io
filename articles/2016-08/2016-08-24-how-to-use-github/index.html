@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://allenn.cn/assets/images/github-flow/fork-project.jpg">
 <meta property="og:image" content="http://allenn.cn/assets/images/github-flow/create-pull-request-1.jpg">
 <meta property="og:image" content="http://allenn.cn/assets/images/github-flow/create-pull-request-2.png">
-<meta property="og:updated_time" content="2017-09-03T15:22:34.797Z">
+<meta property="og:updated_time" content="2018-05-11T15:05:19.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Github的正确使用方法">
 <meta name="twitter:description" content="在了解了Git的基本用法后（如果你还未了解 Git 的基本使用方法，建议你先话点时间阅读下《 Pro Git 》这本书），相信你已经开始跃跃欲试了，那么我就说下如何正确的使用 Github。下面的图描述了使用 Github 的基本流程：">
@@ -408,37 +408,37 @@
 <h3 id="第一步：Fork项目"><a href="#第一步：Fork项目" class="headerlink" title="第一步：Fork项目"></a>第一步：Fork项目</h3><p>Fork 项目其实就是在 Github 上拷贝一份他人项目的副本作为自己的项目。当你进入一个项目页面后，会在右上方看见一个<em>Fork</em>的按钮，点击它就可以 Fork 一个项目。</p>
 <p><img src="/assets/images/github-flow/fork-project.jpg" alt="Fork Project"></p>
 <p>需要注意的是Fork项目后，你自己的项目并不会和源项目保持自动同步，所以你需要手动进行更新，如何更新请看：<em>第五步：拉取源项目的更新</em>。</p>
-<h3 id="第二步：Clone-到本地"><a href="#第二步：Clone-到本地" class="headerlink" title="第二步：Clone 到本地"></a>第二步：Clone 到本地</h3><p>Fork 项目后，我们就可以把代码 Clone 到本地以便我们修改。Github 提供两种 Clone 项目的方式，SSH/HTTPS。如果选用SSH模式，你需要先在本地生成一对SSH Key并上传到Github用于身份识别，具体请参考 Github 的帮助文档：<a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="external">Generating an SSH key</a>。如果选用HTTPS模式，在更新和提交时就要输入 Github 的用户名和密码。一般来说使用 SSH 模式，在一次配置后，就可以免输密码提交代码，比较方便，但使用 HTTPS 模式更具备通用性，所以各有利弊，随意选择~</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 使用 ssh clone 项目到本地</div><div class="line">$ git clone git@github.com:rvm/rvm.git</div><div class="line"></div><div class="line"># 使用 https clone 项目到本地</div><div class="line">$ git clone https://github.com/rvm/rvm.git</div></pre></td></tr></table></figure>
-<h3 id="第三步：创建分支"><a href="#第三步：创建分支" class="headerlink" title="第三步：创建分支"></a>第三步：创建分支</h3><p>每次开发新功能，都应该新建一个单独的分支（这方面可以参考<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="external">《Git分支管理策略》</a>）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line"># 获取主干最新代码</div><div class="line">$ git checkout master</div><div class="line">$ git pull</div><div class="line"></div><div class="line"># 新建一个开发分支myfeature</div><div class="line">$ git checkout -b myfeature</div></pre></td></tr></table></figure>
+<h3 id="第二步：Clone-到本地"><a href="#第二步：Clone-到本地" class="headerlink" title="第二步：Clone 到本地"></a>第二步：Clone 到本地</h3><p>Fork 项目后，我们就可以把代码 Clone 到本地以便我们修改。Github 提供两种 Clone 项目的方式，SSH/HTTPS。如果选用SSH模式，你需要先在本地生成一对SSH Key并上传到Github用于身份识别，具体请参考 Github 的帮助文档：<a href="https://help.github.com/articles/generating-an-ssh-key/" target="_blank" rel="noopener">Generating an SSH key</a>。如果选用HTTPS模式，在更新和提交时就要输入 Github 的用户名和密码。一般来说使用 SSH 模式，在一次配置后，就可以免输密码提交代码，比较方便，但使用 HTTPS 模式更具备通用性，所以各有利弊，随意选择~</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 使用 ssh clone 项目到本地</span><br><span class="line">$ git clone git@github.com:rvm/rvm.git</span><br><span class="line"></span><br><span class="line"># 使用 https clone 项目到本地</span><br><span class="line">$ git clone https://github.com/rvm/rvm.git</span><br></pre></td></tr></table></figure>
+<h3 id="第三步：创建分支"><a href="#第三步：创建分支" class="headerlink" title="第三步：创建分支"></a>第三步：创建分支</h3><p>每次开发新功能，都应该新建一个单独的分支（这方面可以参考<a href="http://www.ruanyifeng.com/blog/2012/07/git.html" target="_blank" rel="noopener">《Git分支管理策略》</a>）。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 获取主干最新代码</span><br><span class="line">$ git checkout master</span><br><span class="line">$ git pull</span><br><span class="line"></span><br><span class="line"># 新建一个开发分支myfeature</span><br><span class="line">$ git checkout -b myfeature</span><br></pre></td></tr></table></figure>
 <h3 id="第四步：Commit-新代码"><a href="#第四步：Commit-新代码" class="headerlink" title="第四步：Commit 新代码"></a>第四步：Commit 新代码</h3><p>分支修改后，就可以提交commit了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git add --all</div><div class="line">$ git status</div><div class="line">$ git commit --verbose</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git add --all</span><br><span class="line">$ git status</span><br><span class="line">$ git commit --verbose</span><br></pre></td></tr></table></figure>
 <ul>
 <li>git add 命令的all参数，表示保存所有变化（包括新建、修改和删除）。从Git 2.0开始，all是 git add 的默认参数，所以也可以用 git add . 代替。</li>
 <li>git status 命令，用来查看发生变动的文件。</li>
 <li>git commit 命令的verbose参数，会列出 diff 的结果。</li>
 </ul>
 <p>需要注意的是 Commit 代码必须给出简明扼要的提交信息，下面是一个范本，第一行是不超过50个字的提要，然后空一行，罗列出改动原因、主要变动、以及需要注意的问题。最后，提供对应的网址（比如Bug ticket）。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">Present-tense summary under 50 characters</div><div class="line"></div><div class="line">* More information about commit (under 72 characters).</div><div class="line">* More information about commit (under 72 characters).</div><div class="line"></div><div class="line">http://project.management-system.com/ticket/123</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Present-tense summary under 50 characters</span><br><span class="line"></span><br><span class="line">* More information about commit (under 72 characters).</span><br><span class="line">* More information about commit (under 72 characters).</span><br><span class="line"></span><br><span class="line">http://project.management-system.com/ticket/123</span><br></pre></td></tr></table></figure>
 <h3 id="第五步：拉取源项目的更新"><a href="#第五步：拉取源项目的更新" class="headerlink" title="第五步：拉取源项目的更新"></a>第五步：拉取源项目的更新</h3><p>当我们在修改代码的时候，源项目肯定也会发生变化，所以在我们向源项目推送代码之前，需要先将源项目的代码更新拉取下来。</p>
 <p>先查看我们的 Remote 配置</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote -v</div><div class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</span><br><span class="line">origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</span><br></pre></td></tr></table></figure>
 <p>将源项目添加为 upstream</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</span><br></pre></td></tr></table></figure>
 <p>检查配置是否生效</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git remote -v</div><div class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div><div class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)</div><div class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</span><br><span class="line">origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</span><br><span class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)</span><br><span class="line">upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)</span><br></pre></td></tr></table></figure>
 <p>拉取源项目的变更</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git fetch upstream</div><div class="line">remote: Counting objects: 75, done.</div><div class="line">remote: Compressing objects: 100% (53/53), done.</div><div class="line">remote: Total 62 (delta 27), reused 44 (delta 9)</div><div class="line">Unpacking objects: 100% (62/62), done.</div><div class="line">From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</div><div class="line"> * [new branch]      master     -&gt; upstream/master</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git fetch upstream</span><br><span class="line">remote: Counting objects: 75, done.</span><br><span class="line">remote: Compressing objects: 100% (53/53), done.</span><br><span class="line">remote: Total 62 (delta 27), reused 44 (delta 9)</span><br><span class="line">Unpacking objects: 100% (62/62), done.</span><br><span class="line">From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</span><br><span class="line"> * [new branch]      master     -&gt; upstream/master</span><br></pre></td></tr></table></figure>
 <p>切换到 master 分支</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git checkout master</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git checkout master</span><br></pre></td></tr></table></figure>
 <p>将源项目的修改合并到本地 master 分支</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git merge upstream/master</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git merge upstream/master</span><br></pre></td></tr></table></figure>
 <h3 id="第六步：Rebase-本地分支并解决冲突"><a href="#第六步：Rebase-本地分支并解决冲突" class="headerlink" title="第六步：Rebase 本地分支并解决冲突"></a>第六步：Rebase 本地分支并解决冲突</h3><p>接着我们切换到之前的开发分支 myfeature，并同 master 分支进行同步</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">$ git checkout myfeature</div><div class="line">$ git rebase master</div></pre></td></tr></table></figure>
-<p>有时我们会和主干发生冲突，那么我们需要在本地把所有冲突解决掉后才能继续合入代码。如何解决冲突，请阅：<a href="https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/" target="_blank" rel="external">Resolving a merge conflict from the command line</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git checkout myfeature</span><br><span class="line">$ git rebase master</span><br></pre></td></tr></table></figure>
+<p>有时我们会和主干发生冲突，那么我们需要在本地把所有冲突解决掉后才能继续合入代码。如何解决冲突，请阅：<a href="https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/" target="_blank" rel="noopener">Resolving a merge conflict from the command line</a></p>
 <h3 id="第七步：Push到Github"><a href="#第七步：Push到Github" class="headerlink" title="第七步：Push到Github"></a>第七步：Push到Github</h3><p>同步好本地分支后，我们就可以将代码推送到Github了</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">git push -u origin myfeature</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git push -u origin myfeature</span><br></pre></td></tr></table></figure>
 <h3 id="第八步：发送Pull-Request"><a href="#第八步：发送Pull-Request" class="headerlink" title="第八步：发送Pull Request"></a>第八步：发送Pull Request</h3><p>点击项目页面上方的pull request按钮</p>
 <p><img src="/assets/images/github-flow/create-pull-request-1.jpg" alt="pull request button"></p>
 <p>我们自己的项目选择之前的开发分支，源项目选择 master 分支</p>
@@ -643,7 +643,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +654,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -665,7 +665,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -773,7 +773,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

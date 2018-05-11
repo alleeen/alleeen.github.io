@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。 JDK的注释中说  返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。  用人话说  如果一个数是0, 则返回0； 如果是负数, 则返回 -214">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-03T15:22:34.797Z">
+<meta property="og:updated_time" content="2018-05-11T15:05:19.809Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Integer的highestOneBit方法源码解析">
 <meta name="twitter:description" content="在读HashMap源码的时候，遇到了Integer的highestOneBit静态方法不是太理解，所以就读了一下源码，这里记录一下。 JDK的注释中说  返回具有至多單個 1 位的 int 值，在指定的 int 值中最高位（最左邊）的 1 位的位置。如果指定的值在其二進制補碼表示形式中不具有 1 位，即它等於零，則返回零。  用人话说  如果一个数是0, 则返回0； 如果是负数, 则返回 -214">
@@ -412,7 +412,7 @@
 <p>比如 17：</p>
 <p>二进制是【0000,0000,0000,0000,0000,0000,0001,0001】</p>
 <p>highestOneBit(17)返回的是最高位的1个1, 其它全是0 的二进制數：【0000,0000,0000,0000,0000,0000,0001,0000】，其实就是16。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 将一个整数（二进制）设置最高位为1，其它位为0，然后返回改变后的值</span></div><div class="line"><span class="comment"> * 如果这个整数是0返回0</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">    <span class="comment">// 例如1000</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">1</span>); <span class="comment">// 使前2位变为1，相当于i = i | (i &gt;&gt; 1); i = 1000 | 0100 = 1100</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">2</span>); <span class="comment">// 使前4位变为1，由于上一步确保了前两位都是1，所以这一次移动两位，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">4</span>); <span class="comment">// 使前8位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt;  <span class="number">8</span>); <span class="comment">// 使前16位变为1，1111</span></div><div class="line">    i |= (i &gt;&gt; <span class="number">16</span>); <span class="comment">// 使前32位变为1，1111</span></div><div class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>); <span class="comment">// i &gt;&gt;&gt; 1 无符号右移，使最高位为0，其余位为1，相减即得出结果，1111 - 0111 = 1000</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将一个整数（二进制）设置最高位为1，其它位为0，然后返回改变后的值</span></span><br><span class="line"><span class="comment"> * 如果这个整数是0返回0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">highestOneBit</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 例如1000</span></span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">1</span>); <span class="comment">// 使前2位变为1，相当于i = i | (i &gt;&gt; 1); i = 1000 | 0100 = 1100</span></span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">2</span>); <span class="comment">// 使前4位变为1，由于上一步确保了前两位都是1，所以这一次移动两位，1111</span></span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">4</span>); <span class="comment">// 使前8位变为1，1111</span></span><br><span class="line">    i |= (i &gt;&gt;  <span class="number">8</span>); <span class="comment">// 使前16位变为1，1111</span></span><br><span class="line">    i |= (i &gt;&gt; <span class="number">16</span>); <span class="comment">// 使前32位变为1，1111</span></span><br><span class="line">    <span class="keyword">return</span> i - (i &gt;&gt;&gt; <span class="number">1</span>); <span class="comment">// i &gt;&gt;&gt; 1 无符号右移，使最高位为0，其余位为1，相减即得出结果，1111 - 0111 = 1000</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>”|“是按位操作符的或操作符，按位操作符有与操作符（&amp;），或操作符（|），异或操作符（^），取反操作符（~），其中运算规则如下：</p>
 <ul>
@@ -617,7 +617,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -628,7 +628,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -639,7 +639,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -731,7 +731,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

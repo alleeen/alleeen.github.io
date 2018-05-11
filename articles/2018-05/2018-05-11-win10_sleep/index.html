@@ -1,0 +1,949 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="SWFq03qXVniuU8xSmbU_-cfB6k7ySTaMohC_RBDdAvI" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Windows 10,睡眠,休眠," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/images/blog-img/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一开始我只是想在谷歌上搜索一下，为啥我的 Win10 笔记本在盖上盖子以后放入背包中，每次拿出来之后电量都会有所下降，结果就一下子看到了很多很神奇的东西，包括 Win10 的几种节能状态，以及如何设置关闭盖子的行为。且听我一一道来。">
+<meta name="keywords" content="Windows 10,睡眠,休眠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 Windows10 笔记本关上后仍会掉电的问题">
+<meta property="og:url" content="http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/index.html">
+<meta property="og:site_name" content="Allen&#39;s Blog">
+<meta property="og:description" content="一开始我只是想在谷歌上搜索一下，为啥我的 Win10 笔记本在盖上盖子以后放入背包中，每次拿出来之后电量都会有所下降，结果就一下子看到了很多很神奇的东西，包括 Win10 的几种节能状态，以及如何设置关闭盖子的行为。且听我一一道来。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://allenn.cn/assets/images/2018-05-11-win10_sleep/win10@1.png">
+<meta property="og:image" content="http://allenn.cn/assets/images/2018-05-11-win10_sleep/win10@2.png">
+<meta property="og:updated_time" content="2018-05-11T15:05:19.809Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解决 Windows10 笔记本关上后仍会掉电的问题">
+<meta name="twitter:description" content="一开始我只是想在谷歌上搜索一下，为啥我的 Win10 笔记本在盖上盖子以后放入背包中，每次拿出来之后电量都会有所下降，结果就一下子看到了很多很神奇的东西，包括 Win10 的几种节能状态，以及如何设置关闭盖子的行为。且听我一一道来。">
+<meta name="twitter:image" content="http://allenn.cn/assets/images/2018-05-11-win10_sleep/win10@1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/"/>
+
+
+
+
+
+  <title>解决 Windows10 笔记本关上后仍会掉电的问题 | Allen's Blog</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-36907890-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2ef044f665c8137864db5a2f0321c0f1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Allen's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">解决 Windows10 笔记本关上后仍会掉电的问题</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T00:00:00+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2018-05/2018-05-11-win10_sleep/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2018-05/2018-05-11-win10_sleep/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一开始我只是想在谷歌上搜索一下，为啥我的 Win10 笔记本在盖上盖子以后放入背包中，每次拿出来之后电量都会有所下降，结果就一下子看到了很多很神奇的东西，包括 Win10 的几种节能状态，以及如何设置关闭盖子的行为。且听我一一道来。</p>
+<a id="more"></a>
+<h2 id="Win10-节能状态"><a href="#Win10-节能状态" class="headerlink" title="Win10 节能状态"></a>Win10 节能状态</h2><p>总的来讲，自 Win7 到 Win8 到 Win10 以来，Windows 实际上一共有 3 种不同的节能状态，可参考该<a href="http://www.thewindowsclub.com/difference-between-sleep-hybrid-sleep-and-hibernation-in-windows-7" target="_blank" rel="noopener">链接</a>。链接中的文章很好地介绍了这 3 种状态，这里我就复制过来顺便简单翻译一下。</p>
+<blockquote>
+<p><strong>Sleep</strong> is a power-saving state that allows a computer to quickly resume full-power operation (typically within several seconds) when you want to start working again.</p>
+<p>Putting your computer into the sleep state is like pausing a DVD player; the computer immediately stops what it ’ s doing and is ready to start again when you want to resume working.</p>
+</blockquote>
+<p><strong>睡眠</strong>（Sleep）可以让计算机在你想要开始工作时迅速（通常在几秒钟内）恢复至全速运行状态。让你的计算机进入睡眠模式就像在 DVD 播放机上按下暂停按钮一样 —— 计算机会立刻停止它的当前任务并且随时准备好在你回来工作时再次启动。</p>
+<blockquote>
+<p><strong>Hibernation</strong> is a power-saving state designed primarily for laptops.</p>
+<p>While sleep puts your work and settings in memory and draws a small amount of power, hibernation puts your open documents and programs on your hard disk and then turns off your computer. Of all the power-saving states in Windows, hibernation uses the least amount of power. On a laptop, use hibernation when you know that you won ’ t use your laptop for an extended period and won ’ t have an opportunity to charge the battery during that time.</p>
+</blockquote>
+<p><strong>休眠</strong>（Hibernation）是一种主要为笔记本电脑设计的节能状态。睡眠实际上会把你当前的工作内容和设置放入到内存中，并且需要少量的电力来维持这些数据，而相比之下休眠则会把这些数据放入到磁盘中然后完全关闭你的计算机。在 Windows 中，休眠实际上是所需电力最少的节能状态。如果你使用的是笔记本电脑，那么如果你在一段较长的时间内都不会再使用你的电脑且这段时间也无法给它充电的话，你应该让它进入休眠状态。</p>
+<blockquote>
+<p><strong>Hybrid sleep</strong> is designed primarily for desktop computers. Hybrid sleep is a combination of sleep and hibernate; it puts any open documents and programs in memory and on your hard disk and then puts your computer into a low-power state so that you can quickly resume your work. That way, if a power failure occurs, Windows can restore your work from your hard disk. When hybrid sleep is turned on, putting your computer into sleep automatically puts your computer into hybrid sleep. <em>Hybrid sleep is typically turned on by default on desktop computers and off by default on laptops</em>.</p>
+</blockquote>
+<p><strong>混合睡眠</strong>（Hybrid Sleep）是一种主要为桌面电脑（台式机）设计的节能状态。混合睡眠实际上是睡眠与休眠的结合：它会把当前的工作内容继续保持在内存中，同时也把这些数据复制到磁盘中，然后再让你的计算机进入低耗能状态，如此一来你的计算机便可以快速地恢复当前状态，同时及时发生电力故障，Windows 仍然可以从磁盘中恢复当前的数据。在混合睡眠设置开启时，你令计算机进入睡眠模式时会让计算机自动进入混合睡眠模式。混合睡眠在桌面电脑上是默认开启的，而在笔记本电脑上则是默认关闭的。</p>
+<h2 id="设置-Win10-关闭盖子行为"><a href="#设置-Win10-关闭盖子行为" class="headerlink" title="设置 Win10 关闭盖子行为"></a>设置 Win10 关闭盖子行为</h2><p>“关闭盖子” 这个词听着有点怪，而部分 Win10 用户实际上也应该在电源选项中见过这个名字：</p>
+<p><img src="/assets/images/2018-05-11-win10_sleep/win10@1.png" alt=""></p>
+<p>实际上这个翻译也是挺奇怪的，而该选项的英文实际上是 “ Choose what closing the lid does ”，也就是配置电脑在盖上时应该做什么。</p>
+<p>进入该页面，可看到设置如下：</p>
+<p><img src="/assets/images/2018-05-11-win10_sleep/win10@2.png" alt=""></p>
+<p>这里可以选择在接通与未接通电源两种情况下，按下电源按钮和关闭盖子时计算机应该采取的行为。选项包括 “不采取任何操作”、“睡眠”、“休眠”、“关机”，在了解过 “睡眠” 和 “休眠” 的差异后，我想这四个选项的含义就不难理解了。我们只要将<strong>关闭盖子时</strong>的行为设置为<strong>休眠</strong>即可。</p>
+<p>实际上，“关闭盖子时”的设置默认为“睡眠”，而该模式仍需要一定的电力维持内存中的数据，而且睡眠状态下的笔记本极易被唤醒（被鼠标、键盘、定时事件等唤醒），因此这也就是为何大多数 Win10 笔记本经常在盖子关上时自行启动了。可见这并不是一个 Bug，而只是单纯的设置不当。</p>
+<p>不过值得注意的是，休眠后的计算机无法在短时间内恢复。进入睡眠模式的计算机在恢复时往往能在瞬间进入登录界面，而进入休眠模式的计算机由于需要从磁盘中读取数据，往往需要经历一段和开机相当的时间。当然，如果你的计算机使用的是 SSD，这个不足则微乎其微。</p>
+<p>从上一节中对睡眠和休眠的描述来看，你可以在确定自己比较长时间内不会使用计算机时才选择让计算机进入休眠，如果离开的时间较短则可以选择让其进入睡眠。因此，可以在上述设置中选择在按下电源按钮时让计算机进入睡眠状态，这样如果你只是要短时间离开计算机（上厕所、倒杯水等），就可以考虑按下电源按钮进入睡眠，而不是直接盖上计算机。</p>
+<p>除此之外，在使用休眠模式时要尤其小心：休眠模式在恢复时需要把磁盘上的数据重新读入到内存，考虑到 Win10 的高兼容性，实际上这个过程很容易发生错误导致部分软件无法恢复到原本的状态继续运行，因此恢复时很容易导致部分驱动程序崩溃，令计算机发生所谓的“蓝屏”现象。休眠模式的不稳定实际上自 Win7 以来便一直存在，Win10 也无法幸免，有较小几率仍会“蓝屏”，但相比 Win7 已有很大的改善。我想，这算是我们选择了 Win10 相比于 Mac OS 高得多的兼容性后所必须承受的代价吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>生活不止眼前的苟且,还有那片海</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/assets/images/weixin.png" alt="Allen Zheng WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/assets/images/alipay.png" alt="Allen Zheng Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      Allen Zheng
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/" title="解决 Windows10 笔记本关上后仍会掉电的问题">http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Windows-10/" rel="tag"># Windows 10</a>
+          
+            <a href="/tags/睡眠/" rel="tag"># 睡眠</a>
+          
+            <a href="/tags/休眠/" rel="tag"># 休眠</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/articles/2017-09/2017-09-03-static-synchronized-accident/" rel="next" title="一起 Static 和 Synchronized 引发的血案">
+                <i class="fa fa-chevron-left"></i> 一起 Static 和 Synchronized 引发的血案
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div id="sidebar-dimmer"></div>
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/images/blog-img/avatar.jpg"
+               alt="Allen Zheng" />
+          <p class="site-author-name" itemprop="name">Allen Zheng</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allenn" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/xudongzheng1225" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/allenzheng1225" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ifeve.com/" title="并发编程网" target="_blank">并发编程网</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Win10-节能状态"><span class="nav-number">1.</span> <span class="nav-text">Win10 节能状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置-Win10-关闭盖子行为"><span class="nav-number">2.</span> <span class="nav-text">设置 Win10 关闭盖子行为</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2013 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Zheng</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://alleeen.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://allenn.cn/articles/2018-05/2018-05-11-win10_sleep/';
+          this.page.identifier = 'articles/2018-05/2018-05-11-win10_sleep/';
+          this.page.title = '解决 Windows10 笔记本关上后仍会掉电的问题';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://alleeen.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。  Mocks aren’t stubs这是软件大师Martin Fowler的一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-03T15:22:34.793Z">
+<meta property="og:updated_time" content="2018-05-11T15:05:19.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mock 与 Stub">
 <meta name="twitter:description" content="在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。  Mocks aren’t stubs这是软件大师Martin Fowler的一">
@@ -400,7 +400,7 @@
         <blockquote>
 <p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
 </blockquote>
-<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="external">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="external">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
+<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="noopener">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="noopener">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
 <a id="more"></a>
 <h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3><p>先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。先看看两者的相同点吧，非常明确的是，Mock和Stub都可以用来对系统(或者将粒度放小为模块，单元)进行隔离。</p>
 <h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3><p>Mock和Stub有两个主要区别：</p>
@@ -410,7 +410,7 @@
 </ol>
 <p>上面的说法比较抽象，让我们通过例子来看看Mock与Stub的区别。</p>
 <h2 id="使用Stub进行单元测试"><a href="#使用Stub进行单元测试" class="headerlink" title="使用Stub进行单元测试"></a>使用Stub进行单元测试</h2><p>下面是一个使用Stub进行单元测试的例子，我们打算创建一个订单对象，并用仓库中的货物填充这个订单。这个订单对象很简单，只有产品和数量两种信息，仓库保存着不同产品的目录。当我们需要填充订单的时候，会有两种不同的回应，如果仓库中有足够的货物，那么订单就会被填满，并且仓库相应产品的数量就会降低到对应的数量。如果仓库中没有足够的参评，那么订单就不会被填充，并且仓库中产品的数量没有任何的变化。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderStateTester</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TALISKER = <span class="string">"Talisker"</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String HIGHLAND_PARK = <span class="string">"Highland Park"</span>;</div><div class="line">    <span class="keyword">private</span> WareHouse warehouse = <span class="keyword">new</span> WareHouseImpl();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        warehouse.add(TALISKER , <span class="number">50</span>);</div><div class="line">        warehouse.add(HIGHLAND_PARK , <span class="number">25</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderIsFilledIfEnoughInWarehouse</span><span class="params">()</span></span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">50</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertTrue(order.isFilled());</div><div class="line">        assertEquals(<span class="number">0</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderDoseNotRemoveIfNotEnough</span><span class="params">()</span> </span>&#123;</div><div class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">51</span>);</div><div class="line">        order.fill(warehouse);</div><div class="line">        assertFalse(order.isFilled());</div><div class="line">        assertEquals(<span class="number">50</span> , warehouse.getInventory(TALISKER));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderStateTester</span> <span class="keyword">extends</span> <span class="title">TestCase</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String TALISKER = <span class="string">"Talisker"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String HIGHLAND_PARK = <span class="string">"Highland Park"</span>;</span><br><span class="line">    <span class="keyword">private</span> WareHouse warehouse = <span class="keyword">new</span> WareHouseImpl();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        warehouse.add(TALISKER , <span class="number">50</span>);</span><br><span class="line">        warehouse.add(HIGHLAND_PARK , <span class="number">25</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderIsFilledIfEnoughInWarehouse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">50</span>);</span><br><span class="line">        order.fill(warehouse);</span><br><span class="line">        assertTrue(order.isFilled());</span><br><span class="line">        assertEquals(<span class="number">0</span> , warehouse.getInventory(TALISKER));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOrderDoseNotRemoveIfNotEnough</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Order order = <span class="keyword">new</span> Order(TALISKER , <span class="number">51</span>);</span><br><span class="line">        order.fill(warehouse);</span><br><span class="line">        assertFalse(order.isFilled());</span><br><span class="line">        assertEquals(<span class="number">50</span> , warehouse.getInventory(TALISKER));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面的例子里，我们需要对Order对象进行测试，为了验证Order.fill方法，我们还需要WareHouse对象。但真正的WareHouse对象内部可能有很复杂的实现，比如读取文件，访问数据库，持有同步锁以维持对象在并发访问时内部数据正确等。实际上在单元测试时我们并不需要去和这些代码发生交互，而且这些复杂的代码还会让我们的单元测试很不稳定。数据库连接失败、必须的配置文件读取失败等都会导致我们的单元测试失败。显然我们并不希望这些外部的因素影响我们的单元测试</p>
 
       
@@ -611,7 +611,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -622,7 +622,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -633,7 +633,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -741,7 +741,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

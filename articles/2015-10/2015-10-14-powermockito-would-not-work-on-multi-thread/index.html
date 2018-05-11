@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="Allen&#39;s Blog">
 <meta property="og:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-03T15:22:34.793Z">
+<meta property="og:updated_time" content="2018-05-11T15:05:19.805Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在多线程构建场景下Powermockito无法在不同类中Mock同一个静态方法">
 <meta name="twitter:description" content="在修改单元测试的过程中，不幸踩了个坑，发现 Powermockito 的PowerMock.mockStatic(ClassThatContainsStaticMethod.class) 在多线程场景下是无法正常工作的，这再次验证了之前 ThrougthWorks 顾问说的那句话：  除非万不得已，或者是Mock遗留系统接口，否则不要使用Powermockito。">
@@ -403,20 +403,20 @@
 </blockquote>
 <a id="more"></a>
 <p>发生问题的场景是这样的 Class C 有一个静态方法，Class A 和 Class B 都需要调用这个方法完成一些功能：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class C&#123;</div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SomeObject <span class="title">getSomeObject</span><span class="params">()</span></span>&#123;</div><div class="line">truetrue[....]</div><div class="line">true&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class A &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div><div class="line"></div><div class="line">Class B &#123;</div><div class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</div><div class="line"></div><div class="line">true[.....]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class C&#123;</span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SomeObject <span class="title">getSomeObject</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetrue[....]</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class A &#123;</span><br><span class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</span><br><span class="line"></span><br><span class="line">true[.....]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class B &#123;</span><br><span class="line">true<span class="keyword">private</span> SomeObject someObject = C.getSomeObject();</span><br><span class="line"></span><br><span class="line">true[.....]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>由于在测试中直接调用 C.getSomeObject() 会导致一些不可预期的错误，所以我想对AB类进行测试就必须使用Mock，于是我那么写：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">Class ATest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">Class BTest&#123;</div><div class="line">true<span class="meta">@Before</span></div><div class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</div><div class="line">truetruePowerMock.mockStatic(C.class)</div><div class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</div><div class="line">true&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Class ATest&#123;</span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetruePowerMock.mockStatic(C.class)</span><br><span class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class BTest&#123;</span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetruePowerMock.mockStatic(C.class)</span><br><span class="line">truetruePowerMock.when(C.C.getSomeObject()).thenReturn(PowerMock.mock(SomeObject.class))</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>当我在IDE中分别运行 ATest 或者 BTest 是，我的测试都是能正确运行的，但是当你使用Maven或者其他的构建工具进行多线程测试的时候，你就会发现问题来了。一会是A抛异常，一会是B抛异常，总之就是不能很好的工作。由于我不是Powermockito的专家，所以无法深入的去探究这个问题的原因，但是我想，这应该是和静态方法本身在一个JVM内的唯一性有关，我截取了网上两个解释供参考：</p>
 <h4 id="Explanation-1"><a href="#Explanation-1" class="headerlink" title="Explanation 1"></a>Explanation 1</h4><p>Without going into details let’s look at this code written using with Mockito :</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">given(mock.doSomethingWith(eq(<span class="string">"A"</span>), longThat(...)).thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">given(mock.doSomethingWith(eq(<span class="string">"A"</span>), longThat(...)).thenReturn(<span class="string">"C"</span>);</span><br></pre></td></tr></table></figure>
 <p>Which is roughly equivalent to :<br>(<strong>*</strong> NEVER use a reference to OngoingStubbing in real test code, it might &gt;lead to wrong test code <strong>*</strong>)</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><div class="line">String aString = eq(<span class="string">"A"</span>);</div><div class="line">Long aLong = longThat(...);</div><div class="line">String variableThatGiveReturnType = mock.doSomethingWith(aString, aLong);</div><div class="line">BDDOngoingStubbing&lt;String&gt; ongoingStubbing = given(variableThatGiveReturnType);</div><div class="line">ongoingStubbing.thenReturn(<span class="string">"C"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">String aString = eq(<span class="string">"A"</span>);</span><br><span class="line">Long aLong = longThat(...);</span><br><span class="line">String variableThatGiveReturnType = mock.doSomethingWith(aString, aLong);</span><br><span class="line">BDDOngoingStubbing&lt;String&gt; ongoingStubbing = given(variableThatGiveReturnType);</span><br><span class="line">ongoingStubbing.thenReturn(<span class="string">"C"</span>);</span><br></pre></td></tr></table></figure>
 <p>The stubbing is clearly not finished until the last call thenReturn is completed, right.</p>
 <p>Don’t you see the missing link between all those line to actually achieve the stubbing in a fluent way ? ;)</p>
 <p>Dependening on how you do that, if you don’t synchronize this block you won’t be able to achieve any correct stubbing, otherwise concurrent access anywhere in this block will garble things in the mock internals.</p>
 <p>And if you add the fact that the mock might be already used, with it’s own concurrent code to use the answers, you end up in with completely messed up internal states.</p>
 <p>Anyway, always stub before using mocks concurrently.</p>
-<h4 id="Explanation-2"><a href="#Explanation-2" class="headerlink" title="Explanation 2"></a>Explanation 2</h4><p>For healthy scenarios Mockito plays nicely with threads. For instance, you can run tests in parallel to speed up the build. Also, You can let multiple threads call methods on a shared mock to test in concurrent conditions. Check out a [<a href="http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22" target="_blank" rel="external">http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22</a> timeout()] feature for testing concurrency.</p>
+<h4 id="Explanation-2"><a href="#Explanation-2" class="headerlink" title="Explanation 2"></a>Explanation 2</h4><p>For healthy scenarios Mockito plays nicely with threads. For instance, you can run tests in parallel to speed up the build. Also, You can let multiple threads call methods on a shared mock to test in concurrent conditions. Check out a [<a href="http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22" target="_blank" rel="noopener">http://mockito.googlecode.com/svn/tags/latest/javadoc/org/mockito/Mockito.html#22</a> timeout()] feature for testing concurrency.</p>
 <p>However Mockito is only thread-safe in healthy tests, that is tests without multiple threads stubbing/verifying a shared mock. Stubbing or verification of a shared mock from different threads is NOT the proper way of testing because it will always lead to intermittent behavior. In general mutable state + assertions in multi-threaded environment lead to random results. If you do stub/verify a shared mock across threads you will face occasional exceptions like: WrongTypeOfReturnValue, etc.</p>
 
       
@@ -617,7 +617,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -628,7 +628,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -639,7 +639,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -747,7 +747,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

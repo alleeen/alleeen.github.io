@@ -297,6 +297,156 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/how-to-set-property-in-unit-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Allen Zheng">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/assets/images/blog-img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Allen's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/articles/2015-10/how-to-set-property-in-unit-test/" itemprop="url">如何在单元测试中设置系统环境变量</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-10-17T13:50:39+08:00">
+                2015-10-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/软件技术/" itemprop="url" rel="index">
+                    <span itemprop="name">软件技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/articles/2015-10/how-to-set-property-in-unit-test/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="articles/2015-10/how-to-set-property-in-unit-test/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>有时我们需要通过读取系统环境变量来获取一些有用的信息，比如系统路径、临时目录等。在系统真正运行的时候我们可以通过启动命令行，如：java -Dxxx.xxx=xxxx …，或者使用System.setProperty(“xxx.xxx”, “xxx.xxx”)来设置系统环境变量。但在单元测试时如何设置这些系统环境变量又成了一个让人头疼的问题。有些小伙伴是在setUp方法里设置，比如：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Before</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> LicenseException</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    PowerMockito.mockStatic(XXXSystem.class);</span><br><span class="line">    System.setProperty(<span class="string">"xxx.xxx"</span>, <span class="string">"xxx.xxx"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/articles/2015-10/how-to-set-property-in-unit-test/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://allenn.cn/articles/2015-10/2015-10-14-unit-test-mock/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -400,7 +550,7 @@
           <blockquote>
 <p>在进行单元测试的时候，我们会发现我们要测试的方法会有很多外部依赖，比如：发邮件，进行网络通讯，操作文件系统等等。而我们通常关注的是被测试对象的功能和行为，对于它的依赖，我们仅仅需要关注它们之间的交互，但对依赖的对象是如何执行的具体细节我们并不关注。较为常见的技巧就是使用mock对象或者stub对象来代替真实的依赖。</p>
 </blockquote>
-<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="external">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="external">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
+<h2 id="Mocks-aren’t-stubs"><a href="#Mocks-aren’t-stubs" class="headerlink" title="Mocks aren’t stubs"></a>Mocks aren’t stubs</h2><p>这是软件大师<a href="http://martinfowler.com/" target="_blank" rel="noopener">Martin Fowler</a>的一篇经典博文。Martin大师在文章中详细的解释了Mock与Stub的区别，以及怎样使用它们进行TDD实践等等一系列干货，强烈推荐阅读，猛击<a href="http://martinfowler.com/articles/mocksArentStubs.html" target="_blank" rel="noopener">这里</a>阅读原文。我无意把大师的话再复述一遍，所以在本文中我就聊聊我对Mock与Stub的理解以及一些实践。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/articles/2015-10/2015-10-14-unit-test-mock/#more" rel="contents">
@@ -701,7 +851,7 @@
 
       
         
-          <h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/" target="_blank" rel="external">http://connect.apple.com/</a></p>
+          <h3 id="安装JDK1-6"><a href="#安装JDK1-6" class="headerlink" title="安装JDK1.6"></a>安装JDK1.6</h3><p>oracle官网从jdk1.7开始才有Mac版的安装包，但有的项目必须使用jdk1.6，所以必须从其他途径安装jdk1.6了。查了下发现，要想安装jdk1.6，可以直接从apple的开发者网站下安装提供的java支持包，具体下载地址 <a href="http://connect.apple.com/" target="_blank" rel="noopener">http://connect.apple.com/</a></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/articles/2013-09/mac-install-jdk_1_6/#more" rel="contents">
@@ -942,7 +1092,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -953,7 +1103,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -964,7 +1114,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-count">48</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1056,7 +1206,7 @@
         <div class="copyright" >
   
   &copy;  2013 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
